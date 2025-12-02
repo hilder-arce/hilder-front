@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { environment } from '../environments/environment';
-
+import { LoginComponent } from './auth/login/login.component';
 
 @Component({
   selector: 'app-root',
