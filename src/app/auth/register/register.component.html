@@ -1,0 +1,157 @@
+<div 
+  class="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8
+  transition-all duration-500"
+  [class.bg-gray-100]="!darkMode"
+  [class.bg-gradient-to-br]="darkMode"
+  [class.from-black]="darkMode"
+  [class.via-gray-900]="darkMode"
+  [class.to-gray-800]="darkMode"
+>
+
+  <!-- Toggle Dark / Light -->
+  <button 
+    (click)="toggleTheme()"
+    class="absolute top-4 right-4 sm:top-6 sm:right-6 p-2 rounded-full 
+           border border-gray-400
+           transition"
+    [class.bg-white]="!darkMode"
+    [class.text-black]="!darkMode"
+    [class.bg-black]="darkMode"
+    [class.text-white]="darkMode">
+    {{ darkMode ? '☀️' : '🌙' }}
+  </button>
+
+  <!-- Card -->
+  <div 
+    class="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-md
+           p-6 sm:p-8
+           rounded-2xl shadow-2xl
+           backdrop-blur-xl border transition-all duration-700
+           transform"
+    [class.opacity-0]="!loaded"
+    [class.translate-y-12]="!loaded"
+    [class.opacity-100]="loaded"
+    [class.translate-y-0]="loaded"
+
+    [class.bg-white]="!darkMode"
+    [class.border-gray-300]="!darkMode"
+    [class.text-black]="!darkMode"
+
+    [class.bg-white/5]="darkMode"
+    [class.border-white/10]="darkMode"
+    [class.text-white]="darkMode"
+  >
+
+    <!-- Title -->
+    <div class="text-center mb-6 sm:mb-8">
+      <h1 class="text-2xl sm:text-3xl font-bold tracking-wide">
+        Crear cuenta
+      </h1>
+      <p class="text-sm opacity-70">
+        Regístrate en el sistema
+      </p>
+    </div>
+
+    <!-- Form -->
+    <form (ngSubmit)="register()" class="space-y-5 sm:space-y-6">
+
+      <!-- Nombre -->
+      <div>
+        <label class="text-sm block mb-1 sm:mb-2">Nombre completo</label>
+        <input 
+          type="text"
+          [(ngModel)]="name"
+          name="name"
+          required
+          class="w-full px-4 py-2 sm:py-3 rounded-xl border
+                 bg-transparent
+                 focus:outline-none focus:ring-2 focus:ring-pink-500"
+          [class.border-gray-400]="!darkMode"
+          [class.border-gray-600]="darkMode"
+        >
+      </div>
+
+      <!-- Email -->
+      <div>
+        <label class="text-sm block mb-1 sm:mb-2">Correo</label>
+        <input 
+          type="email"
+          [(ngModel)]="email"
+          name="email"
+          required
+          class="w-full px-4 py-2 sm:py-3 rounded-xl border
+                 bg-transparent
+                 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          [class.border-gray-400]="!darkMode"
+          [class.border-gray-600]="darkMode"
+        >
+      </div>
+
+      <!-- Password -->
+      <div>
+        <label class="text-sm block mb-1 sm:mb-2">Contraseña</label>
+        <input 
+          type="password"
+          [(ngModel)]="password"
+          name="password"
+          required
+          class="w-full px-4 py-2 sm:py-3 rounded-xl border
+                 bg-transparent
+                 focus:outline-none focus:ring-2 focus:ring-purple-500"
+          [class.border-gray-400]="!darkMode"
+          [class.border-gray-600]="darkMode"
+        >
+      </div>
+
+      <!-- Button -->
+      <button 
+        type="submit"
+        class="w-full py-3 rounded-xl bg-gradient-to-r
+               from-pink-600 to-purple-600
+               text-white font-bold
+               hover:scale-[1.03] hover:shadow-2xl
+               transition-all duration-200"
+      >
+        Registrarse
+      </button>
+
+    </form>
+
+    <!-- Divider -->
+    <div class="flex items-center my-5 sm:my-6">
+      <div class="flex-1 h-px bg-gray-500/40"></div>
+      <span class="px-3 text-xs opacity-60">o</span>
+      <div class="flex-1 h-px bg-gray-500/40"></div>
+    </div>
+
+    <!-- Google Register -->
+    <button
+      (click)="registerWithGoogle()"
+      class="w-full py-3 rounded-xl border
+             flex items-center justify-center gap-3
+             hover:scale-[1.03] transition-all duration-200"
+      [class.border-gray-300]="!darkMode"
+      [class.hover:bg-gray-200]="!darkMode"
+      [class.border-white/20]="darkMode"
+      [class.hover:bg-white/10]="darkMode"
+    >
+      <img 
+        src="https://www.svgrepo.com/show/475656/google-color.svg"
+        alt="Google"
+        class="w-5 h-5"
+      />
+      <span class="font-semibold text-sm sm:text-base">
+        Registrarse con Google
+      </span>
+    </button>
+
+    <!-- Footer -->
+    <p class="text-center text-xs mt-5 sm:mt-6 opacity-70">
+      ¿Ya tienes una cuenta?
+      <a routerLink="/login" class="underline ml-1 hover:text-blue-400">
+        Inicia sesión
+      </a>
+    </p>
+
+  </div>
+</div>
