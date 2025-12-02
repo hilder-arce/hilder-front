@@ -9,6 +9,7 @@ import { LoginComponent } from './auth/login/login.component';
   selector: 'app-root',
   imports: [
     RouterOutlet,
+    LoginComponent
   ],
   templateUrl: './app.html',
   styleUrl: './app.css'
