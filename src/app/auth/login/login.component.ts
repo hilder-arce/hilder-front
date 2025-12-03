@@ -1,10 +1,13 @@
 import { Component, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
+import { ThemeService } from "../../services/theme";
+import { RouterModule } from "@angular/router";
 
 @Component({
     selector: 'app-login',
     imports: [
-        FormsModule
+        FormsModule,
+        RouterModule
     ],
     templateUrl: './login.component.html',
     styleUrl: './login.component.css'
@@ -12,24 +15,16 @@ import { FormsModule } from "@angular/forms";
 
 export class LoginComponent implements OnInit {
 
-     email: string = '';
+    constructor(public theme: ThemeService){}
+  
+    email: string = '';
   password: string = '';
-
-  darkMode = true;
   loaded = false;
 
   ngOnInit() {
-
-    this.darkMode = localStorage.getItem('theme') === 'dark';
-
     setTimeout(() => {
       this.loaded = true; // animación de entrada
     }, 200);
-  }
-
-  toggleTheme() {
-    this.darkMode = !this.darkMode;
-    localStorage.setItem('theme', this.darkMode ? 'dark' : 'light');
   }
 
   login() {
@@ -39,7 +34,6 @@ export class LoginComponent implements OnInit {
     }
 
     console.log('Login normal:', this.email, this.password);
-
     alert('Login estándar listo 🚀');
   }
 
@@ -47,5 +41,4 @@ export class LoginComponent implements OnInit {
     console.log('Login con Google');
     alert('Botón de Google listo (conectar luego a backend)');
   }
-
 }

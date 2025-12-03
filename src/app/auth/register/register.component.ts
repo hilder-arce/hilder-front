@@ -1,10 +1,13 @@
 import { Component, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
+import { ThemeService } from "../../services/theme";
+import { RouterModule } from "@angular/router";
 
 @Component({
     selector: 'app-register',
     imports: [
-        FormsModule
+        FormsModule,
+        RouterModule
     ],
     templateUrl: './register.component.html',
     styleUrl: './register.component.css'
@@ -12,26 +15,23 @@ import { FormsModule } from "@angular/forms";
 
 export class RegisterComponent implements OnInit {
 
+    constructor(public theme: ThemeService){}
+  
+
   name: string = '';
   email: string = '';
   password: string = '';
 
-  darkMode = true;
   loaded = false;
 
   ngOnInit() {
 
-    this.darkMode = localStorage.getItem('theme') === 'dark';
 
     setTimeout(() => {
       this.loaded = true;
     }, 200);
   }
 
-  toggleTheme() {
-    this.darkMode = !this.darkMode;
-    localStorage.setItem('theme', this.darkMode ? 'dark' : 'light');
-  }
 
   register() {
     if (!this.name || !this.email || !this.password) {
