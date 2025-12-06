@@ -1,0 +1,17 @@
+.border-orbit {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  top: 0;
+  left: 0;
+  animation: orbitRect 5s linear infinite;
+}
+
+@keyframes orbitRect {
+  0% { top: 0; left: 0; }
+  25% { top: 0; left: calc(100% - 10px); }
+  50% { top: calc(100% - 10px); left: calc(100% - 10px); }
+  75% { top: calc(100% - 10px); left: 0; }
+  100% { top: 0; left: 0; }
+}

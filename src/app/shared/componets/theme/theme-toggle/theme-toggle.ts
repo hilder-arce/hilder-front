@@ -8,7 +8,9 @@ import { ThemeService } from '../../../../services/theme';
     <button 
       (click)="theme.toggleTheme()"
       class="p-2 rounded-full border transition-all
-             fixed top-4 right-4 z-50"
+             fixed top-28 right-18 z-[9999]
+             cursor-pointer
+             hover:scale-110 hover:shadow-lg"
       [class.bg-white]="!theme.darkMode()"
       [class.text-black]="!theme.darkMode()"
       [class.bg-black]="theme.darkMode()"

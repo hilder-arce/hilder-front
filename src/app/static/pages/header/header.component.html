@@ -1,0 +1,68 @@
+<!-- HEADER -->
+<header
+  class="sticky top-0 z-[1030] flex items-center justify-between px-4 py-3 shadow-lg h-[15vh] transition-all duration-500"
+
+  [class.bg-[#1e1b74]]="!theme.darkMode()"
+  [class.text-white]="!theme.darkMode()"
+
+  [class.bg-black]="theme.darkMode()"
+  [class.text-gray-100]="theme.darkMode()"
+>
+
+  <!-- CONTENEDOR PRINCIPAL -->
+  <div class="relative flex flex-col items-start text-left w-full mr-3 overflow-visible">
+
+    <div class="relative w-auto px-3 py-2">
+
+      <!-- 🔵 PARTÍCULA QUE GIRA POR EL BORDE -->
+      <span 
+        class="border-orbit"
+        [class.bg-yellow-400]="!theme.darkMode()"
+        [class.bg-pink-500]="theme.darkMode()"
+      ></span>
+
+      <!-- CONTENIDO -->
+      <h1 
+        class="font-bold uppercase text-[1.6rem] z-10 relative"
+        [class.text-white]="!theme.darkMode()"
+        [class.text-[#a5b4fc]]="theme.darkMode()"
+      >
+        HΛYCE ─ SYSTEMS
+      </h1>
+
+      <p 
+        class="text-[0.9rem] tracking-wide z-10 relative"
+        [class.text-gray-200]="!theme.darkMode()"
+        [class.text-gray-400]="theme.darkMode()"
+      >
+        Innovación que impulsa tu negocio
+      </p>
+
+    </div>
+  </div>
+
+  <!-- BOTÓN MENÚ -->
+  <div class="flex items-center gap-3">
+
+   <app-button-login></app-button-login>
+
+    <button
+      (click)="openSidebar()"
+      class="w-[42px] cursor-pointer h-[42px] flex items-center justify-center rounded-full border transition-all duration-300"
+      
+      [class.border-white/70]="!theme.darkMode()"
+      [class.hover:bg-white/20]="!theme.darkMode()"
+
+      [class.border-gray-500]="theme.darkMode()"
+      [class.hover:bg-white/10]="theme.darkMode()"
+    >
+      <i 
+        class="bi bi-list text-xl transition-transform duration-300 hover:rotate-90"
+        [class.text-white]="!theme.darkMode()"
+        [class.text-purple-400]="theme.darkMode()"
+      ></i>
+    </button>
+
+  </div>
+
+</header>

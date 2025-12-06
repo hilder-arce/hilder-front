@@ -1,0 +1,24 @@
+<a 
+  [routerLink]="['/login']"
+  class="
+    inline-flex items-center justify-center
+    px-6 py-2
+    rounded-full
+    font-semibold
+    whitespace-nowrap
+    leading-snug
+    transition-all duration-300
+    cursor-pointer
+
+    hover:scale-105
+    hover:shadow-md
+  "
+
+  [class.bg-[#fdd835]]="!theme.darkMode()"
+  [class.text-[#1e1b74]]="!theme.darkMode()"
+
+  [class.bg-purple-600]="theme.darkMode()"
+  [class.text-white]="theme.darkMode()"
+>
+  INICIAR SESIÓN
+</a>
