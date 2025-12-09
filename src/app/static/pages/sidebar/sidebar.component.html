@@ -20,16 +20,16 @@
     fixed top-[15vh] right-0
     h-[85vh] w-[260px]
     z-[2000]
-    flex flex-col
-    p-5
     shadow-2xl
     transition-transform duration-300
-  overflow-y-auto
+
+    flex flex-col               <!-- clave -->
+    overflow-hidden              <!-- clave -->
+    p-5
   "
 
   [class.translate-x-full]="!visibilitySidebar"
   [class.translate-x-0]="visibilitySidebar"
-
   [class.bg-[#1e1b74]]="!theme.darkMode()"
   [class.bg-[#0f172a]]="theme.darkMode()"
 >
