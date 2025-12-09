@@ -1,5 +1,5 @@
-<div 
-  class="min-h-screen flex items-center justify-center px-6 transition-all duration-700 relative overflow-hidden"
+<div
+  class="min-h-screen flex items-center justify-center px-6 relative overflow-hidden transition-all duration-700"
   [class.bg-gray-100]="!theme.darkMode()"
   [class.bg-gradient-to-br]="theme.darkMode()"
   [class.from-black]="theme.darkMode()"
@@ -7,21 +7,16 @@
   [class.to-gray-800]="theme.darkMode()"
 >
 
-  <!-- ANIMATED ORBS -->
-  <div class="absolute w-72 h-72 bg-purple-600/20 blur-3xl rounded-full -top-24 -left-20 animate-pulse"
-       *ngIf="theme.darkMode()"></div>
+  <!-- BG BLOBS -->
+  <div *ngIf="theme.darkMode()" class="absolute w-80 h-80 bg-purple-600/20 blur-3xl rounded-full -top-28 -left-16"></div>
+  <div *ngIf="theme.darkMode()" class="absolute w-[32rem] h-[32rem] bg-blue-500/20 blur-[110px] rounded-full -bottom-20 -right-20"></div>
 
-  <div class="absolute w-[30rem] h-[30rem] bg-blue-500/20 blur-[110px] rounded-full bottom-0 -right-20 animate-[ping_10s_linear_infinite]"
-       *ngIf="theme.darkMode()"></div>
-
-  <!-- PREMIUM CARD -->
+  <!-- CARD -->
   <div
-    class="relative w-full max-w-md p-8 rounded-3xl shadow-[0_8px_40px_rgba(0,0,0,0.35)]
-           backdrop-blur-2xl border transition-all duration-[900ms] transform scale-95"
+    class="relative w-full max-w-md p-7 rounded-3xl shadow-xl backdrop-blur-2xl transition-all duration-700
+           border scale-95 text-white"
     [class.opacity-0]="!loaded"
     [class.translate-y-10]="!loaded"
-    [class.opacity-100]="loaded"
-    [class.translate-y-0]="loaded"
     [class.scale-100]="loaded"
 
     [class.bg-white/70]="!theme.darkMode()"
@@ -33,29 +28,11 @@
     [class.text-white]="theme.darkMode()"
   >
 
-    <!-- HEADER -->
+    <!-- TITLE -->
     <div class="text-center mb-10">
-      <h1 class="text-4xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500 drop-shadow-sm">
-        Crear cuenta
-      </h1>
-      <p class="mt-2 text-sm opacity-70">Registro de usuario del sistema</p>
-    </div>
-
-    <!-- FORM -->
-    <form class="space-y-7">
-
-      <!-- NOMBRE -->
-      <div class="group relative w-full">
-        <label
-          class="absolute -top-2 left-4 px-2 text-xs font-semibold tracking-wide transition-all duration-300"
-          [class.text-gray-800]="!theme.darkMode()"
-          [class.text-gray-300]="theme.darkMode()"
-        >
-          Nombre de Usuario
-        </label>
-
-        <div class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 transition group-focus-within:text-blue-500">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8"
+      <div class="flex justify-center mb-3">
+        <div class="w-16 h-16 rounded-full bg-blue-600/20 flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-blue-500" fill="none" stroke="currentColor" stroke-width="1.6"
                viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round"
                   d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
@@ -63,117 +40,90 @@
                   d="M4.5 20.25a8.25 8.25 0 1115 0v.75H4.5v-.75z" />
           </svg>
         </div>
-
-        <input
-          type="text"
-          [(ngModel)]="user.nameUser"
-          name="nameUser"
-          placeholder="Jane Smith"
-          class="w-full pl-11 pr-4 py-3 rounded-xl border placeholder-gray-500 text-sm shadow-sm transition-all duration-300
-                 focus:outline-none focus:ring-2 focus:ring-blue-500/70 group-hover:shadow-lg"
-          [class.bg-white]="!theme.darkMode()"
-          [class.border-gray-300]="!theme.darkMode()"
-          [class.text-black]="!theme.darkMode()"
-          [class.bg-[#111827]]="theme.darkMode()"
-          [class.border-gray-700]="theme.darkMode()"
-          [class.text-gray-200]="theme.darkMode()"
-        />
       </div>
 
-      <!-- EMAIL -->
-      <div class="group relative w-full">
-        <label class="absolute -top-2 left-4 px-2 text-xs font-semibold tracking-wide"
-               [class.text-gray-800]="!theme.darkMode()"
-               [class.text-gray-300]="theme.darkMode()">
-          Correo
-        </label>
+      <h1 class="text-3xl font-extrabold">Crear Cuenta</h1>
+      <p class="text-sm opacity-70 mt-1">Únete para descubrir las mejores ofertas</p>
+    </div>
 
-        <div class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-500 transition">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8"
-               viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25H4.5A2.25 2.25 0 012.25 17.25V6.75m0 0L12 12.75m0 0l9.75-6m-9.75 6L2.25 6.75" />
-          </svg>
+    <!-- FORM -->
+    <form class="space-y-6">
+
+      <!-- INPUT REUSABLE STYLE -->
+      <ng-container *ngFor="let field of [
+        { label:'Nombre de Usuario', icon:'user', model:'nameUser', type:'text', placeholder:'Tu nombre de usuario' },
+        { label:'Correo electrónico', icon:'mail', model:'email', type:'email', placeholder:'ejemplo@correo.com' },
+        { label:'Contraseña', icon:'lock', model:'password', type:'password', placeholder:'Mínimo 6 caracteres' }
+      ]">
+
+        <div class="relative">
+          <label class="text-sm font-semibold absolute -top-2 left-4 px-2 backdrop-blur-sm opacity-70">
+            {{ field.label }}
+          </label>
+
+          <div class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
+            <ng-container [ngSwitch]="field.icon">
+              <svg *ngSwitchCase="'user'" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
+                   stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M4.5 20.25a8.25 8.25 0 1115 0v.75H4.5v-.75z" />
+              </svg>
+
+              <svg *ngSwitchCase="'mail'" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
+                   stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25H4.5A2.25 2.25 0 012.25 17.25V6.75m0 0L12 12.75m0 0l9.75-6" />
+              </svg>
+
+              <svg *ngSwitchCase="'lock'" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
+                   stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75" />
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M3.75 10.5h16.5v9a.75.75 0 01-.75.75H4.5a.75.75 0 01-.75-.75v-9z" />
+              </svg>
+            </ng-container>
+          </div>
+
+          <input
+            [type]="field.type"
+            [(ngModel)]="user[field.model]"
+            [name]="field.model"
+            [placeholder]="field.placeholder"
+            class="w-full pl-12 pr-4 py-3.5 rounded-xl border text-sm shadow-sm
+                   placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/70
+                   transition-all bg-opacity-40 backdrop-blur-lg"
+            [class.bg-white]="!theme.darkMode()"
+            [class.border-gray-300]="!theme.darkMode()"
+            [class.text-black]="!theme.darkMode()"
+            [class.bg-[#111827]]="theme.darkMode()"
+            [class.border-gray-700]="theme.darkMode()"
+            [class.text-gray-200]="theme.darkMode()"
+          />
         </div>
+      </ng-container>
 
-        <input
-          type="email"
-          [(ngModel)]="user.email"
-          name="email"
-          placeholder="JaneSmith@empresa.com"
-          class="w-full pl-11 pr-4 py-3 rounded-xl border placeholder-gray-500 text-sm shadow-sm
-                 focus:outline-none focus:ring-2 focus:ring-blue-500/70 transition-all group-hover:shadow-lg"
-          [class.bg-white]="!theme.darkMode()"
-          [class.border-gray-300]="!theme.darkMode()"
-          [class.text-black]="!theme.darkMode()"
-          [class.bg-[#111827]]="theme.darkMode()"
-          [class.border-gray-700]="theme.darkMode()"
-          [class.text-gray-200]="theme.darkMode()"
-        />
-      </div>
-
-      <!-- PASSWORD -->
-      <div class="group relative w-full">
-        <label class="absolute -top-2 left-4 px-2 text-xs font-semibold tracking-wide"
-               [class.text-gray-800]="!theme.darkMode()"
-               [class.text-gray-300]="theme.darkMode()">
-          Contraseña
-        </label>
-
-        <div class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 transition group-focus-within:text-blue-500">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8"
-               viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m12 0H3.75a.75.75 0 00-.75.75v9a.75.75 0 00.75.75h15a.75.75 0 00.75-.75v-9a.75.75 0 00-.75-.75z" />
-          </svg>
-        </div>
-
-        <input
-          type="password"
-          [(ngModel)]="user.password"
-          name="password"
-          placeholder="********"
-          class="w-full pl-11 pr-4 py-3 rounded-xl border placeholder-gray-500 text-sm shadow-sm
-                 focus:outline-none focus:ring-2 focus:ring-blue-500/70 transition-all group-hover:shadow-lg"
-          [class.bg-white]="!theme.darkMode()"
-          [class.border-gray-300]="!theme.darkMode()"
-          [class.text-black]="!theme.darkMode()"
-          [class.bg-[#111827]]="theme.darkMode()"
-          [class.border-gray-700]="theme.darkMode()"
-          [class.text-gray-200]="theme.darkMode()"
-        />
-      </div>
-
-      <!-- SELECT TIPO DE USUARIO -->
-      <div class="group relative w-full">
-        <label class="absolute -top-2 left-4 px-2 text-xs font-semibold tracking-wide"
-               [class.text-gray-800]="!theme.darkMode()"
-               [class.text-gray-300]="theme.darkMode()">
+      <!-- SELECT USER TYPE -->
+      <div class="relative">
+        <label class="text-sm font-semibold absolute -top-2 left-4 px-2 backdrop-blur-sm opacity-70">
           Cargo
         </label>
-
-        <div class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 transition group-focus-within:text-blue-500">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400" fill="none"
-            viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round"
-                d="M15.75 5.25a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 20.25a8.25 8.25 0 0115 0M19.5 7.5l2 2-2 2" />
-        </svg>
-
-        </div>
 
         <select
           [(ngModel)]="user.userType"
           name="userType"
-          class="w-full pl-11 pr-4 py-3 rounded-xl border text-sm shadow-sm
-                 focus:outline-none focus:ring-2 focus:ring-blue-500/70 transition-all duration-300 group-hover:shadow-lg"
+          class="w-full pl-12 pr-4 py-3.5 rounded-xl border text-sm shadow-sm bg-opacity-40 backdrop-blur-lg
+                 focus:outline-none focus:ring-2 focus:ring-blue-500/70 transition-all"
           [class.bg-white]="!theme.darkMode()"
-          [class.border-gray-300]="!theme.darkMode()"
           [class.text-black]="!theme.darkMode()"
+          [class.border-gray-300]="!theme.darkMode()"
           [class.bg-[#111827]]="theme.darkMode()"
-          [class.border-gray-700]="theme.darkMode()"
           [class.text-gray-200]="theme.darkMode()"
+          [class.border-gray-700]="theme.darkMode()"
         >
-          <option value="">SELECCIONAR</option>
+          <option value="">Seleccionar</option>
           <option [ngValue]="UserType.Administrador">Administrador</option>
           <option [ngValue]="UserType.Agente">Agente</option>
           <option [ngValue]="UserType.Operador">Operador</option>
@@ -189,17 +139,19 @@
       <button
         type="submit"
         (click)="register(user)"
-        class="w-full py-3.5 rounded-xl font-bold text-white
-               bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600
-               bg-[length:200%_auto] hover:bg-[right_center]
-               transition-all duration-500 shadow-lg hover:shadow-2xl
-               hover:-translate-y-1 active:scale-[.98]
-               cursor-pointer"
+        class="w-full py-3.5 rounded-xl font-bold text-white text-lg
+               bg-blue-600 hover:bg-blue-700 transition-all shadow-lg hover:shadow-2xl"
       >
-        Registrarme
+        Crear Cuenta
       </button>
 
     </form>
 
+    <p class="text-center text-sm mt-6 opacity-80">
+      ¿Ya tienes una cuenta?
+      <a class="text-blue-400 hover:underline cursor-pointer">Iniciar sesión</a>
+    </p>
+
   </div>
+
 </div>
