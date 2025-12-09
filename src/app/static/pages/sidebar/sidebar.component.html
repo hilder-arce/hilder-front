@@ -1,0 +1,122 @@
+<button
+   (click)="close()"
+      class="w-[42px] cursor-pointer h-[42px] flex items-center justify-center rounded-full border transition-all duration-300"
+      
+      [class.border-white/70]="!theme.darkMode()"
+      [class.hover:bg-white/20]="!theme.darkMode()"
+
+      [class.border-gray-500]="theme.darkMode()"
+      [class.hover:bg-white/10]="theme.darkMode()"
+    >
+      <i 
+        class="bi bi-list text-xl transition-transform duration-300 hover:rotate-90"
+        [class.text-white]="!theme.darkMode()"
+        [class.text-purple-400]="theme.darkMode()"
+      ></i>
+    </button>
+
+<aside *ngIf="visibilitySidebar"
+  class="
+    fixed bottom-0 right-0
+    h-[85vh] w-[260px]
+    z-[2000]
+    flex flex-col
+    p-5
+    shadow-2xl
+    transition-transform duration-300
+  "
+
+  [class.translate-x-full]="!visibilitySidebar"
+  [class.translate-x-0]="visibilitySidebar"
+
+  [class.bg-[#1e1b74]]="!theme.darkMode()"
+  [class.bg-[#0f172a]]="theme.darkMode()"
+>
+
+  <!-- BOTÓN DE CERRAR (X) - vive en el sidebar -->
+  <div class="flex justify-end mb-4">
+    <button 
+      (click)="close()"
+      class="w-9 h-9 rounded-full flex items-center justify-center
+      transition-all hover:scale-110"
+
+      [class.bg-white/20]="!theme.darkMode()"
+      [class.text-white]="!theme.darkMode()"
+
+      [class.bg-white/10]="theme.darkMode()"
+      [class.text-purple-400]="theme.darkMode()"
+    >
+      ✕
+    </button>
+  </div>
+
+  <!-- LINKS -->
+  <nav class="flex flex-col gap-2">
+
+    <a 
+      (click)="close()"
+      [routerLink]="['/home']"
+      class="px-4 py-3 rounded-md transition"
+      [class.text-white]="!theme.darkMode()"
+      [class.hover:bg-white/20]="!theme.darkMode()"
+      [class.text-gray-200]="theme.darkMode()"
+      [class.hover:bg-white/10]="theme.darkMode()"
+    >Home</a>
+
+    <a 
+      (click)="close()"
+      [routerLink]="['/nosotros']"
+      class="px-4 py-3 rounded-md transition"
+      [class.text-white]="!theme.darkMode()"
+      [class.hover:bg-white/20]="!theme.darkMode()"
+      [class.text-gray-200]="theme.darkMode()"
+      [class.hover:bg-white/10]="theme.darkMode()"
+    >Nosotros</a>
+
+    <a 
+      (click)="close()"
+      [routerLink]="['/contacto']"
+      class="px-4 py-3 rounded-md transition"
+      [class.text-white]="!theme.darkMode()"
+      [class.hover:bg-white/20]="!theme.darkMode()"
+      [class.text-gray-200]="theme.darkMode()"
+      [class.hover:bg-white/10]="theme.darkMode()"
+    >Contáctanos</a>
+
+    <a 
+      (click)="close()"
+      [routerLink]="['/servicios']"
+      class="px-4 py-3 rounded-md transition"
+      [class.text-white]="!theme.darkMode()"
+      [class.hover:bg-white/20]="!theme.darkMode()"
+      [class.text-gray-200]="theme.darkMode()"
+      [class.hover:bg-white/10]="theme.darkMode()"
+    >Servicios</a>
+
+    <a 
+      (click)="close()"
+      [routerLink]="['/soporte']"
+      class="px-4 py-3 rounded-md transition"
+      [class.text-white]="!theme.darkMode()"
+      [class.hover:bg-white/20]="!theme.darkMode()"
+      [class.text-gray-200]="theme.darkMode()"
+      [class.hover:bg-white/10]="theme.darkMode()"
+    >Soporte</a>
+    <a 
+      (click)="close()"
+      [routerLink]="['/ficha-trabajador']"
+      class="px-4 py-3 rounded-md transition"
+      [class.text-white]="!theme.darkMode()"
+      [class.hover:bg-white/20]="!theme.darkMode()"
+      [class.text-gray-200]="theme.darkMode()"
+      [class.hover:bg-white/10]="theme.darkMode()"
+    >RRHH</a>
+
+  </nav>
+
+  <!-- BOTÓN LOGIN (solo mobile) -->
+  <div class="mt-auto pt-6 md:hidden">
+    <app-button-login (click)="close()"></app-button-login>
+  </div>
+
+</aside>

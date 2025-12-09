@@ -26,7 +26,7 @@
         [class.text-white]="!theme.darkMode()"
         [class.text-[#a5b4fc]]="theme.darkMode()"
       >
-        Hilder.ts 🧩🥷
+        CAJACE E.I.E.R.L
       </h1>
 
       <p 
@@ -45,22 +45,7 @@
 
    <app-button-login class="hidden md:block" ></app-button-login>
 
-    <button
-      (click)="openSidebar()"
-      class="w-[42px] cursor-pointer h-[42px] flex items-center justify-center rounded-full border transition-all duration-300"
-      
-      [class.border-white/70]="!theme.darkMode()"
-      [class.hover:bg-white/20]="!theme.darkMode()"
-
-      [class.border-gray-500]="theme.darkMode()"
-      [class.hover:bg-white/10]="theme.darkMode()"
-    >
-      <i 
-        class="bi bi-list text-xl transition-transform duration-300 hover:rotate-90"
-        [class.text-white]="!theme.darkMode()"
-        [class.text-purple-400]="theme.darkMode()"
-      ></i>
-    </button>
+    <app-sidebar></app-sidebar>
 
   </div>
 

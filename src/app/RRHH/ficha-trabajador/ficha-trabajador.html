@@ -1,0 +1,230 @@
+<div 
+  class="min-h-screen px-4 py-10 transition-all duration-500"
+  [class.bg-gray-100]="!theme.darkMode()"
+  [class.bg-gradient-to-br]="theme.darkMode()"
+  [class.from-black]="theme.darkMode()"
+  [class.via-gray-900]="theme.darkMode()"
+  [class.to-gray-800]="theme.darkMode()"
+>
+
+  <div class="max-w-6xl mx-auto">
+
+    <h1 class="text-3xl font-bold mb-2"
+      [class.text-black]="!theme.darkMode()"
+      [class.text-white]="theme.darkMode()">
+      Ficha del Trabajador
+    </h1>
+
+    <p class="mb-6 opacity-70"
+       [class.text-black]="!theme.darkMode()"
+       [class.text-white]="theme.darkMode()">
+      Registro completo de información del personal
+    </p>
+
+    <!-- TABS -->
+    <div class="flex gap-4 mb-8">
+      <button 
+        (click)="activeTab = 'general'"
+        class="px-6 py-2 rounded-xl font-semibold transition-all"
+        [class.bg-blue-600]="activeTab === 'general'"
+        [class.text-white]="activeTab === 'general'"
+        [class.bg-gray-200]="activeTab !== 'general' && !theme.darkMode()"
+        [class.text-black]="activeTab !== 'general' && !theme.darkMode()"
+        [class.bg-white/10]="activeTab !== 'general' && theme.darkMode()"
+      >
+        Información General
+      </button>
+
+      <button 
+        (click)="activeTab = 'academica'"
+        class="px-6 py-2 rounded-xl font-semibold transition-all"
+        [class.bg-purple-600]="activeTab === 'academica'"
+        [class.text-white]="activeTab === 'academica'"
+        [class.bg-gray-200]="activeTab !== 'academica' && !theme.darkMode()"
+        [class.text-black]="activeTab !== 'academica' && !theme.darkMode()"
+        [class.bg-white/10]="activeTab !== 'academica' && theme.darkMode()"
+      >
+        Información Académica
+      </button>
+
+      <button 
+        (click)="activeTab = 'complementaria'"
+        class="px-6 py-2 rounded-xl font-semibold transition-all"
+        [class.bg-green-600]="activeTab === 'complementaria'"
+        [class.text-white]="activeTab === 'complementaria'"
+        [class.bg-gray-200]="activeTab !== 'complementaria' && !theme.darkMode()"
+        [class.text-black]="activeTab !== 'complementaria' && !theme.darkMode()"
+        [class.bg-white/10]="activeTab !== 'complementaria' && theme.darkMode()"
+      >
+        Información Complementaria
+      </button>
+    </div>
+
+    <form (ngSubmit)="register()" class="space-y-8">
+
+      <!-- ===================================================== -->
+      <!-- INFO GENERAL -->
+      <!-- ===================================================== -->
+      <div *ngIf="activeTab === 'general'" class="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 rounded-2xl border"
+        [class.bg-white]="!theme.darkMode()"
+        [class.border-gray-300]="!theme.darkMode()"
+        [class.bg-white/5]="theme.darkMode()"
+        [class.border-white/10]="theme.darkMode()"
+      >
+
+        <div class="md:col-span-3 text-xl font-bold mb-2">Datos Personales</div>
+
+        <div>
+          <label>Nombres</label>
+          <input type="text" [(ngModel)]="nombre" name="nombre" class="input" />
+        </div>
+
+        <div>
+          <label>Apellidos</label>
+          <input type="text" [(ngModel)]="apellidos" name="apellidos" class="input" />
+        </div>
+
+        <div>
+          <label>DNI</label>
+          <input type="text" [(ngModel)]="dni" name="dni" class="input" />
+        </div>
+
+        <div>
+          <label>Fecha Nacimiento</label>
+          <input type="date" [(ngModel)]="fechaNacimiento" name="fechaNacimiento" class="input" />
+        </div>
+
+        <div>
+          <label>Sexo</label>
+          <select [(ngModel)]="sexo" name="sexo" class="input">
+            <option value="">Seleccione</option>
+            <option>Masculino</option>
+            <option>Femenino</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Estado Civil</label>
+          <select [(ngModel)]="estadoCivil" name="estadoCivil" class="input">
+            <option>Soltero</option>
+            <option>Casado</option>
+            <option>Viudo</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Celular</label>
+          <input type="text" [(ngModel)]="celular" name="celular" class="input" />
+        </div>
+
+        <div>
+          <label>Correo</label>
+          <input type="email" [(ngModel)]="email" name="email" class="input" />
+        </div>
+
+        <div class="md:col-span-3">
+          <label>Dirección</label>
+          <input type="text" [(ngModel)]="direccion" name="direccion" class="input" />
+        </div>
+
+      </div>
+
+      <!-- ===================================================== -->
+      <!-- INFO ACADÉMICA -->
+      <!-- ===================================================== -->
+      <div *ngIf="activeTab === 'academica'" class="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 rounded-2xl border"
+        [class.bg-white]="!theme.darkMode()"
+        [class.border-gray-300]="!theme.darkMode()"
+        [class.bg-white/5]="theme.darkMode()"
+        [class.border-white/10]="theme.darkMode()"
+      >
+
+        <div class="md:col-span-3 text-xl font-bold mb-2">Formación Académica</div>
+
+        <div>
+          <label>Nivel de estudios</label>
+          <select [(ngModel)]="nivelEstudio" name="nivelEstudio" class="input">
+            <option>Secundaria</option>
+            <option>Técnico</option>
+            <option>Universitario</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Carrera</label>
+          <input type="text" [(ngModel)]="carrera" name="carrera" class="input" />
+        </div>
+
+        <div>
+          <label>Centro de estudios</label>
+          <input type="text" [(ngModel)]="centroEstudios" name="centroEstudios" class="input" />
+        </div>
+
+        <div>
+          <label>Año egreso</label>
+          <input type="number" [(ngModel)]="anioEgreso" name="anioEgreso" class="input" />
+        </div>
+
+      </div>
+
+      <!-- ===================================================== -->
+      <!-- INFO COMPLEMENTARIA -->
+      <!-- ===================================================== -->
+      <div *ngIf="activeTab === 'complementaria'" class="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 rounded-2xl border"
+        [class.bg-white]="!theme.darkMode()"
+        [class.border-gray-300]="!theme.darkMode()"
+        [class.bg-white/5]="theme.darkMode()"
+        [class.border-white/10]="theme.darkMode()"
+      >
+
+        <div class="md:col-span-3 text-xl font-bold mb-2">Datos Laborales</div>
+
+        <div>
+          <label>Cargo</label>
+          <input type="text" [(ngModel)]="cargo" name="cargo" class="input" />
+        </div>
+
+        <div>
+          <label>Área</label>
+          <input type="text" [(ngModel)]="area" name="area" class="input" />
+        </div>
+
+        <div>
+          <label>Fecha ingreso</label>
+          <input type="date" [(ngModel)]="fechaIngreso" name="fechaIngreso" class="input" />
+        </div>
+
+        <div>
+          <label>Tipo contrato</label>
+          <select [(ngModel)]="tipoContrato" name="tipoContrato" class="input">
+            <option>CAS</option>
+            <option>Nombrado</option>
+            <option>Locación</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Salario</label>
+          <input type="number" [(ngModel)]="salario" name="salario" class="input" />
+        </div>
+
+        <div class="md:col-span-3">
+          <label>Observaciones</label>
+          <textarea [(ngModel)]="observaciones" name="observaciones" rows="3" class="input"></textarea>
+        </div>
+
+      </div>
+
+      <!-- BOTÓN GLOBAL -->
+      <div class="flex justify-end pt-6">
+        <button type="submit"
+          class="px-10 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold hover:scale-105 transition-all">
+          GUARDAR FICHA
+        </button>
+      </div>
+
+    </form>
+
+  </div>
+
+</div>

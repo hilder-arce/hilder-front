@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, } from '@angular/core';
 import { ThemeService } from '../../../services/theme';
 import { ButtonLoginComponent } from '../../../shared/componets/button-login/button-login.component';
+import { SidebarComponent } from '../sidebar/sidebar.component';
 
 @Component({
   selector: 'app-header',
@@ -8,17 +9,12 @@ import { ButtonLoginComponent } from '../../../shared/componets/button-login/but
   styleUrls: ['./header.component.css'],
   standalone: true,
   imports: [
-    ButtonLoginComponent
+    ButtonLoginComponent,
+    SidebarComponent
   ]
 })
 export class HeaderComponent {
 
   constructor(public theme: ThemeService){}
-
-  @Output() toggleSidebar = new EventEmitter<void>();
-
-  openSidebar() {
-    this.toggleSidebar.emit();
-  }
 
 }

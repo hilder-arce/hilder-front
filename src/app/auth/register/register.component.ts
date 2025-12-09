@@ -2,51 +2,31 @@ import { Component, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { ThemeService } from "../../services/theme";
 import { RouterModule } from "@angular/router";
+import { CommonModule } from "@angular/common";
 
 @Component({
-    selector: 'app-register',
-    imports: [
-        FormsModule,
-        RouterModule
-    ],
-    templateUrl: './register.component.html',
-    styleUrl: './register.component.css'
+  selector: 'app-register',
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterModule
+  ],
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']   
 })
-
 export class RegisterComponent implements OnInit {
 
-    constructor(public theme: ThemeService){}
-  
+  constructor(public theme: ThemeService) {}
 
-  name: string = '';
-  email: string = '';
-  password: string = '';
-
-  loaded = false;
-
-  ngOnInit() {
+  // CONTROL DE ANIMACIÓN
+  loaded: boolean = false;
 
 
-    setTimeout(() => {
-      this.loaded = true;
-    }, 200);
+  ngOnInit(): void {
+    // activa la animación del card
+    setTimeout(() => this.loaded = true, 50);
   }
 
-
-  register() {
-    if (!this.name || !this.email || !this.password) {
-      alert('Completa todos los campos');
-      return;
-    }
-
-    console.log('Registro:', this.name, this.email, this.password);
-
-    alert('Registro listo 🚀');
-  }
-
-  registerWithGoogle() {
-    console.log('Registro con Google');
-    alert('Botón de Google listo (conectar luego a backend)');
-  }
 
 }
