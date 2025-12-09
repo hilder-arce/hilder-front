@@ -44,19 +44,17 @@
     <!-- FORM -->
     <form class="space-y-7">
 
-      <!-- INPUT PREMIUM -->
+      <!-- NOMBRE -->
       <div class="group relative w-full">
         <label
-          class="absolute -top-2 left-4 px-2 text-xs font-semibold tracking-wide
-                 bg-transparent transition-all duration-300"
+          class="absolute -top-2 left-4 px-2 text-xs font-semibold tracking-wide transition-all duration-300"
           [class.text-gray-800]="!theme.darkMode()"
           [class.text-gray-300]="theme.darkMode()"
         >
           Nombre de Usuario
         </label>
 
-        <div class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-500 transition">
-          <!-- HEROICON -->
+        <div class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 transition group-focus-within:text-blue-500">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8"
                viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round"
@@ -68,17 +66,14 @@
 
         <input
           type="text"
+          [(ngModel)]="user.nameUser"
+          name="nameUser"
           placeholder="Jane Smith"
-          class="w-full pl-11 pr-4 py-3 rounded-xl border
-                 placeholder-gray-500 text-sm
-                 shadow-sm transition-all duration-300
-                 focus:outline-none focus:ring-2 focus:ring-blue-500/70
-                 group-hover:shadow-lg"
-
+          class="w-full pl-11 pr-4 py-3 rounded-xl border placeholder-gray-500 text-sm shadow-sm transition-all duration-300
+                 focus:outline-none focus:ring-2 focus:ring-blue-500/70 group-hover:shadow-lg"
           [class.bg-white]="!theme.darkMode()"
           [class.border-gray-300]="!theme.darkMode()"
           [class.text-black]="!theme.darkMode()"
-
           [class.bg-[#111827]]="theme.darkMode()"
           [class.border-gray-700]="theme.darkMode()"
           [class.text-gray-200]="theme.darkMode()"
@@ -103,16 +98,14 @@
 
         <input
           type="email"
+          [(ngModel)]="user.email"
+          name="email"
           placeholder="JaneSmith@empresa.com"
-          class="w-full pl-11 pr-4 py-3 rounded-xl border
-                 placeholder-gray-500 text-sm shadow-sm
-                 focus:outline-none focus:ring-2 focus:ring-blue-500/70
-                 transition-all group-hover:shadow-lg"
-
+          class="w-full pl-11 pr-4 py-3 rounded-xl border placeholder-gray-500 text-sm shadow-sm
+                 focus:outline-none focus:ring-2 focus:ring-blue-500/70 transition-all group-hover:shadow-lg"
           [class.bg-white]="!theme.darkMode()"
           [class.border-gray-300]="!theme.darkMode()"
           [class.text-black]="!theme.darkMode()"
-
           [class.bg-[#111827]]="theme.darkMode()"
           [class.border-gray-700]="theme.darkMode()"
           [class.text-gray-200]="theme.darkMode()"
@@ -137,30 +130,71 @@
 
         <input
           type="password"
+          [(ngModel)]="user.password"
+          name="password"
           placeholder="********"
-          class="w-full pl-11 pr-4 py-3 rounded-xl border
-                 placeholder-gray-500 text-sm shadow-sm
-                 focus:outline-none focus:ring-2 focus:ring-blue-500/70
-                 transition-all duration-300 group-hover:shadow-lg"
-
+          class="w-full pl-11 pr-4 py-3 rounded-xl border placeholder-gray-500 text-sm shadow-sm
+                 focus:outline-none focus:ring-2 focus:ring-blue-500/70 transition-all group-hover:shadow-lg"
           [class.bg-white]="!theme.darkMode()"
           [class.border-gray-300]="!theme.darkMode()"
           [class.text-black]="!theme.darkMode()"
-
           [class.bg-[#111827]]="theme.darkMode()"
           [class.border-gray-700]="theme.darkMode()"
           [class.text-gray-200]="theme.darkMode()"
         />
       </div>
 
+      <!-- SELECT TIPO DE USUARIO -->
+      <div class="group relative w-full">
+        <label class="absolute -top-2 left-4 px-2 text-xs font-semibold tracking-wide"
+               [class.text-gray-800]="!theme.darkMode()"
+               [class.text-gray-300]="theme.darkMode()">
+          Cargo
+        </label>
+
+        <div class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 transition group-focus-within:text-blue-500">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400" fill="none"
+            viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round"
+                d="M15.75 5.25a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 20.25a8.25 8.25 0 0115 0M19.5 7.5l2 2-2 2" />
+        </svg>
+
+        </div>
+
+        <select
+          [(ngModel)]="user.userType"
+          name="userType"
+          class="w-full pl-11 pr-4 py-3 rounded-xl border text-sm shadow-sm
+                 focus:outline-none focus:ring-2 focus:ring-blue-500/70 transition-all duration-300 group-hover:shadow-lg"
+          [class.bg-white]="!theme.darkMode()"
+          [class.border-gray-300]="!theme.darkMode()"
+          [class.text-black]="!theme.darkMode()"
+          [class.bg-[#111827]]="theme.darkMode()"
+          [class.border-gray-700]="theme.darkMode()"
+          [class.text-gray-200]="theme.darkMode()"
+        >
+          <option value="">SELECCIONAR</option>
+          <option [ngValue]="UserType.Administrador">Administrador</option>
+          <option [ngValue]="UserType.Agente">Agente</option>
+          <option [ngValue]="UserType.Operador">Operador</option>
+          <option [ngValue]="UserType.Supervisor">Supervisor</option>
+          <option [ngValue]="UserType.Mecanico">Mecánico</option>
+          <option [ngValue]="UserType.Chofer">Chofer</option>
+          <option [ngValue]="UserType.Secretaria">Secretaria</option>
+          <option [ngValue]="UserType.Ingeniero">Ingeniero</option>
+        </select>
+      </div>
+
       <!-- BUTTON -->
       <button
         type="submit"
+        (click)="register(user)"
         class="w-full py-3.5 rounded-xl font-bold text-white
                bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600
                bg-[length:200%_auto] hover:bg-[right_center]
                transition-all duration-500 shadow-lg hover:shadow-2xl
-               hover:-translate-y-1 active:scale-[.98]"
+               hover:-translate-y-1 active:scale-[.98]
+               cursor-pointer"
       >
         Registrarme
       </button>
