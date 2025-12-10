@@ -40,3 +40,20 @@
 .animate-spin-slow {
   animation: spin-slow 12s linear infinite;
 }
+
+/* Spinner futurista premium */
+.loader-premium {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 3px solid rgba(0, 255, 255, 0.15);
+  border-top-color: #00eaff;
+  animation: spinPremium 0.65s linear infinite;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+}
+
+@keyframes spinPremium {
+  to {
+    transform: rotate(360deg);
+  }
+}

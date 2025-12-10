@@ -64,11 +64,8 @@
     <form class="space-y-7">
       <!-- NOMBRE -->
       <div class="group relative w-full">
-        <label class="absolute -top-2 left-4 px-2 text-xs font-semibold tracking-wide"
-               [class.text-gray-800]="!theme.darkMode()"
-               [class.text-gray-300]="theme.darkMode()">
-          Nombre de Usuario
-        </label>
+        <label class="text-sm mb-1 block font-medium ml-4">Nombre de Usuario</label>
+
 
         <input
           type="text"
@@ -98,11 +95,8 @@
 
       <!-- EMAIL -->
       <div class="group relative w-full">
-        <label class="absolute -top-2 left-4 px-2 text-xs font-semibold tracking-wide"
-               [class.text-gray-800]="!theme.darkMode()"
-               [class.text-gray-300]="theme.darkMode()">
-          Correo
-        </label>
+        <label class="text-sm mb-1 block font-medium ml-4">Correo</label>
+
 
         <input
           type="email"
@@ -130,11 +124,8 @@
 
       <!-- PASSWORD -->
       <div class="group relative w-full">
-        <label class="absolute -top-2 left-4 px-2 text-xs font-semibold tracking-wide"
-               [class.text-gray-800]="!theme.darkMode()"
-               [class.text-gray-300]="theme.darkMode()">
-          Contraseña
-        </label>
+        <label class="text-sm mb-1 block font-medium ml-4">Contraseña</label>
+
 
         <input
           type="password"
@@ -162,11 +153,7 @@
 
       <!-- SELECT -->
       <div class="group relative w-full">
-        <label class="absolute -top-2 left-4 px-2 text-xs font-semibold tracking-wide"
-               [class.text-gray-800]="!theme.darkMode()"
-               [class.text-gray-300]="theme.darkMode()">
-          Cargo
-        </label>
+        <label class="text-sm mb-1 block font-medium ml-4">Cargo</label>
 
         <select
           [(ngModel)]="user.userType"
@@ -180,7 +167,6 @@
           [class.border-gray-700]="theme.darkMode()"
           [class.text-gray-200]="theme.darkMode()"
         >
-          <option value="">SELECCIONAR</option>
           <option [ngValue]="UserType.Administrador">Administrador</option>
           <option [ngValue]="UserType.Agente">Agente</option>
           <option [ngValue]="UserType.Operador">Operador</option>
@@ -204,12 +190,23 @@
       <!-- BOTÓN REGISTRO -->
       <button
         type="submit"
-        (click)="register(user)"
-        class="w-full py-3 rounded-xl bg-blue-600 text-white font-semibold text-base
-               hover:bg-blue-700 transition-all duration-200 hover:shadow-xl"
+        (click)="register()"
+        [disabled]="isLoading"
+        class="w-full py-3 rounded-xl text-white font-semibold text-base
+              transition-all duration-200 hover:shadow-xl
+              flex items-center justify-center gap-2 cursor-pointer
+              bg-blue-600 hover:bg-blue-700 disabled:opacity-60 disabled:hover:bg-blue-600 disabled:cursor-not-allowed"
       >
-        Registrarme
+
+        <!-- Cuando está cargando -->
+        <span *ngIf="isLoading" class="loader-premium"></span>
+        <span *ngIf="isLoading">Procesando...</span>
+
+        <!-- Cuando NO está cargando -->
+        <span *ngIf="!isLoading">Registrarme</span>
+
       </button>
+
     </form>
 
     <!-- FOOTER -->
