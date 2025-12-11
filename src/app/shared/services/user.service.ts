@@ -16,7 +16,6 @@ export class UserService {
 
     //CREAR USUARIO
     async createUser(newUser: User) {
-        console.log(newUser)
         return await this.http.post<{ message: string }>(`${this.apiBackend}/users`, newUser, { withCredentials: true }).toPromise()
     } 
 

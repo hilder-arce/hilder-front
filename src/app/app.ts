@@ -16,24 +16,4 @@ import { HeaderComponent } from './static/pages/header/header.component';
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App implements OnInit{
-
-  constructor(private HTTP: HttpClient){}
-
- 
-
-  async ngOnInit(): Promise<void> {
-    try {
-
-      const response = await firstValueFrom(
-        this.HTTP.get(`${environment.apiUrl}/users`)
-      );
-
-      console.log('Datos recibidos:', response);
-
-    } catch (error) {
-      console.error('Error al llamar la API:', error);
-    }
-  }
-
-}
+export class App {}
