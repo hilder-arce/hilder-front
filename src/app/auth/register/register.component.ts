@@ -44,7 +44,7 @@ export class RegisterComponent implements OnInit {
   }
 
   UserType = UserType;
-  isLoading: boolean = true
+  isLoading: boolean = false
 
   async register() {
 
