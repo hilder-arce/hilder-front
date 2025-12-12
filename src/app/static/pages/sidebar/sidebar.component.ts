@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ButtonLoginComponent } from '../../../shared/componets/button-login/button-login.component';
-import { ThemeService } from '../../../services/theme';
+import { ThemeService } from '../../../shared/services/theme.service';
 
 @Component({
   selector: 'app-sidebar',

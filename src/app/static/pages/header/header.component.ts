@@ -1,5 +1,5 @@
 import { Component, } from '@angular/core';
-import { ThemeService } from '../../../services/theme';
+import { ThemeService } from '../../../shared/services/theme.service';
 import { ButtonLoginComponent } from '../../../shared/componets/button-login/button-login.component';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 

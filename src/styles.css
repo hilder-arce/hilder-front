@@ -1,72 +1,72 @@
 /* You can add global styles to this file, and also import other style files */
 @import "tailwindcss";
 
-/* ===== ALERTA FUTURISTA PREMIUM ===== */
+/* ===== ALERTA CORPORATIVA PREMIUM ===== */
 .custom-alert-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.45);
+    background: rgba(15, 23, 42, 0.35); /* azul oscuro con transparencia */
     backdrop-filter: blur(6px);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 9999;
-    animation: fadeInOverlay 0.3s ease-out forwards;
+    animation: fadeInOverlay 0.25s ease-out forwards;
 }
 
 .custom-alert-box {
     min-width: 340px;
-    padding: 28px 25px;
+    padding: 26px 24px;
     border-radius: 18px;
-    background: rgba(10, 15, 25, 0.7);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    box-shadow:
-        0 8px 25px rgba(0, 0, 0, 0.45),
-        0 0 18px rgba(0, 255, 255, 0.35);
+    background: #ffffffee; /* fondo claro corporativo */
+    border: 1px solid rgba(15, 30, 106, 0.18);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
     text-align: center;
-    font-family: 'Inter', sans-serif;
-    color: white;
-    animation: scaleIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-    position: relative;
+    font-family: Inter, sans-serif;
+    color: #0f1e6a;
+    animation: scaleIn 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Estados */
+.custom-alert-success {
+    border-left: 5px solid #00a572;
+}
+
+.custom-alert-error {
+    border-left: 5px solid #b71c1c;
 }
 
 .custom-alert-title {
     font-size: 20px;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     font-weight: 600;
-    letter-spacing: 0.5px;
 }
 
 .custom-alert-message {
-    font-size: 16px;
-    opacity: 0.9;
+    font-size: 15px;
+    color: #1f2c72;
 }
 
 .custom-alert-icon {
-    width: 50px;
-    height: 50px;
-    margin: 0 auto 15px;
+    width: 46px;
+    height: 46px;
+    margin: 0 auto 12px;
     display: block;
 }
 
-.custom-alert-success {
-    box-shadow:
-        0 0 25px rgba(0, 255, 255, 0.45),
-        inset 0 0 20px rgba(0, 255, 255, 0.25);
-    border-color: rgba(0, 255, 255, 0.4);
+/* Success icon */
+.custom-alert-success .custom-alert-icon svg {
+    stroke: #00a572;
 }
 
-.custom-alert-error {
-    box-shadow:
-        0 0 25px rgba(255, 80, 80, 0.45),
-        inset 0 0 20px rgba(255, 80, 80, 0.25);
-    border-color: rgba(255, 80, 80, 0.4);
+/* Error icon */
+.custom-alert-error .custom-alert-icon svg {
+    stroke: #b71c1c;
 }
 
-/* ANIMACIONES */
+/* Animaciones */
 @keyframes scaleIn {
-    0% { transform: scale(0.75) translateY(15px); opacity: 0; }
+    0% { transform: scale(0.8) translateY(10px); opacity: 0; }
     100% { transform: scale(1) translateY(0); opacity: 1; }
 }
 
@@ -77,5 +77,5 @@
 
 @keyframes fadeOutAlert {
     0% { opacity: 1; transform: scale(1); }
-    100% { opacity: 0; transform: scale(0.8); }
+    100% { opacity: 0; transform: scale(0.85); }
 }

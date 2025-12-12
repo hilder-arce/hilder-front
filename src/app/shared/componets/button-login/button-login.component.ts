@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { Component } from "@angular/core";
 import { RouterModule } from "@angular/router";
-import { ThemeService } from "../../../services/theme";
+import { ThemeService } from "../../services/theme.service";
 
 @Component({
     selector: 'app-button-login',

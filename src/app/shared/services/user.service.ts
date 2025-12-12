@@ -16,7 +16,20 @@ export class UserService {
 
     //CREAR USUARIO
     async createUser(newUser: User) {
-        return await this.http.post<{ message: string }>(`${this.apiBackend}/users`, newUser, { withCredentials: true }).toPromise()
+        return await this.http.post<{ message: string }>(
+            `${this.apiBackend}/users`, 
+            newUser, { withCredentials: true }
+        ).toPromise();
     } 
+
+    //AUTHENTICACION DE USERS
+    async login(email: string, password: string) {
+        console.log(email,password)
+        return await this.http.post<{ message: string }>(
+            `${environment.apiUrl}/auth/login`,
+            { email, password },
+            { withCredentials: true }
+        ).toPromise();
+    }
 
 }
