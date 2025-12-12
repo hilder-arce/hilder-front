@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
   email: string = '';
   password: string = '';
   loaded = false;
-  isLoading: boolean = true;
+  isLoading: boolean = false;
 
   ngOnInit() {
     setTimeout(() => {
