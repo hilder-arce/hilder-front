@@ -43,7 +43,7 @@
   <!-- BOTÓN MENÚ -->
   <div class="flex items-center gap-3">
 
-   <app-button-login class="hidden md:block" ></app-button-login>
+   <app-button-login class="hidden md:block" *ngIf="!layout.isRouteLogin()"></app-button-login>
 
     <app-sidebar></app-sidebar>
 

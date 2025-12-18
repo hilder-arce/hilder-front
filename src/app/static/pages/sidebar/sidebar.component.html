@@ -116,7 +116,7 @@
   </nav>
 
   <!-- BOTÓN LOGIN (solo mobile) -->
-  <div class="mt-auto md:hidden">
+  <div class="mt-auto md:hidden" *ngIf="!layout.isRouteLogin()">
     <app-button-login (click)="close()"></app-button-login>
   </div>
 

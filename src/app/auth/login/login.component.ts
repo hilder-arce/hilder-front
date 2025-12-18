@@ -62,7 +62,8 @@ export class LoginComponent implements OnInit {
 
     try {
       const res = await this.userService.login(this.email, this.password);
-        if(res?.message  === 'Login exitoso'){
+      console.log(res)
+        if(res?.message  === 'Login exitoso' && res?.userType){
           this.alertService.show(res?.message, 'success');
           // navegar al login
           this.router.navigate(['/ficha-trabajador']);
@@ -78,8 +79,5 @@ export class LoginComponent implements OnInit {
 
   }
 
-  loginWithGoogle() {
-    console.log('Login con Google');
-    alert('Botón de Google listo (conectar luego a backend)');
-  }
+
 }

@@ -119,59 +119,26 @@
       </div>
 
       <!-- BOTÓN LOGIN -->
-      <button
-        type="submit"
-        [disabled]="isLoading"
-        class="w-full py-3 rounded-xl text-white font-semibold text-base
-              transition-all duration-200 hover:shadow-xl
-              flex items-center justify-center gap-2 cursor-pointer
-              bg-blue-600 hover:bg-blue-700 disabled:opacity-60 disabled:hover:bg-blue-600 disabled:cursor-not-allowed"
-      >
-        <!-- Cuando está cargando -->
-        <span *ngIf="isLoading" class="loader-premium"></span>
-        <span *ngIf="isLoading">Procesando...</span>
-
-        <!-- Cuando NO está cargando -->
-        <span *ngIf="!isLoading">Iniciar Sesión</span>
-
-      </button>
+       <div class="flex items-center justify-center">
+         <button
+           type="submit"
+           [disabled]="isLoading"
+           class="w-75 py-3 rounded-xl text-white font-semibold text-base
+                 transition-all duration-200 hover:shadow-xl
+                 flex items-center justify-center gap-2 cursor-pointer
+                 bg-blue-600 hover:bg-blue-700 disabled:opacity-60 disabled:hover:bg-blue-600 disabled:cursor-not-allowed"
+         >
+           <!-- Cuando está cargando -->
+           <span *ngIf="isLoading" class="loader-premium"></span>
+           <span *ngIf="isLoading">Procesando...</span>
+   
+           <!-- Cuando NO está cargando -->
+           <span *ngIf="!isLoading">INICIAR SESIÓN</span>
+   
+         </button>
+       </div>
     </form>
 
-    <!-- SEPARADOR -->
-    <div class="flex items-center my-6">
-      <div class="flex-1 h-px bg-gray-500/30"></div>
-      <span class="px-3 text-xs opacity-70">o</span>
-      <div class="flex-1 h-px bg-gray-500/30"></div>
-    </div>
-
-    <!-- GOOGLE -->
-    <button
-      (click)="loginWithGoogle()"
-      [disabled]="isLoading"
-      class="w-full py-3 rounded-xl border flex items-center justify-center gap-3
-             transition-all duration-200 hover:scale-[1.02] cursor-pointer
-             disabled:cursor-not-allowed"
-
-      [class.border-gray-300]="!theme.darkMode()"
-      [class.border-white/20]="theme.darkMode()"
-      [class.hover:bg-gray-200]="!theme.darkMode()"
-      [class.hover:bg-white/10]="theme.darkMode()"
-    >
-      <img
-        src="https://www.svgrepo.com/show/475656/google-color.svg"
-        class="w-5 h-5"
-        alt="Google"
-      />
-      <span class="text-sm font-medium">Continuar con Google</span>
-    </button>
-
-    <!-- FOOTER -->
-    <p class="text-center text-sm mt-6 opacity-80">
-      ¿No tienes una cuenta?
-      <a routerLink="/register" class="text-blue-400 font-medium hover:underline">
-        Regístrate
-      </a>
-    </p>
   </div>
 </div>
 

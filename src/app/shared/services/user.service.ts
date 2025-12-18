@@ -24,8 +24,7 @@ export class UserService {
 
     //AUTHENTICACION DE USERS
     async login(email: string, password: string) {
-        console.log(email,password)
-        return await this.http.post<{ message: string }>(
+        return await this.http.post<{ message: string, userType: string }>(
             `${environment.apiUrl}/auth/login`,
             { email, password },
             { withCredentials: true }
