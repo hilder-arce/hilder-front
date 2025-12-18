@@ -10,7 +10,6 @@ export interface User {
 }
 
 export enum UserType {
-    Administrador = 'administrador',
     Agente = 'agente',
     Operador = 'operador',
     Supervisor = 'supervisor',
