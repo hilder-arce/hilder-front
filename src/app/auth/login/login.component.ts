@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
         if(res?.message  === 'Login exitoso' && res?.userType){
           this.alertService.show(res?.message, 'success');
           // navegar al login
-          this.router.navigate(['/ficha-trabajador']);
+          this.router.navigate(['/dashboard']);
         } else {
           this.alertService.show('Error al crear la cuenta.', 'error');
         }
