@@ -1,13 +1,8 @@
 <!-- HEADER -->
-<header
+<header *ngIf="layout.isPublicRoute()"
   class="sticky top-0 z-[4000] flex items-center justify-between px-4 py-3 shadow-lg h-[15vh] transition-all duration-500"
-
-  [class.bg-[#1e1b74]]="!theme.darkMode()"
-  [class.text-white]="!theme.darkMode()"
-
-  [class.bg-black]="theme.darkMode()"
-  [class.text-gray-100]="theme.darkMode()"
->
+  [class.bg-[#1e1b74]]="!theme.darkMode()" [class.text-white]="!theme.darkMode()" [class.bg-black]="theme.darkMode()"
+  [class.text-gray-100]="theme.darkMode()">
 
   <!-- CONTENEDOR PRINCIPAL -->
   <div class="relative flex flex-col items-start text-left w-full mr-3 overflow-visible">
@@ -15,25 +10,16 @@
     <div class="relative w-auto px-3 py-2">
 
       <!-- 🔵 PARTÍCULA QUE GIRA POR EL BORDE -->
-      <span 
-        class="border-orbit"
-        [class.bg-yellow-400]="!theme.darkMode()"
-        [class.bg-pink-500]="theme.darkMode()"
-      ></span>
-      
-      <h1 
-        class="font-bold uppercase text-[1.6rem] z-10 relative"
-        [class.text-white]="!theme.darkMode()"
-        [class.text-[#a5b4fc]]="theme.darkMode()"
-      >
+      <span class="border-orbit" [class.bg-yellow-400]="!theme.darkMode()"
+        [class.bg-pink-500]="theme.darkMode()"></span>
+
+      <h1 class="font-bold uppercase text-[1.6rem] z-10 relative" [class.text-white]="!theme.darkMode()"
+        [class.text-[#a5b4fc]]="theme.darkMode()">
         CAJACE
       </h1>
 
-      <p 
-        class="text-[0.9rem] tracking-wide z-10 relative"
-        [class.text-gray-200]="!theme.darkMode()"
-        [class.text-gray-400]="theme.darkMode()"
-      >
+      <p class="text-[0.9rem] tracking-wide z-10 relative" [class.text-gray-200]="!theme.darkMode()"
+        [class.text-gray-400]="theme.darkMode()">
         Tecnología estratégica para operaciones subterráneas.
       </p>
 
@@ -43,14 +29,7 @@
   <!-- BOTÓN MENÚ -->
   <div class="flex items-center gap-3">
 
-    <!-- 
-      <button
-      class="px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white transition">
-      Cerrar sesión
-    </button>
-    -->
-
-   <app-button-login class="hidden md:block" *ngIf="!layout.isRouteLogin()"></app-button-login>
+    <app-button-login class="hidden md:block" *ngIf="!layout.isRouteLogin()"></app-button-login>
 
     <app-sidebar></app-sidebar>
 

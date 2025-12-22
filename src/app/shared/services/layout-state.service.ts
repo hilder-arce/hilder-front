@@ -10,6 +10,16 @@ export class LayoutStateService {
   // Signal base: URL actual
   private currentUrl = signal<string>('');
 
+  /** true → dashboard / rutas privadas */
+  readonly isDashboardRoute = computed(() =>
+    this.currentUrl().includes('/dashboard')
+  );
+
+  /** true → rutas públicas */
+  readonly isPublicRoute = computed(() =>
+    !this.isDashboardRoute()
+  );
+
   // Computed: ¿estoy en /login?
   readonly isRouteLogin = computed(() => this.currentUrl() === '/login');
 
