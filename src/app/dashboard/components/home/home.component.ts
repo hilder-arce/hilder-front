@@ -8,8 +8,7 @@ import { DashboardSidebarComponent } from '../sidebar/sidebar.component';
     styleUrl: './home.component.css',
     imports: [
         CommonModule,
-        DashboardSidebarComponent
     ]
-}) 
+})
 
-export class DashboardHomeComponent {}
+export class DashboardHomeComponent { }

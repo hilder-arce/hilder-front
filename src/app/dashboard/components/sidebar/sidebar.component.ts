@@ -10,4 +10,16 @@ import { Component } from '@angular/core';
     ]
 }) 
 
-export class DashboardSidebarComponent {}
+export class DashboardSidebarComponent {
+
+    isOpen = false;
+
+    open() { 
+        this.isOpen = true;
+     }
+     
+    close() { 
+        this.isOpen = false;
+     }
+
+}
