@@ -14,7 +14,7 @@ export class ReportCreateComponent implements OnInit {
 
 
     fechaActual!: string;
-    agente = 'xd'
+    agente = 'Hilder Arce'
 
     ngOnInit(): void {
         this.fechaActual = this.obtenerFecha();
