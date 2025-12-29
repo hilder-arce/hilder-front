@@ -1,20 +1,15 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
-import { FichaTrabajadorComponent } from './RRHH/ficha-trabajador/ficha-trabajador';
-import { DashboardHomeComponent } from './dashboard/components/home/home.component';
+import { DASHBOARD_ROUTES } from './dashboard/dashboard.routes';
 
 export const routes: Routes = [
+    //PUBLIC
     {
         path: 'login', component: LoginComponent
     },
-    {
-        path: 'register', component: RegisterComponent
-    },
-    {
-        path: 'ficha-trabajador', component: FichaTrabajadorComponent
-    },
 
     //DASHBOARD
-    { path: 'dashboard', component: DashboardHomeComponent}
+    {
+        path: 'dashboard', children: DASHBOARD_ROUTES
+    }
 ];

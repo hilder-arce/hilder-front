@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, HostListener } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { ButtonLoginComponent } from '../../../shared/componets/button-login/button-login.component';
-import { ThemeService } from '../../../shared/services/theme.service';
-import { LayoutStateService } from '../../../shared/services/layout-state.service';
+import { ButtonLoginComponent } from '../../shared/componets/button-login/button-login.component';
+import { ThemeService } from '../../shared/services/theme.service';
+import { LayoutStateService } from '../../shared/services/layout-state.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -20,17 +20,17 @@ export class SidebarComponent {
   //CONTEOLAR LA VISIBILIDAD DEL SIDEBAR
   visibilitySidebar = false;
 
-    constructor(
-      public theme: ThemeService,
-       public layout: LayoutStateService,
-       private el: ElementRef
-    ){}
+  constructor(
+    public theme: ThemeService,
+    public layout: LayoutStateService,
+    private el: ElementRef
+  ) { }
 
-    close() {
-      this.visibilitySidebar = !this.visibilitySidebar;
-    }
+  close() {
+    this.visibilitySidebar = !this.visibilitySidebar;
+  }
 
-    // Detecta clics globales
+  // Detecta clics globales
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
 
