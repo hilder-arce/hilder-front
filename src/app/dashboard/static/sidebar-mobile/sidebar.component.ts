@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
-    selector: 'app-dashboard-sidebar',
+    selector: 'app-dashboard-sidebar-mobile',
     templateUrl: './sidebar.component.html',
     styleUrl: './sidebar.component.css',
     imports: [
@@ -12,14 +12,17 @@ import { RouterModule } from '@angular/router';
     ]
 })
 
-export class DashboardSidebarComponent {
+export class DashboardSidebarMobileComponent {
 
-    @Input() isCollapsed = false;
+    open = false
 
-    @Output() toggle = new EventEmitter<void>();
-
-    onToggle() {
-        this.toggle.emit();
+    close () {
+        this.open = false
     }
+
+    openSidebar() {
+        this.open = true
+    }
+
   
 }

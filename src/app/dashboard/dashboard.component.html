@@ -1,1 +1,23 @@
-<router-outlet></router-outlet>
+<div class="flex min-h-screen">
+
+
+  <!-- SIDEBAR -->
+  <app-dashboard-sidebar
+    [isCollapsed]="isSidebarCollapsed"
+    (toggle)="toggleSidebar()">
+  </app-dashboard-sidebar>
+
+  <!-- MAIN -->
+  <main
+    class="flex-1 min-w-0 transition-all duration-500"
+    [class.lg:ml-[280px]]="!isSidebarCollapsed"
+    [class.lg:ml-[72px]]="isSidebarCollapsed">
+
+        <app-dashboard-sidebar-mobile></app-dashboard-sidebar-mobile>
+
+    <section class="p-4 sm:p-6">
+      <router-outlet></router-outlet>
+    </section>
+
+  </main>
+</div>

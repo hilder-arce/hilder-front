@@ -1,7 +1,7 @@
 import { Routes } from "@angular/router";
-import { ReportComponent } from "./main/main.component";
 import { ReportCreateComponent } from "./create/report-create.component";
 import { ReportTableComponent } from "./tables/table.component";
+import { ReportComponent } from "./report.component";
 
 export const REPORT_ROUTES: Routes = [
     {
