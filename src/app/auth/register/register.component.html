@@ -62,7 +62,7 @@
       </div>
 
       <!-- PASSWORD -->
-      <div class="group relative w-full">
+      <div class="group relative w-full" *ngIf="!isUserExist">
         <label class="text-sm mb-1 block font-medium ml-4">Contraseña</label>
 
 
@@ -117,7 +117,7 @@
       </div>
 
       <!-- BOTÓN REGISTRO -->
-      <button
+      <button *ngIf="!isUserExist"
         type="submit"
         (click)="register()"
         [disabled]="isLoading"
@@ -136,10 +136,30 @@
 
       </button>
 
+      <!-- BOTÓN ACTUALIZAR -->
+      <button *ngIf="isUserExist"
+        type="submit"
+        (click)="updated()"
+        [disabled]="isLoading"
+        class="w-full py-3 rounded-xl text-white font-semibold text-base
+              transition-all duration-200 hover:shadow-xl
+              flex items-center justify-center gap-2 cursor-pointer
+              bg-blue-600 hover:bg-blue-700 disabled:opacity-60 disabled:hover:bg-blue-600 disabled:cursor-not-allowed"
+      >
+
+        <!-- Cuando está cargando -->
+        <span *ngIf="isLoading" class="loader-premium"></span>
+        <span *ngIf="isLoading">Procesando...</span>
+
+        <!-- Cuando NO está cargando -->
+        <span *ngIf="!isLoading">ACTUALIZAR</span>
+
+      </button>
+
     </form>
 
     <!-- FOOTER -->
-    <p class="text-center text-sm mt-6 opacity-80">
+    <p *ngIf="!isUserExist" class="text-center text-sm mt-6 opacity-80">
       ¿Ya tienes una cuenta?
       <a routerLink="/login" class="text-blue-400 font-medium hover:underline">
         Inicia Sesion

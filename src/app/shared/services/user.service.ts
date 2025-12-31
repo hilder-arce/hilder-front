@@ -47,4 +47,13 @@ export class UserService {
         ).toPromise();
     }
 
+    //UPDATED USER BY ID
+    async updateUser(id: string, payload: Partial<User>) {
+        return await this.http.patch<{ message: string }>(
+            `${this.apiBackend}/users/${id}`,
+            payload
+        ).toPromise();
+    }
+
+
 }

@@ -1,51 +1,62 @@
-import { CommonModule } from '@angular/common';
 import { Component, computed, DestroyRef, signal } from '@angular/core';
-import { Router, RouterModule, NavigationEnd } from '@angular/router';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ActivatedRoute, Router, NavigationEnd, RouterModule } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { CommonModule } from '@angular/common';
 
 @Component({
-    selector: 'app-users-header',
-    standalone: true,
-    imports: [CommonModule, RouterModule],
-    templateUrl: './header.component.html',
-    styleUrl: './header.component.css',
+  selector: 'app-users-header',
+  standalone: true,
+  templateUrl: './header.component.html',
+  imports: [
+    CommonModule,
+    RouterModule
+  ]
 })
 export class UsersHeaderComponent {
 
-    // URL actual (inicializada correctamente)
-    private currentUrl = signal<string>('');
+  private currentUrl = signal('');
+  private hasUserId = signal(false);
 
-    // true solo cuando está en /reports/create
-    readonly isCreate = computed(() =>
-        this.currentUrl().endsWith('/users/create')
-    );
+  readonly isCreate = computed(() =>
+    this.currentUrl().endsWith('/users/create') && !this.hasUserId()
+  );
 
-    // Título dinámico
-    readonly title = computed(() =>
-        this.isCreate() ? 'NUEVO USUARIO' : 'USUARIOS'
-    );
+  readonly isEdit = computed(() =>
+    this.currentUrl().endsWith('/users/create') && this.hasUserId()
+  );
 
-    constructor(
-        private router: Router,
-        private destroyRef: DestroyRef
-    ) {
-        // 🔑 CLAVE: inicializar con la URL actual (recarga directa)
-        this.currentUrl.set(this.router.url);
+  readonly title = computed(() => {
+    if (this.isEdit()) return 'EDITAR USUARIO';
+    if (this.isCreate()) return 'NUEVO USUARIO';
+    return 'USUARIOS';
+  });
 
-        // Escuchar cambios de ruta
-        this.router.events
-            .pipe(
-                filter(event => event instanceof NavigationEnd),
-                takeUntilDestroyed(this.destroyRef)
-            )
-            .subscribe((event: NavigationEnd) => {
-                this.currentUrl.set(event.urlAfterRedirects);
-            });
-    }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private destroyRef: DestroyRef
+  ) {
+    // inicial
+    this.syncState();
 
-    // Volver a la lista
-    goReportList(): void {
-        this.router.navigate(['/dashboard/users/list']);
-    }
+    // cambios de navegación
+    this.router.events
+      .pipe(
+        filter(e => e instanceof NavigationEnd),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe(() => this.syncState());
+  }
+
+  private syncState() {
+    this.currentUrl.set(this.router.url.split('?')[0]);
+
+    const id = this.route.snapshot.queryParamMap.get('_id');
+    this.hasUserId.set(!!id);
+  }
+
+  goReportList() {
+    this.router.navigate(['/dashboard/users/list']);
+  }
 }

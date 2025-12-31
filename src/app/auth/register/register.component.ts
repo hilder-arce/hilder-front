@@ -28,6 +28,11 @@ export class RegisterComponent implements OnInit {
 
   // CONTROL DE ANIMACIÓN
   loaded: boolean = false;
+  UserType = UserType; //tipo de user
+  isLoading: boolean = false //animacion mientras se crea el user
+  isUserExist: boolean = false //comprobar si existe un usuario
+  private originalUser!: User; //usuario original cargado desde la bd
+
 
   ngOnInit(): void {
     // activa la animación del card
@@ -45,19 +50,58 @@ export class RegisterComponent implements OnInit {
     password: ''
   }
 
-  UserType = UserType;
-  isLoading: boolean = false
 
+  //CARGAR EL USUARIO A EDITAR
   async loadUserById() {
     const userid = this.route.snapshot.queryParamMap.get('_id');
     if(userid) {
       const userData = await this.userService.getUserById(userid);
       if(userData) {
         this.user = {...userData}
+        this.originalUser = { ...userData }; // 🔑 snapshot
+        this.isUserExist = !this.isUserExist
       }
     }
   }
 
+  //ACTUALIZAR UN USUARIO
+  async updated() {
+
+    this.isLoading = true;
+
+    const payload = this.buildUpdatePayload();
+
+    if (Object.keys(payload).length === 0) {
+      this.alertService.show('No hay cambios para actualizar.', 'error');
+      this.isLoading = false;
+      return;
+    }
+
+    try {
+      const userId = this.user._id!;
+      /*const response = await this.userService.updateUser(userId, payload);
+
+      if (response?.message === 'Usuario actualizado con éxito.') {
+        this.alertService.show(response.message, 'success');
+
+        // refrescar snapshot
+        this.originalUser = { ...this.user };
+
+        // volver a la lista
+        this.router.navigate(['../list'], { relativeTo: this.route });
+      } else {
+        this.alertService.show('No se pudo actualizar el usuario.', 'error');
+      }*/
+
+    } catch (error) {
+      this.alertService.show('Error al actualizar el usuario.', 'error');
+    } finally {
+      this.isLoading = false;
+    }
+  }
+
+
+  //REGISTRAR NUEVO USUARIO
   async register() {
 
     this.isLoading = true;
@@ -117,6 +161,25 @@ export class RegisterComponent implements OnInit {
       this.isLoading = false;
     }
   
+  }
+
+  //payload solo de datos cambiados 
+  private buildUpdatePayload(): Partial<User> {
+    const payload: Partial<User> = {};
+
+    if (this.user.nameUser !== this.originalUser.nameUser) {
+      payload.nameUser = this.user.nameUser;
+    }
+
+    if (this.user.email !== this.originalUser.email) {
+      payload.email = this.user.email;
+    }
+
+    if (this.user.userType !== this.originalUser.userType) {
+      payload.userType = this.user.userType;
+    }
+
+    return payload;
   }
 
 }
