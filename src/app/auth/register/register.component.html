@@ -1,64 +1,12 @@
-<div 
-  class="min-h-screen flex items-center pt-6 pb-6 justify-center px-6 transition-all duration-700 relative overflow-hidden"
-  [class.bg-gray-100]="!theme.darkMode()"
-  [class.bg-gradient-to-br]="theme.darkMode()"
-  [class.from-black]="theme.darkMode()"
-  [class.via-gray-900]="theme.darkMode()"
-  [class.to-gray-800]="theme.darkMode()"
->
-
-  <!-- ORBS COMO EN LOGIN -->
-  <div class="absolute w-72 h-72 bg-purple-600/20 blur-3xl rounded-full -top-24 -left-20 animate-pulse"
-       *ngIf="theme.darkMode()"></div>
-
-  <div class="absolute w-[30rem] h-[30rem] bg-blue-500/20 blur-[110px] rounded-full bottom-0 -right-20 animate-[ping_10s_linear_infinite]"
-       *ngIf="theme.darkMode()"></div>
-
+<div class="flex flex-1 min-w-0 transition-all duration-500 justify-center items-center">
   <!-- CARD REGISTRO IDENTICO AL LOGIN -->
   <div
     class="relative w-full max-w-md p-8 rounded-3xl shadow-[0_8px_40px_rgba(0,0,0,0.35)]
-           backdrop-blur-2xl border transition-all duration-[900ms]"
-
-    [class.bg-white/70]="!theme.darkMode()"
-    [class.border-gray-300/40]="!theme.darkMode()"
-    [class.text-black]="!theme.darkMode()"
-
-    [class.bg-white/10]="theme.darkMode()"
-    [class.border-white/10]="theme.darkMode()"
-    [class.text-white]="theme.darkMode()"
+           backdrop-blur-2xl border transition-all duration-[900ms]
+           text-black border-gray-300/40 bg-white/70"
   >
 
-    <!-- LOGO ULTRA FUTURISTA -->
-    <div class="flex justify-center mb-12">
-      <div class="relative group">
 
-        <div class="relative animate-float-elite group-hover:animate-float-hover transition-transform duration-500">
-
-          <div
-            class="absolute -inset-6 rounded-full blur-3xl opacity-70
-                  bg-blue-600/40 animate-holo-glow">
-          </div>
-
-          <div
-            class="absolute -inset-2 rounded-full border-4 border-blue-400/30
-                  animate-spin-slow">
-          </div>
-
-          <img
-            src="https://i.ibb.co/Hp72r8P8/logo-cajace.jpg"
-            class="relative w-32 h-32 object-cover rounded-full drop-shadow-2xl"
-            alt="Logo"
-          />
-
-        </div>
-
-      </div>
-    </div>
-
-    <!-- TITULO -->
-    <h1 class="text-3xl font-bold text-center mb-6">
-      Crear cuenta
-    </h1>
 
     <!-- FORM -->
     <form class="space-y-7">
@@ -72,13 +20,8 @@
           [(ngModel)]="user.nameUser"
           name="nameUser"
           class="w-full pl-11 pr-4 py-3 rounded-xl border placeholder-gray-500 text-sm shadow-sm
-                 focus:outline-none focus:ring-2 focus:ring-blue-500/70"
-          [class.bg-white]="!theme.darkMode()"
-          [class.border-gray-300]="!theme.darkMode()"
-          [class.text-black]="!theme.darkMode()"
-          [class.bg-[#111827]]="theme.darkMode()"
-          [class.border-gray-700]="theme.darkMode()"
-          [class.text-gray-200]="theme.darkMode()"
+                 focus:outline-none focus:ring-2 focus:ring-blue-500/70
+                 text-black border-gray-300 bg-white"
         />
 
         <div class="pointer-events-none h-full top-0
@@ -104,13 +47,8 @@
           [(ngModel)]="user.email"
           name="email"
           class="w-full pl-11 pr-4 py-3 rounded-xl border placeholder-gray-500 text-sm shadow-sm
-                 focus:outline-none focus:ring-2 focus:ring-blue-500/70"
-          [class.bg-white]="!theme.darkMode()"
-          [class.border-gray-300]="!theme.darkMode()"
-          [class.text-black]="!theme.darkMode()"
-          [class.bg-[#111827]]="theme.darkMode()"
-          [class.border-gray-700]="theme.darkMode()"
-          [class.text-gray-200]="theme.darkMode()"
+                 focus:outline-none focus:ring-2 focus:ring-blue-500/70
+                 text-black border-gray-300 bg-white"
         />
 
         <div class="absolute left-3 inset-y-0 flex items-center text-gray-400">
@@ -133,13 +71,8 @@
           [(ngModel)]="user.password"
           name="password"
           class="w-full pl-11 pr-4 py-3 rounded-xl border placeholder-gray-500 text-sm shadow-sm
-                 focus:outline-none focus:ring-2 focus:ring-blue-500/70"
-          [class.bg-white]="!theme.darkMode()"
-          [class.border-gray-300]="!theme.darkMode()"
-          [class.text-black]="!theme.darkMode()"
-          [class.bg-[#111827]]="theme.darkMode()"
-          [class.border-gray-700]="theme.darkMode()"
-          [class.text-gray-200]="theme.darkMode()"
+                 focus:outline-none focus:ring-2 focus:ring-blue-500/70
+                 text-black border-gray-300 bg-white"
         />
 
         <div class="absolute left-3 inset-y-0 flex items-center text-gray-400">
@@ -160,13 +93,8 @@
           [(ngModel)]="user.userType"
           name="userType"
           class="w-full pl-11 pr-4 py-3 rounded-xl border text-sm shadow-sm
-                 focus:outline-none focus:ring-2 focus:ring-blue-500/70"
-          [class.bg-white]="!theme.darkMode()"
-          [class.border-gray-300]="!theme.darkMode()"
-          [class.text-black]="!theme.darkMode()"
-          [class.bg-[#111827]]="theme.darkMode()"
-          [class.border-gray-700]="theme.darkMode()"
-          [class.text-gray-200]="theme.darkMode()"
+                 focus:outline-none focus:ring-2 focus:ring-blue-500/70
+                 bg-white border-gray-300  text-black"
         >
           <option value="" disabled selected>SELECCIONAR</option>
           <option [ngValue]="UserType.Agente">Agente</option>
@@ -204,7 +132,7 @@
         <span *ngIf="isLoading">Procesando...</span>
 
         <!-- Cuando NO está cargando -->
-        <span *ngIf="!isLoading">Registrarme</span>
+        <span *ngIf="!isLoading">CREAR CUENTA</span>
 
       </button>
 

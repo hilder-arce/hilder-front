@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { ThemeService } from "../../shared/services/theme.service";
-import { Router, RouterModule } from "@angular/router";
+import { ActivatedRoute, Router, RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { User, UserType } from "../../shared/interfaces/user.interface";
 import { UserService } from "../../shared/services/user.service";
@@ -21,10 +20,10 @@ import { AlertService } from "../../shared/services/alert.service";
 export class RegisterComponent implements OnInit {
 
   constructor(
-    public theme: ThemeService,
     private alertService: AlertService,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   // CONTROL DE ANIMACIÓN
@@ -33,6 +32,9 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     // activa la animación del card
     setTimeout(() => this.loaded = true, 50);
+
+    //cargar user or editing
+    this.loadUserById();
   }
 
   //objeto de user
@@ -45,6 +47,16 @@ export class RegisterComponent implements OnInit {
 
   UserType = UserType;
   isLoading: boolean = false
+
+  async loadUserById() {
+    const userid = this.route.snapshot.queryParamMap.get('_id');
+    if(userid) {
+      const userData = await this.userService.getUserById(userid);
+      if(userData) {
+        this.user = {...userData}
+      }
+    }
+  }
 
   async register() {
 
@@ -92,8 +104,9 @@ export class RegisterComponent implements OnInit {
 
         if(response?.message  === 'Usuario creado con éxito.'){
           this.alertService.show(response?.message, 'success');
-          // navegar al login
-          this.router.navigate(['/login']);
+          // navegar a la interfaz de users
+          this.router.navigate(['../list'], { relativeTo: this.route });
+
         } else {
           this.alertService.show('Error al crear la cuenta.', 'error');
         }

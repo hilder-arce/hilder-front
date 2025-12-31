@@ -2,7 +2,6 @@ import { Component, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
-import { ThemeService } from "../../shared/services/theme.service";
 
 @Component({
   selector: 'app-register',
@@ -41,7 +40,7 @@ salario: any = '';
 observaciones = '';
 
 
-  constructor(public theme: ThemeService){}
+  constructor(){}
 
   name: string = '';
   email: string = '';

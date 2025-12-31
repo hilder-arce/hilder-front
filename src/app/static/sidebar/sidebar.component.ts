@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, ElementRef, HostListener } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ButtonLoginComponent } from '../../shared/componets/button-login/button-login.component';
-import { ThemeService } from '../../shared/services/theme.service';
 import { LayoutStateService } from '../../shared/services/layout-state.service';
 
 @Component({
@@ -21,7 +20,6 @@ export class SidebarComponent {
   visibilitySidebar = false;
 
   constructor(
-    public theme: ThemeService,
     public layout: LayoutStateService,
     private el: ElementRef
   ) { }

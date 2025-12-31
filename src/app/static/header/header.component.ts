@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ThemeService } from '../../shared/services/theme.service';
 import { ButtonLoginComponent } from '../../shared/componets/button-login/button-login.component';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { CommonModule } from '@angular/common';
@@ -19,7 +18,6 @@ import { LayoutStateService } from '../../shared/services/layout-state.service';
 export class HeaderComponent {
 
   constructor(
-    public theme: ThemeService,
     public layout: LayoutStateService
   ) { }
 

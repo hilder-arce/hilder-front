@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { UserService } from '../../../../shared/services/user.service';
 import { User } from '../../../../shared/interfaces/user.interface';
 
@@ -18,6 +18,7 @@ export class UsersTableComponent implements OnInit {
 
     constructor(
         private userService: UserService,
+        private router: Router
     ) {}
 
     users: User[] = []
@@ -31,5 +32,10 @@ export class UsersTableComponent implements OnInit {
         if(users){
             this.users = [...users]
         }
+    }
+
+    // Navega al formulario de registro con el ID
+    editUser(user: User) {
+    this.router.navigate(['/dashboard/users/create'], { queryParams: { _id: user._id } });
     }
 }

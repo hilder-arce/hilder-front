@@ -1,23 +1,15 @@
 <div 
   class="min-h-screen px-4 py-10 transition-all duration-500"
-  [class.bg-gray-100]="!theme.darkMode()"
-  [class.bg-gradient-to-br]="theme.darkMode()"
-  [class.from-black]="theme.darkMode()"
-  [class.via-gray-900]="theme.darkMode()"
-  [class.to-gray-800]="theme.darkMode()"
+
 >
 
   <div class="max-w-6xl mx-auto">
 
-    <h1 class="text-3xl font-bold mb-2"
-      [class.text-black]="!theme.darkMode()"
-      [class.text-white]="theme.darkMode()">
+    <h1 class="text-3xl font-bold mb-2">
       Ficha del Trabajador
     </h1>
 
-    <p class="mb-6 opacity-70"
-       [class.text-black]="!theme.darkMode()"
-       [class.text-white]="theme.darkMode()">
+    <p class="mb-6 opacity-70">
       Registro completo de información del personal
     </p>
 
@@ -28,9 +20,9 @@
         class="px-6 py-2 rounded-xl font-semibold transition-all"
         [class.bg-blue-600]="activeTab === 'general'"
         [class.text-white]="activeTab === 'general'"
-        [class.bg-gray-200]="activeTab !== 'general' && !theme.darkMode()"
-        [class.text-black]="activeTab !== 'general' && !theme.darkMode()"
-        [class.bg-white/10]="activeTab !== 'general' && theme.darkMode()"
+        [class.bg-gray-200]="activeTab !== 'general'"
+        [class.text-black]="activeTab !== 'general'"
+        [class.bg-white/10]="activeTab !== 'general'"
       >
         Información General
       </button>
@@ -40,9 +32,9 @@
         class="px-6 py-2 rounded-xl font-semibold transition-all"
         [class.bg-purple-600]="activeTab === 'academica'"
         [class.text-white]="activeTab === 'academica'"
-        [class.bg-gray-200]="activeTab !== 'academica' && !theme.darkMode()"
-        [class.text-black]="activeTab !== 'academica' && !theme.darkMode()"
-        [class.bg-white/10]="activeTab !== 'academica' && theme.darkMode()"
+        [class.bg-gray-200]="activeTab !== 'academica'"
+        [class.text-black]="activeTab !== 'academica'"
+        [class.bg-white/10]="activeTab !== 'academica'"
       >
         Información Académica
       </button>
@@ -52,9 +44,9 @@
         class="px-6 py-2 rounded-xl font-semibold transition-all"
         [class.bg-green-600]="activeTab === 'complementaria'"
         [class.text-white]="activeTab === 'complementaria'"
-        [class.bg-gray-200]="activeTab !== 'complementaria' && !theme.darkMode()"
-        [class.text-black]="activeTab !== 'complementaria' && !theme.darkMode()"
-        [class.bg-white/10]="activeTab !== 'complementaria' && theme.darkMode()"
+        [class.bg-gray-200]="activeTab !== 'complementaria'"
+        [class.text-black]="activeTab !== 'complementaria'"
+        [class.bg-white/10]="activeTab !== 'complementaria'"
       >
         Información Complementaria
       </button>
@@ -66,10 +58,6 @@
       <!-- INFO GENERAL -->
       <!-- ===================================================== -->
       <div *ngIf="activeTab === 'general'" class="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 rounded-2xl border"
-        [class.bg-white]="!theme.darkMode()"
-        [class.border-gray-300]="!theme.darkMode()"
-        [class.bg-white/5]="theme.darkMode()"
-        [class.border-white/10]="theme.darkMode()"
       >
 
         <div class="md:col-span-3 text-xl font-bold mb-2">Datos Personales</div>
@@ -133,10 +121,6 @@
       <!-- INFO ACADÉMICA -->
       <!-- ===================================================== -->
       <div *ngIf="activeTab === 'academica'" class="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 rounded-2xl border"
-        [class.bg-white]="!theme.darkMode()"
-        [class.border-gray-300]="!theme.darkMode()"
-        [class.bg-white/5]="theme.darkMode()"
-        [class.border-white/10]="theme.darkMode()"
       >
 
         <div class="md:col-span-3 text-xl font-bold mb-2">Formación Académica</div>
@@ -171,10 +155,6 @@
       <!-- INFO COMPLEMENTARIA -->
       <!-- ===================================================== -->
       <div *ngIf="activeTab === 'complementaria'" class="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 rounded-2xl border"
-        [class.bg-white]="!theme.darkMode()"
-        [class.border-gray-300]="!theme.darkMode()"
-        [class.bg-white/5]="theme.darkMode()"
-        [class.border-white/10]="theme.darkMode()"
       >
 
         <div class="md:col-span-3 text-xl font-bold mb-2">Datos Laborales</div>

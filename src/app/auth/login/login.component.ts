@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { ThemeService } from "../../shared/services/theme.service";
 import { Router, RouterModule } from "@angular/router";
 import { UserService } from "../../shared/services/user.service";
 import { AlertService } from "../../shared/services/alert.service";
@@ -20,7 +19,6 @@ import { CommonModule } from "@angular/common";
 export class LoginComponent implements OnInit {
 
   constructor(
-    public theme: ThemeService,
     private userService: UserService,
     private alertService: AlertService,
     private router: Router

@@ -39,4 +39,12 @@ export class UserService {
     ).toPromise();
     }
 
+    //OBTENER USER BY ID
+    async getUserById (id: string) {
+        return await this.http.get<User>(
+            `${this.apiBackend}/users/user/${id}`,
+            { withCredentials: true }
+        ).toPromise();
+    }
+
 }
