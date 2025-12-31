@@ -31,4 +31,12 @@ export class UserService {
         ).toPromise();
     }
 
+    // OBTENER TODOS LOS USUARIOS
+    async getUsers() {
+    return await this.http.get<User[]>(
+        `${this.apiBackend}/users`,
+        { withCredentials: true }
+    ).toPromise();
+    }
+
 }

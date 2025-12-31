@@ -1,0 +1,123 @@
+<!-- ========================= -->
+<!-- TABLA PRINCIPAL -->
+<!-- ========================= -->
+<div
+  class="relative overflow-hidden rounded-xl
+         border border-gray-200 bg-white
+         shadow-sm">
+
+  <div class="max-h-[500px] overflow-auto">
+    <table class="w-full text-sm border-collapse">
+
+      <!-- HEADER -->
+      <thead
+        class="sticky top-0 z-10
+               bg-gray-100 border-b border-gray-200">
+        <tr class="text-gray-600 text-xs uppercase tracking-wide">
+          <th class="px-4 py-3 text-center w-16">#</th>
+          <th class="px-4 py-3 text-left">Nombre</th>
+          <th class="px-4 py-3 text-left">Correo</th>
+          <th class="px-4 py-3 text-left">Rol</th>
+          <th class="px-4 py-3 text-center">Estado</th>
+          <th class="px-4 py-3 text-right w-32">Acciones</th>
+        </tr>
+      </thead>
+
+      <!-- BODY -->
+      <tbody>
+
+        <tr
+          *ngFor="let user of users; let i = index"
+          class="border-b last:border-b-0
+                 hover:bg-gray-50
+                 transition-colors">
+
+          <!-- ITEM -->
+          <td class="px-4 py-3 text-center text-gray-500">
+            {{ i + 1 }}
+          </td>
+
+          <!-- NOMBRE -->
+          <td class="px-4 py-3 font-medium text-gray-800">
+            {{ user.nameUser }}
+          </td>
+
+          <!-- CORREO -->
+          <td class="px-4 py-3 text-gray-600">
+            {{ user.email }}
+          </td>
+
+          <!-- ROL -->
+          <td class="px-4 py-3">
+            <span
+              class="inline-flex items-center px-2.5 py-1 rounded-full
+                     text-xs font-medium
+                     bg-indigo-50 text-indigo-700">
+              {{ user.userType }}
+            </span>
+          </td>
+
+          <!-- ESTADO -->
+          <td class="px-4 py-3 text-center">
+            <span
+              class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full
+                     text-xs font-medium"
+              [ngClass]="user.estado
+                ? 'bg-green-50 text-green-700'
+                : 'bg-red-50 text-red-700'">
+
+              <span
+                class="w-2 h-2 rounded-full"
+                [ngClass]="user.estado
+                  ? 'bg-green-500'
+                  : 'bg-red-500'">
+              </span>
+
+              {{ user.estado ? 'Activo' : 'Inactivo' }}
+            </span>
+          </td>
+
+          <!-- ACCIONES -->
+          <td class="px-4 py-3 text-right">
+            <div class="inline-flex items-center gap-2">
+
+              <!-- EDITAR -->
+              <button
+                class="w-8 h-8 flex items-center justify-center
+                       rounded-md
+                       text-indigo-600 hover:text-white
+                       hover:bg-indigo-600
+                       transition"
+                title="Editar usuario">
+                ✏️
+              </button>
+
+              <!-- ELIMINAR -->
+              <button
+                class="w-8 h-8 flex items-center justify-center
+                       rounded-md
+                       text-red-600 hover:text-white
+                       hover:bg-red-600
+                       transition"
+                title="Eliminar usuario">
+                🗑️
+              </button>
+
+            </div>
+          </td>
+
+        </tr>
+
+        <!-- EMPTY STATE -->
+        <tr *ngIf="users.length === 0">
+          <td
+            colspan="6"
+            class="px-4 py-10 text-center text-gray-500">
+            No hay usuarios registrados
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -62,7 +62,6 @@ export class LoginComponent implements OnInit {
 
     try {
       const res = await this.userService.login(this.email, this.password);
-      console.log(res)
         if(res?.message  === 'Login exitoso' && res?.userType){
           this.alertService.show(res?.message, 'success');
           // navegar al login
