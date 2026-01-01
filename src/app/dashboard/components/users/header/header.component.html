@@ -22,7 +22,7 @@
   <!-- COLUMNA BOTÓN (ancho natural) -->
   <div class="shrink-0">
     <!--cuando este en list-->
-    <button routerLink="create" *ngIf="!isCreate()" class="group relative inline-flex items-center gap-2
+    <button routerLink="create" *ngIf="!isCreate() & & !isEdit()" class="group relative inline-flex items-center gap-2
              px-4 py-2.5
              rounded-lg
              cursor-pointer
