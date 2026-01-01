@@ -2,6 +2,7 @@
 <!-- DASHBOARD USUARIOS ENTERPRISE 3.0 -->
 <!-- ========================= -->
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+
   <div *ngFor="let user of users; let i = index"
        class="flex flex-col justify-between p-5 bg-white border border-gray-200 rounded-xl
               shadow-sm hover:shadow-md transition-shadow duration-300">
@@ -9,14 +10,21 @@
     <!-- INFO PRINCIPAL -->
     <div class="flex items-start gap-4">
       <!-- Icono / número -->
-      <div class="flex items-center justify-center w-12 h-12 rounded-full bg-gray-100 text-gray-700 font-semibold">
+      <div class="flex items-center justify-center w-12 h-12 rounded-full
+                  bg-gray-100 text-gray-700 font-semibold">
         {{ i + 1 }}
       </div>
 
       <!-- Datos de usuario -->
       <div class="flex-1 min-w-0">
-        <h2 class="text-lg font-semibold text-gray-800 truncate uppercase">{{ user.nameUser }}</h2>
-        <p class="text-sm text-gray-500 truncate">{{ user.email }}</p>
+        <h2 class="text-lg font-semibold text-gray-800 truncate uppercase">
+          {{ user.nameUser }}
+        </h2>
+
+        <p class="text-sm text-gray-500 truncate">
+          {{ user.email }}
+        </p>
+
         <span class="inline-block mt-1 px-3 py-1 rounded-full text-xs font-medium
                      bg-blue-50 text-blue-700">
           {{ user.userType }}
@@ -24,77 +32,117 @@
       </div>
     </div>
 
-    <!-- Estado y progreso -->
+    <!-- ESTADO -->
     <div class="mt-4 flex items-center justify-between">
-      <!-- Estado -->
       <span [ngClass]="user.estado
-              ? 'bg-green-100 text-green-800'
-              : 'bg-red-100 text-red-800'"
-            class="flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold">
+            ? 'bg-green-100 text-green-800'
+            : 'bg-red-100 text-red-800'"
+            class="flex items-center gap-2 px-3 py-1 rounded-full
+                   text-xs font-semibold">
+
         <span [ngClass]="user.estado ? 'bg-green-500' : 'bg-red-500'"
               class="w-2 h-2 rounded-full"></span>
+
         {{ user.estado ? 'Activo' : 'Inactivo' }}
       </span>
     </div>
 
-    <!-- Acciones -->
-    <div class="flex gap-2 relative justify-center mt-2">
+    <!-- ACCIONES -->
+    <div class="flex justify-center mt-4">
 
-      <!-- BOTÓN EDITAR -->
-      <div class="relative group">
-        <button class="w-10 h-10 flex items-center justify-center rounded-md
-                      text-gray-600 hover:text-white hover:bg-yellow-600 cursor-pointer
-                      transition-colors duration-300 shadow-md mr-4"
-                (click)="editUser(user)"
-                      aria-label="Editar usuario">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 20h9"/>
-            <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/>
-          </svg>
+      <!-- ========================= -->
+      <!-- USUARIO DEL SISTEMA -->
+      <!-- ========================= -->
+      <ng-container *ngIf="user.userType === 'administrador'; else normalActions">
+        <div class="flex flex-col items-center gap-1">
+          <span class="px-4 py-1 rounded-full text-xs font-semibold
+                       bg-black text-white tracking-wide">
+            USUARIO DEL SISTEMA
+          </span>
+          <span class="text-xs text-gray-500 italic">
+            No modificable
+          </span>
+        </div>
+      </ng-container>
 
-        </button>
+      <!-- ========================= -->
+      <!-- ACCIONES NORMALES -->
+      <!-- ========================= -->
+      <ng-template #normalActions>
+        <div class="flex gap-4">
 
-        <!-- TOOLTIP -->
-        <span
-          class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2
-                bg-gray-800 text-white text-xs font-semibold px-3 py-1
-                rounded-md shadow-lg opacity-0 group-hover:opacity-100
-                transition-opacity duration-300
-                pointer-events-none whitespace-nowrap">
-          Editar usuario
-        </span>
-      </div>
+          <!-- EDITAR -->
+          <div class="relative group">
+            <button
+              (click)="editUser(user)"
+              aria-label="Editar usuario"
+              class="w-10 h-10 flex items-center justify-center rounded-md
+                     text-gray-600 hover:text-white hover:bg-yellow-600
+                     transition-colors duration-300 shadow-md">
 
-      <!-- BOTÓN ELIMINAR -->
-      <div class="relative group">
-        <button class="w-10 h-10 ml-4 flex items-center justify-center rounded-md
-                      text-gray-600 hover:text-white hover:bg-red-600 cursor-pointer
-                      transition-colors duration-300 shadow-md"
-                aria-label="Eliminar usuario">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M19 7L5 7M6 7L6 19a2 2 0 002 2h8a2 2 0 002-2V7M10 11v6M14 11v6M9 7V5a1 1 0 011-1h4a1 1 0 011 1v2"/>
-          </svg>
-        </button>
+              <svg xmlns="http://www.w3.org/2000/svg"
+                   class="h-5 w-5"
+                   viewBox="0 0 24 24"
+                   fill="none"
+                   stroke="currentColor"
+                   stroke-width="2"
+                   stroke-linecap="round"
+                   stroke-linejoin="round">
+                <path d="M12 20h9"/>
+                <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/>
+              </svg>
+            </button>
 
-        <!-- TOOLTIP -->
-        <span
-          class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2
-                bg-gray-800 text-white text-xs font-semibold px-3 py-1
-                rounded-md shadow-lg opacity-0 group-hover:opacity-100
-                transition-opacity duration-300
-                pointer-events-none whitespace-nowrap">
-          Eliminar usuario
-        </span>
-      </div>
+            <span class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2
+                         bg-gray-800 text-white text-xs font-semibold
+                         px-3 py-1 rounded-md shadow-lg
+                         opacity-0 group-hover:opacity-100
+                         transition-opacity pointer-events-none">
+              Editar usuario
+            </span>
+          </div>
+
+          <!-- ELIMINAR -->
+          <div class="relative group">
+            <button
+              (click)="deleteUser(user)"
+              aria-label="Eliminar usuario"
+              class="w-10 h-10 flex items-center justify-center rounded-md
+                     text-gray-600 hover:text-white hover:bg-red-600
+                     transition-colors duration-300 shadow-md">
+
+              <svg xmlns="http://www.w3.org/2000/svg"
+                   class="h-5 w-5"
+                   fill="none"
+                   viewBox="0 0 24 24"
+                   stroke="currentColor">
+                <path stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M19 7L5 7M6 7L6 19a2 2 0 002 2h8a2 2 0 002-2V7M10 11v6M14 11v6M9 7V5a1 1 0 011-1h4a1 1 0 011 1v2"/>
+              </svg>
+            </button>
+
+            <span class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2
+                         bg-gray-800 text-white text-xs font-semibold
+                         px-3 py-1 rounded-md shadow-lg
+                         opacity-0 group-hover:opacity-100
+                         transition-opacity pointer-events-none">
+              Eliminar usuario
+            </span>
+          </div>
+
+        </div>
+      </ng-template>
 
     </div>
-
   </div>
 
   <!-- EMPTY STATE -->
   <div *ngIf="users.length === 0"
-       class="col-span-full text-center text-gray-400 text-lg font-medium py-16">
+       class="col-span-full text-center text-gray-400
+              text-lg font-medium py-16">
     No hay usuarios registrados
   </div>
+
 </div>

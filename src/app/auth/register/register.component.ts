@@ -79,7 +79,7 @@ export class RegisterComponent implements OnInit {
 
     try {
       const userId = this.user._id!;
-      /*const response = await this.userService.updateUser(userId, payload);
+      const response = await this.userService.updateUser(userId, payload);
 
       if (response?.message === 'Usuario actualizado con éxito.') {
         this.alertService.show(response.message, 'success');
@@ -91,7 +91,7 @@ export class RegisterComponent implements OnInit {
         this.router.navigate(['../list'], { relativeTo: this.route });
       } else {
         this.alertService.show('No se pudo actualizar el usuario.', 'error');
-      }*/
+      }
 
     } catch (error) {
       this.alertService.show('Error al actualizar el usuario.', 'error');

@@ -9,7 +9,8 @@ import { environment } from "../../../environments/environment";
 
 export class UserService {
 
-    private readonly apiBackend = environment.apiUrl;
+    //private readonly apiBackend = environment.apiUrl;
+    private readonly apiBackend = 'http://localhost:3000/v1';
 
   //INJECTANDO A HttpClient PARA MANEJAR PETICIONES HTTP
   constructor(private http : HttpClient){}
@@ -49,10 +50,20 @@ export class UserService {
 
     //UPDATED USER BY ID
     async updateUser(id: string, payload: Partial<User>) {
+        console.log(payload);
         return await this.http.patch<{ message: string }>(
             `${this.apiBackend}/users/${id}`,
             payload
         ).toPromise();
+    }
+
+    // DESACTIVAR USUARIO (SOFT DELETE)
+    async deactivateUser(id: string) {
+    return await this.http.patch<{ message: string }>(
+        `${this.apiBackend}/users/${id}/deactivate`,
+        {},
+        { withCredentials: true }
+    ).toPromise();
     }
 
 
