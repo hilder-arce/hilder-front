@@ -63,6 +63,7 @@ export class LoginComponent implements OnInit {
     try {
       const res = await this.authService.login(this.email, this.password);
         if(res?.message  === 'Login exitoso'){
+          this.authService.checkSession()
           this.alertService.show(res?.message, 'success');
           // navegar al login
           this.router.navigate(['/dashboard']);
