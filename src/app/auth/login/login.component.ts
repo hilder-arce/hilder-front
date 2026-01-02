@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { Router, RouterModule } from "@angular/router";
 import { UserService } from "../../shared/services/user.service";
+import { AuthService } from "../../shared/services/auth.service";
 import { AlertService } from "../../shared/services/alert.service";
 import { CommonModule } from "@angular/common";
 
@@ -20,6 +21,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private userService: UserService,
+    private authService: AuthService,
     private alertService: AlertService,
     private router: Router
   ){}
@@ -59,8 +61,8 @@ export class LoginComponent implements OnInit {
     }
 
     try {
-      const res = await this.userService.login(this.email, this.password);
-        if(res?.message  === 'Login exitoso' && res?.userType){
+      const res = await this.authService.login(this.email, this.password);
+        if(res?.message  === 'Login exitoso'){
           this.alertService.show(res?.message, 'success');
           // navegar al login
           this.router.navigate(['/dashboard']);

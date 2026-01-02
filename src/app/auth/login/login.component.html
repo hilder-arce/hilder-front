@@ -1,131 +1,105 @@
 <div
-  class="min-h-screen flex items-center justify-center px-6 transition-all duration-500 bg-gray-100"
+  class="min-h-screen flex items-center justify-center px-6
+         bg-gradient-to-br from-slate-100 to-slate-200"
 >
 
   <!-- CARD -->
   <div
-    class="w-full mt-6 mb-6 max-w-md p-8 rounded-3xl shadow-2xl border
-           transition-all duration-700 backdrop-blur-xl
-           bg-white border-gray-300 text-black"
+    class="relative w-full max-w-md p-8
+           rounded-2xl bg-white
+           border border-slate-200
+           shadow-[0_30px_80px_rgba(15,23,42,0.25)]"
   >
 
-  <!-- LOGO ULTRA-FUTURISTA -->
-  <div class="flex justify-center mb-12">
-    <div class="relative group">
+    <!-- BRAND -->
+    <div class="flex flex-col items-center mb-10">
 
-      <!-- CONTENEDOR QUE FLOTA COMPLETO -->
-      <div class="relative animate-float-elite group-hover:animate-float-hover transition-transform duration-500">
+      <div class="relative mb-6">
+        <div class="logo-aura"></div>
 
-        <!-- Glow holográfico dinámico -->
-        <div
-          class="absolute -inset-6 rounded-full blur-3xl opacity-70
-                bg-blue-600/40 animate-holo-glow">
-        </div>
-
-        <!-- Anillo neón giratorio -->
-        <div
-          class="absolute -inset-2 rounded-full border-4 border-blue-400/30
-                animate-spin-slow">
-        </div>
-
-        <!-- Imagen -->
         <img
           src="https://i.ibb.co/Hp72r8P8/logo-cajace.jpg"
-          class="relative w-32 h-32 object-cover drop-shadow-2xl rounded-full"
           alt="Logo"
+          class="relative w-24 h-24 rounded-full object-cover shadow-xl"
         />
       </div>
 
+      <h1 class="text-2xl font-semibold text-slate-900">
+        Acceso al sistema
+      </h1>
+
+      <p class="text-sm text-slate-500 mt-1">
+        Plataforma corporativa segura
+      </p>
     </div>
-  </div>
-
-
-    <!-- TITULO -->
-    <h1 class="text-3xl font-bold text-center mb-6">
-      Bienvenido
-    </h1>
 
     <!-- FORM -->
     <form (ngSubmit)="login()" class="space-y-5">
 
       <!-- EMAIL -->
       <div>
-        <label class="text-sm mb-1 block font-medium">Correo electrónico</label>
+        <label class="text-xs font-medium text-slate-600 block mb-1">
+          Correo electrónico
+        </label>
 
         <div class="relative">
-          <span class="absolute inset-y-0 left-3 flex items-center opacity-60">
-            <svg xmlns="http://www.w3.org/2000/svg"
-              class="w-5 h-5"
-              fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round"
-                stroke-width="1.8"
-                d="M4 6l8 6 8-6M4 6h16v12H4z"/>
+          <span class="input-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M4 6l8 6 8-6M4 6h16v12H4z"/>
             </svg>
           </span>
 
           <input
             type="email"
-            [(ngModel)]="email"
             name="email"
+            [(ngModel)]="email"
             required
-            class="w-full px-10 py-3 rounded-xl border bg-transparent
-                   focus:ring-2 focus:ring-blue-500 outline-none transition
-                   border-gray-400"
+            class="input-enterprise"
           />
         </div>
       </div>
 
       <!-- PASSWORD -->
       <div>
-        <label class="text-sm mb-1 block font-medium">Contraseña</label>
+        <label class="text-xs font-medium text-slate-600 block mb-1">
+          Contraseña
+        </label>
 
         <div class="relative">
-          <span class="absolute inset-y-0 left-3 flex items-center opacity-60">
-            <svg xmlns="http://www.w3.org/2000/svg"
-              class="w-5 h-5"
-              fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round"
-                stroke-width="1.8"
-                d="M12 11c1.1 0 2-.9 2-2V7a2 2 0 10-4 0v2a2 2 0 002 2z"/>
-              <path stroke-linecap="round" stroke-linejoin="round"
-                stroke-width="1.8"
-                d="M5 11h14v8H5z"/>
+          <span class="input-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 11c1.1 0 2-.9 2-2V7a2 2 0 10-4 0v2a2 2 0 002 2z"/>
+              <path d="M5 11h14v8H5z"/>
             </svg>
           </span>
 
           <input
             type="password"
-            [(ngModel)]="password"
             name="password"
+            [(ngModel)]="password"
             required
-            class="w-full px-10 py-3 rounded-xl border bg-transparent
-                   focus:ring-2 focus:ring-purple-500 outline-none transition
-                   border-gray-400"
+            class="input-enterprise"
           />
         </div>
       </div>
 
-      <!-- BOTÓN LOGIN -->
-       <div class="flex items-center justify-center">
-         <button
-           type="submit"
-           [disabled]="isLoading"
-           class="w-75 py-3 rounded-xl text-white font-semibold text-base
-                 transition-all duration-200 hover:shadow-xl
-                 flex items-center justify-center gap-2 cursor-pointer
-                 bg-blue-600 hover:bg-blue-700 disabled:opacity-60 disabled:hover:bg-blue-600 disabled:cursor-not-allowed"
-         >
-           <!-- Cuando está cargando -->
-           <span *ngIf="isLoading" class="loader-premium"></span>
-           <span *ngIf="isLoading">Procesando...</span>
-   
-           <!-- Cuando NO está cargando -->
-           <span *ngIf="!isLoading">INICIAR SESIÓN</span>
-   
-         </button>
-       </div>
+      <!-- BOTÓN -->
+      <button
+        type="submit"
+        [disabled]="isLoading"
+        class="btn-enterprise"
+      >
+        <span *ngIf="isLoading" class="loader-enterprise"></span>
+        <span *ngIf="isLoading">Validando acceso…</span>
+        <span *ngIf="!isLoading">INICIAR SESIÓN</span>
+      </button>
+
     </form>
+
+    <!-- FOOTER -->
+    <div class="mt-8 text-center text-xs text-slate-400">
+      © 2026 CAJACE · Seguridad corporativa
+    </div>
 
   </div>
 </div>
-

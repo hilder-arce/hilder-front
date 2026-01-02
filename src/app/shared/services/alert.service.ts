@@ -1,72 +1,65 @@
 import { Injectable } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class AlertService {
 
- show(message: string, type: 'success' | 'error') {
+  show(message: string, type: 'success' | 'error') {
 
-  // Elimina alerta previa si existe
-  const old = document.querySelector('.custom-alert-overlay');
-  if (old) old.remove();
+    const old = document.querySelector('.enterprise-alert-overlay');
+    if (old) old.remove();
 
-  // Bloquea scroll como alert nativo
-  document.body.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
 
-  // Overlay
-  const overlay = document.createElement('div');
-  overlay.classList.add('custom-alert-overlay');
+    const overlay = document.createElement('div');
+    overlay.className = 'enterprise-alert-overlay';
 
-  // Caja
-  const box = document.createElement('div');
-  box.classList.add(
-    'custom-alert-box',
-    type === 'success' ? 'custom-alert-success' : 'custom-alert-error'
-  );
+    const box = document.createElement('div');
+    box.className = `enterprise-alert enterprise-alert-${type}`;
 
-  // Iconos
-  const icon =
-    type === 'success'
-      ? `
-        <svg class="custom-alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-          <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>`
-      : `
-        <svg class="custom-alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-          <circle cx="12" cy="12" r="10"/>
-          <line x1="15" y1="9" x2="9" y2="15"/>
-          <line x1="9" y1="9" x2="15" y2="15"/>
-        </svg>
-      `;
+    box.innerHTML = `
+      <div class="enterprise-alert-header">
+        <div class="enterprise-alert-icon">
+          ${type === 'success' ? this.successIcon() : this.errorIcon()}
+        </div>
+        <div class="enterprise-alert-heading">
+          ${type === 'success' ? 'Operación completada' : 'Error del sistema'}
+        </div>
+      </div>
 
-  // Contenido
-  box.innerHTML = `
-    <div class="custom-alert-icon-wrapper">
-      ${icon}
-    </div>
-    <div class="custom-alert-title">
-      ${type === 'success' ? 'Operación exitosa' : 'Error'}
-    </div>
-    <div class="custom-alert-message">
-      ${message}
-    </div>
-  `;
+      <div class="enterprise-alert-body">
+        ${message}
+      </div>
+    `;
 
-  overlay.appendChild(box);
-  document.body.appendChild(overlay);
-
-  // Auto-cierre con animación
-  setTimeout(() => {
-    box.style.animation = 'fadeOutAlert 0.25s forwards';
+    overlay.appendChild(box);
+    document.body.appendChild(overlay);
 
     setTimeout(() => {
-      document.body.style.overflow = '';
-      overlay.remove();
-    }, 250);
+      box.classList.add('enterprise-alert-hide');
 
-  }, 1800);
-}
+      setTimeout(() => {
+        document.body.style.overflow = '';
+        overlay.remove();
+      }, 220);
 
+    }, 2000);
+  }
 
+  private successIcon() {
+    return `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+        <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    `;
+  }
+
+  private errorIcon() {
+    return `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+        <circle cx="12" cy="12" r="9"/>
+        <line x1="15" y1="9" x2="9" y2="15"/>
+        <line x1="9" y1="9" x2="15" y2="15"/>
+      </svg>
+    `;
+  }
 }

@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
 import { User } from "../interfaces/user.interface";
 import { HttpClient } from "@angular/common/http";
-import { environment } from "../../../environments/environment";
+import { SesionUser } from "../interfaces/user-sesion.interface";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
     providedIn: 'root'
@@ -11,6 +12,7 @@ export class UserService {
 
     private readonly apiBackend = environment.apiUrl;
     //private readonly apiBackend = 'http://localhost:3000/v1';
+
 
   //INJECTANDO A HttpClient PARA MANEJAR PETICIONES HTTP
   constructor(private http : HttpClient){}
@@ -22,15 +24,6 @@ export class UserService {
             newUser, { withCredentials: true }
         ).toPromise();
     } 
-
-    //AUTHENTICACION DE USERS
-    async login(email: string, password: string) {
-        return await this.http.post<{ message: string, userType: string }>(
-            `${environment.apiUrl}/auth/login`,
-            { email, password },
-            { withCredentials: true }
-        ).toPromise();
-    }
 
     // OBTENER TODOS LOS USUARIOS
     async getUsers() {
@@ -65,6 +58,5 @@ export class UserService {
         { withCredentials: true }
     ).toPromise();
     }
-
 
 }

@@ -1,63 +1,120 @@
+<!-- BOTÓN HAMBURGUESA -->
 <button
-   (click)="close()"
-      class="border-white/70 hover:bg-white/20 w-[42px] cursor-pointer h-[42px] flex items-center justify-center rounded-full border transition-all duration-300"
-    >
-      <i 
-        class="bi text-white bi-list text-xl transition-transform duration-300 hover:rotate-90"
-      ></i>
-    </button>
+  (click)="close()"
+  class="
+    cursor-pointer
+    w-10 h-10
+    flex items-center justify-center
+    rounded-lg
+    border border-white/20
+    text-white
+    transition-colors duration-200
+    hover:bg-white/10
+    active:bg-white/20
+  "
+>
+  <i class="bi bi-list text-xl"></i>
+</button>
 
-<aside *ngIf="visibilitySidebar"
+<!-- SIDEBAR -->
+<aside
+  *ngIf="visibilitySidebar"
   class="
     fixed right-0
     top-[96px]
     h-[calc(100dvh-96px)]
-    w-[260px]
+    w-[280px]
     z-[3000]
-    shadow-2xl
-    transition-transform duration-300
-    flex flex-col bg-[#1e1b74]
-  "
 
+    flex flex-col
+    bg-gradient-to-b from-[#1b1970] to-[#1e1b74]
+
+    border-l border-white/10
+    shadow-xl
+
+    transition-transform duration-300 ease-out
+  "
   [class.translate-x-full]="!visibilitySidebar"
   [class.translate-x-0]="visibilitySidebar"
+>
+  <!-- HEADER SIDEBAR -->
+  <div class="flex items-center justify-between px-5 py-4 border-b border-white/10">
+    <span class="text-xs tracking-widest uppercase text-white/70">
+      Navegación
+    </span>
+
+    <button
+      (click)="close()"
+      class="
+        cursor-pointer
+        w-8 h-8
+        flex items-center justify-center
+        rounded-md
+        text-white/70
+        transition-colors
+        hover:bg-white/10
+      "
+    >
+      ✕
+    </button>
+  </div>
+
+  <!-- LINKS -->
+  <nav
+    class="
+      flex-1
+      overflow-y-auto
+      px-3 py-4
+      space-y-1
+    "
   >
-  
-<div class="flex flex-col flex-1 overflow-hidden px-5 pb-5">
-  
-  
-    <!-- BOTÓN DE CERRAR (X) - vive en el sidebar -->
-    <div class="flex justify-end mb-4">
-      <button 
-        (click)="close()"
-        class="w-9 h-9 rounded-full flex items-center justify-center
-        transition-all hover:scale-110 bg-white/20 text-white"
-        >
-        ✕
-      </button>
-    </div>
-    
-    <!-- LINKS -->
-    <nav class="flex flex-col gap-2 overflow-y-auto pr-1 sidebar-scroll">
-      
-      <a 
+    <a
       (click)="close()"
       [routerLink]="['/home']"
-      class="px-4 py-3 rounded-md transition hover:bg-white/20 text-white"
-      >Home</a>
-      
-      <a 
+      routerLinkActive="sidebar-active"
+      class="
+        flex items-center gap-3
+        px-4 py-2.5
+        rounded-lg
+        text-white/85
+        font-medium text-sm
+        transition-colors duration-200
+        hover:bg-white/10
+      "
+    >
+      <i class="bi bi-house-door text-lg opacity-90 shrink-0"></i>
+      <span class="whitespace-nowrap">Home</span>
+    </a>
+
+    <a
       (click)="close()"
       [routerLink]="['/nosotros']"
-      class="px-4 py-3 rounded-md transition text-white hover:bg-white/20"
-      >Nosotros</a>
-      
-    </nav>
-    
-    <!-- BOTÓN LOGIN (solo mobile) -->
-    <div class="mt-auto md:hidden" *ngIf="!layout.isRouteLogin()">
-      <app-button-login (click)="close()"></app-button-login>
-    </div>
+      routerLinkActive="sidebar-active"
+      class="
+        flex items-center gap-3
+        px-4 py-2.5
+        rounded-lg
+        text-white/85
+        font-medium text-sm
+        transition-colors duration-200
+        hover:bg-white/10
+      "
+    >
+      <i class="bi bi-people text-lg opacity-90 shrink-0"></i>
+      <span class="whitespace-nowrap">Nosotros</span>
+    </a>
+  </nav>
+
+  <!-- FOOTER (MOBILE) -->
+  <div class="px-4 py-4 border-t border-white/10 md:hidden flex justify-center">
+    <app-button-login
+      *ngIf="!auth.isAuthenticated && !layout.isRouteLogin()"
+      (click)="close()"
+    ></app-button-login>
+
+    <app-button-dashboard
+      *ngIf="auth.isAuthenticated"
+      (click)="close()"
+    ></app-button-dashboard>
   </div>
-    
 </aside>

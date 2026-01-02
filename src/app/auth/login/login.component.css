@@ -1,59 +1,139 @@
-/* FLOTE ELITE */
-@keyframes float-elite {
-  0%   { transform: translateY(0) scale(1); }
-  50%  { transform: translateY(-14px) scale(1.04); }
-  100% { transform: translateY(0) scale(1); }
+/* ================================
+   INPUT ENTERPRISE (BOOTSTRAP FEEL)
+   ================================ */
+.input-enterprise {
+  width: 100%;
+  height: 48px;
+  padding-left: 44px;
+  padding-right: 14px;
+
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+
+  background-color: #ffffff;
+  color: #0f172a;
+  font-size: 14.5px;
+  line-height: 1.2;
+
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
 }
 
-/* FLOTE AL PASAR EL MOUSE (parallax ligero) */
-@keyframes float-hover {
-  0%   { transform: translateY(0) rotateX(0deg) rotateY(0deg); }
-  50%  { transform: translateY(-7px) rotateX(4deg) rotateY(-2deg); }
-  100% { transform: translateY(0) rotateX(0deg) rotateY(0deg); }
+.input-enterprise::placeholder {
+  color: #9ca3af;
 }
 
-/* GLOW HOLOGRÁFICO */
-@keyframes holo-glow {
-  0%   { opacity: 0.4; transform: scale(1); }
-  50%  { opacity: 0.8; transform: scale(1.15); }
-  100% { opacity: 0.4; transform: scale(1); }
+.input-enterprise:hover {
+  border-color: #9ca3af;
 }
 
-/* GIRO LENTO DEL ANILLO NEÓN */
-@keyframes spin-slow {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
+.input-enterprise:focus {
+  border-color: #2563eb;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
-.animate-float-elite {
-  animation: float-elite 5s ease-in-out infinite;
+/* ================================
+   ICONO CENTRADO PERFECTO
+   ================================ */
+.input-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 18px;
+  height: 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #6b7280;
+  pointer-events: none;
 }
 
-.animate-float-hover {
-  animation: float-hover 3s ease-in-out infinite;
+.input-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
 }
 
-.animate-holo-glow {
-  animation: holo-glow 6s ease-in-out infinite;
+/* ================================
+   BOTÓN ENTERPRISE
+   ================================ */
+.btn-enterprise {
+  width: 100%;
+  height: 48px;
+  margin-top: 8px;
+
+  border-radius: 12px;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: #ffffff;
+
+  font-size: 14.5px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  cursor: pointer;
+  transition: all 0.25s ease;
 }
 
-.animate-spin-slow {
-  animation: spin-slow 12s linear infinite;
+.btn-enterprise:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 30px rgba(37, 99, 235, 0.35);
 }
 
-/* Spinner futurista premium */
-.loader-premium {
-  width: 22px;
-  height: 22px;
+.btn-enterprise:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ================================
+   SPINNER ENTERPRISE
+   ================================ */
+.loader-enterprise {
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
-  border: 3px solid rgba(0, 255, 255, 0.15);
-  border-top-color: #00eaff;
-  animation: spinPremium 0.65s linear infinite;
-  box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+  border: 3px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #ffffff;
+  animation: spin 0.7s linear infinite;
 }
 
-@keyframes spinPremium {
-  to {
-    transform: rotate(360deg);
-  }
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ================================
+   LOGO AURA (SUTIL, CORPORATIVO)
+   ================================ */
+.logo-aura {
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(37, 99, 235, 0.35),
+    transparent 70%
+  );
+  filter: blur(18px);
+  animation: auraPulse 6s ease-in-out infinite;
+}
+
+@keyframes auraPulse {
+  0% { opacity: 0.4; }
+  50% { opacity: 0.75; }
+  100% { opacity: 0.4; }
 }

@@ -1,34 +1,79 @@
 <!-- HEADER -->
-<header *ngIf="layout.isPublicRoute()"
-  class="sticky bg-[#1e1b74] top-0 text-white z-[4000] flex items-center justify-between px-4 py-3 shadow-lg h-[15vh] transition-all duration-500"
-  >
+<header
+  *ngIf="layout.isPublicRoute()"
+  class="
+    relative
+    sticky top-0 z-[4000]
 
-  <!-- CONTENEDOR PRINCIPAL -->
-  <div class="relative flex flex-col items-start text-left w-full mr-3 overflow-visible">
+    flex items-center justify-between
+    px-6
+    h-[96px]
 
-    <div class="relative w-auto px-3 py-2">
+    text-white
+    bg-gradient-to-r from-[#1b1970] via-[#1e1b74] to-[#2522a5]
 
-      <!-- 🔵 PARTÍCULA QUE GIRA POR EL BORDE -->
-      <span class="border-orbit bg-yellow-400" ></span>
+    backdrop-blur-md
+    border-b border-white/10
 
-      <h1 class="font-bold uppercase text-[1.6rem] z-10 relative text-white">
+    transition-all duration-300
+  "
+>
+  <!-- Glow ambiental -->
+  <div class="header-glow"></div>
+
+  <!-- MARCA -->
+  <div class="relative flex flex-col justify-center">
+    <div class="relative pl-4">
+
+      <!-- Línea institucional -->
+      <span
+        class="
+          absolute left-0 top-1
+          h-[80%] w-[2px]
+          bg-gradient-to-b from-yellow-400 to-yellow-500
+          rounded-full
+        "
+      ></span>
+
+      <h1
+        class="
+          text-[1.4rem]
+          font-bold
+          tracking-widest
+          uppercase
+        "
+      >
         CAJACE
       </h1>
 
-      <p class="text-[0.9rem] tracking-wide z-10 relative text-gray-200">
-        Tecnología estratégica para operaciones subterráneas.
+      <p
+        class="
+          text-xs
+          text-white/70
+          tracking-wide
+          leading-tight
+        "
+      >
+        Tecnología estratégica para operaciones subterráneas
       </p>
 
     </div>
   </div>
 
-  <!-- BOTÓN MENÚ -->
-  <div class="flex items-center gap-3">
+  <!-- ACCIONES -->
+  <div class="relative flex items-center gap-3">
 
-    <app-button-login class="hidden md:block" *ngIf="!layout.isRouteLogin()"></app-button-login>
+    <app-button-login
+      class="hidden md:block"
+      *ngIf="!auth.isAuthenticated && !layout.isRouteLogin()"
+    ></app-button-login>
+
+    <app-button-dashboard
+      class="hidden md:block"
+      *ngIf="auth.isAuthenticated"
+    ></app-button-dashboard>
 
     <app-sidebar></app-sidebar>
 
   </div>
-
 </header>

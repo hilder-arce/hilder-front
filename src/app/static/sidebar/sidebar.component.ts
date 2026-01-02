@@ -3,6 +3,8 @@ import { Component, ElementRef, HostListener } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ButtonLoginComponent } from '../../shared/componets/button-login/button-login.component';
 import { LayoutStateService } from '../../shared/services/layout-state.service';
+import { ButtonDashboardComponent } from '../../shared/componets/button-dashboard/button-dashboard.component';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,6 +12,7 @@ import { LayoutStateService } from '../../shared/services/layout-state.service';
   styleUrls: ['./sidebar.component.css'],
   imports: [
     RouterModule,
+    ButtonDashboardComponent,
     CommonModule,
     ButtonLoginComponent
   ]
@@ -21,6 +24,7 @@ export class SidebarComponent {
 
   constructor(
     public layout: LayoutStateService,
+        public auth: AuthService,
     private el: ElementRef
   ) { }
 
