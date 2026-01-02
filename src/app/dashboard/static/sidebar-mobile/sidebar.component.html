@@ -1,52 +1,68 @@
-    <!-- HEADER MOBILE -->
-    <header *ngIf="!open" class=" sticky top-0 z-[1999] lg:hidden h-14 px-4 flex items-center justify-between
-                   bg-white/80 backdrop-blur-xl border-b">
-      <button
-      (click)="openSidebar()"
-        class="w-10 h-10 flex items-center justify-center rounded-lg
-               hover:bg-black/5 transition">
-        ☰
-      </button>
+<!-- HEADER MOBILE -->
+<header
+  *ngIf="!open"
+  class="sticky top-0 z-[1999] lg:hidden
+         h-14 px-4
+         flex items-center justify-between
+         bg-white/85 backdrop-blur-xl
+         border-b border-black/5">
 
-      <span class="text-sm font-semibold truncate">
-        CAJACE EIRL
-      </span>
+  <!-- MENU -->
+  <button
+    (click)="openSidebar()"
+    class="group w-10 h-10 flex items-center justify-center
+           rounded-xl
+           bg-black/[0.03]
+           hover:bg-black/[0.06]
+           active:scale-95
+           transition-all duration-200">
 
-      <div class="w-10"></div>
-    </header>
+    <i class="bi bi-list text-xl text-black/80
+              group-hover:text-black"></i>
+  </button>
 
-<!-- ========================= -->
+  <!-- BRAND -->
+  <div class="flex items-center gap-2 min-w-0">
+    <div
+      class="w-7 h-7 rounded-lg
+             bg-gradient-to-br from-indigo-500 via-violet-500 to-cyan-400
+             shadow-[0_0_20px_rgba(99,102,241,.6)]">
+    </div>
+
+    <span class="text-sm font-semibold tracking-wide truncate">
+      CAJACE EIRL
+    </span>
+  </div>
+
+  <!-- PLACEHOLDER -->
+  <div class="w-10"></div>
+</header>
+
 <!-- SIDEBAR MOBILE -->
-<!-- ========================= -->
 <aside
   class="fixed inset-y-0 left-0 z-[2000]
-         w-[280px]
+         w-[300px] max-w-[90vw]
+         lg:hidden
+         transition-transform duration-300 ease-[cubic-bezier(.4,0,.2,1)]
          bg-gradient-to-b from-[#0b0f19]/95 to-[#05070d]/95
          backdrop-blur-xl
          border-r border-white/5
-         shadow-[0_0_60px_-15px_rgba(99,102,241,0.25)]
-         transition-transform duration-300 ease-out
-         lg:hidden"
+         shadow-[0_0_80px_-20px_rgba(99,102,241,0.35)]"
   [class.translate-x-0]="open"
   [class.-translate-x-full]="!open">
 
-  <div class="h-full w-full flex flex-col
-              bg-gradient-to-b from-[#0b0f19]/95 to-[#05070d]/95
-              backdrop-blur-xl
-              border-r border-white/5
-              shadow-[0_0_60px_-15px_rgba(99,102,241,0.25)]">
+  <div class="h-full flex flex-col">
 
-    <!-- ========================= -->
     <!-- HEADER -->
-    <!-- ========================= -->
-    <div class="h-14 px-4 flex items-center justify-between
-                border-b border-white/5">
+    <div
+      class="h-14 px-4 flex items-center justify-between
+             border-b border-white/5">
 
-      <!-- LOGO -->
-      <div class="flex items-center gap-2">
-        <div class="w-8 h-8 rounded-lg
-                    bg-gradient-to-br from-indigo-500 to-cyan-400
-                    shadow-[0_0_20px_rgba(99,102,241,.6)]">
+      <div class="flex items-center gap-3">
+        <div
+          class="w-8 h-8 rounded-xl
+                 bg-gradient-to-br from-indigo-500 via-violet-500 to-cyan-400
+                 shadow-[0_0_25px_rgba(99,102,241,.7)]">
         </div>
 
         <span class="text-sm font-semibold text-white/90">
@@ -54,155 +70,106 @@
         </span>
       </div>
 
-      <!-- CLOSE -->
       <button
         (click)="close()"
-        class="w-8 h-8 flex items-center justify-center rounded-md
-              text-white/60 hover:text-white
-              hover:bg-white/5 transition">
-        ✕
+        class="group w-9 h-9 flex items-center justify-center
+               rounded-lg
+               text-white/60
+               hover:text-white
+               hover:bg-white/5
+               active:scale-95
+               transition">
+
+        <i class="bi bi-x-lg text-sm"></i>
       </button>
     </div>
 
-    <!-- ========================= -->
-    <!-- ACTION -->
-    <!-- ========================= -->
-    <div class="px-3 mt-4">
-      
+    <!-- QUICK ACTION -->
+    <div class="px-4 mt-4">
       <button
-      routerLink="/dashboard"
-      (click)="close()"
-        class="group relative w-full flex items-center justify-center gap-3
-               px-3 py-2.5 rounded-lg
-               bg-white/5 hover:bg-white/10
-               border border-white/10
-               text-white/90
-               transition-all duration-300 mb-2">
+        routerLink="/dashboard"
+        (click)="close()"
+        class="group w-full flex items-center gap-3
+               px-4 py-3 rounded-xl
+               bg-gradient-to-r
+               from-indigo-500/25 to-indigo-500/5
+               border border-indigo-400/20
+               text-white
+               shadow-[0_10px_30px_-15px_rgba(99,102,241,.6)]
+               hover:from-indigo-500/35
+               transition-all duration-300">
 
-        <!-- ICON -->
-        <svg
-          width="18"
-          height="18"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="shrink-0 transition-all duration-300">
+        <i class="bi bi-speedometer2 text-lg"></i>
 
-          <!-- top left -->
-          <rect x="3" y="3" width="7" height="7" rx="1.5" />
-          <!-- top right -->
-          <rect x="14" y="3" width="7" height="7" rx="1.5" />
-          <!-- bottom -->
-          <rect x="3" y="14" width="18" height="7" rx="1.5" />
-        </svg>
-
-        <span class="text-sm">
+        <span class="text-sm font-medium">
           Dashboard
         </span>
-
       </button>
-
     </div>
 
-    <!-- ========================= -->
     <!-- NAV -->
-    <!-- ========================= -->
-    <nav class="mt-4 flex-1 overflow-y-auto px-2 space-y-1
-                [&::-webkit-scrollbar]:w-[6px]
-                [&::-webkit-scrollbar-thumb]:rounded-full
-                [&::-webkit-scrollbar-thumb]:bg-gradient-to-b
-                [&::-webkit-scrollbar-thumb]:from-indigo-500/40
-                [&::-webkit-scrollbar-thumb]:to-cyan-400/40">
-      
+    <nav
+      class="mt-5 flex-1 overflow-y-auto px-3 space-y-1
+             [&::-webkit-scrollbar]:w-[5px]
+             [&::-webkit-scrollbar-thumb]:rounded-full
+             [&::-webkit-scrollbar-thumb]:bg-gradient-to-b
+             [&::-webkit-scrollbar-thumb]:from-indigo-500/40
+             [&::-webkit-scrollbar-thumb]:to-cyan-400/40">
 
-      <!-- Users -->
       <button
         routerLink="users"
         (click)="close()"
-        class="w-full flex items-center gap-3 px-4 py-3
-              rounded-lg
-              text-white/70 hover:text-white
-              hover:bg-white/5
-              transition-all duration-300">
+        class="mobile-item">
 
-        <!-- ICON USERS -->
-        <svg
-          width="18"
-          height="18"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="shrink-0">
-
-          <!-- user -->
-          <path d="M20 21a8 8 0 0 0-16 0" />
-          <circle cx="12" cy="7" r="4" />
-        </svg>
-        Users
+        <i class="bi bi-people"></i>
+        Usuarios
       </button>
 
-      <!-- ITEM -->
       <button
         routerLink="reports"
         (click)="close()"
-        class="w-full flex items-center gap-3 px-4 py-3
-              rounded-lg
-              text-white/70 hover:text-white
-              hover:bg-white/5
-              transition-all duration-300">
+        class="mobile-item">
 
-        <span class="text-lg">📄</span>
+        <i class="bi bi-bar-chart"></i>
         Reportes
       </button>
 
-      <!-- ITEM -->
       <button
-        (click)="close()"
         routerLink="config"
-        class="w-full flex items-center gap-3 px-4 py-3
-              rounded-lg
-              text-white/70 hover:text-white
-              hover:bg-white/5
-              transition-all duration-300">
+        (click)="close()"
+        class="mobile-item">
 
-        <span class="text-lg">⚙️</span>
+        <i class="bi bi-gear"></i>
         Configuración
       </button>
     </nav>
 
-    <!-- ========================= -->
     <!-- FOOTER -->
-    <!-- ========================= -->
-    <div class="px-3 py-4 border-t border-white/5
-                bg-gradient-to-t from-black/30 to-transparent">
+    <div
+      class="px-4 py-4 border-t border-white/5
+             bg-gradient-to-t from-black/40 to-transparent">
 
       <button
         (click)="close()"
-        class="w-full flex items-center gap-3 px-3 py-2
-              rounded-lg
-              hover:bg-white/5
-              transition">
+        class="w-full flex items-center gap-3
+               rounded-xl px-3 py-2
+               hover:bg-white/5
+               transition">
 
         <img
           src="https://i.pravatar.cc/40"
-          class="w-8 h-8 rounded-full ring-2 ring-white/10" />
+          class="w-9 h-9 rounded-full ring-2 ring-white/10" />
 
-        <div class="min-w-0 text-left">
+        <div class="min-w-0">
           <div class="text-xs font-medium text-white truncate">
             Hacker
           </div>
           <div class="text-[11px] text-white/40 truncate">
-            Plan Pro
+            Plan Enterprise
           </div>
         </div>
       </button>
     </div>
-  </div>
 
+  </div>
 </aside>

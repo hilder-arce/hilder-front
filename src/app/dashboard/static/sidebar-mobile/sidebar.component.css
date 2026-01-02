@@ -1,3 +1,35 @@
 button {
   cursor: pointer;
 }
+
+.mobile-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  padding: 12px 14px;
+  border-radius: 14px;
+
+  color: rgba(255,255,255,0.7);
+  font-size: 14px;
+  font-weight: 500;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.15s ease;
+}
+
+.mobile-item i {
+  font-size: 18px;
+}
+
+.mobile-item:hover {
+  background: linear-gradient(
+    90deg,
+    rgba(99,102,241,0.18),
+    rgba(99,102,241,0.05)
+  );
+  color: #fff;
+}
