@@ -9,8 +9,8 @@ import {environment} from "../../../environments/environment";
 
 export class AuthService {
 
-    //private readonly apiBackend = environment.apiUrl;
-    private readonly apiBackend = 'http://localhost:3000/v1';
+    private readonly apiBackend = environment.apiUrl;
+    //private readonly apiBackend = 'http://localhost:3000/v1';
 
     user?: SesionUser | null = null
 
