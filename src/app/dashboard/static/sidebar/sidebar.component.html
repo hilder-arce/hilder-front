@@ -143,31 +143,44 @@
 
     <!-- FOOTER -->
     <div
+      *ngIf="auth.currentUser as user"
       class="mt-auto border-t border-white/5
-             bg-gradient-to-t from-black/30 to-transparent
-             px-3 py-3">
+            bg-gradient-to-t from-black/30 to-transparent
+            px-3 py-3">
 
       <button
         class="group relative w-full flex items-center gap-3
-               hover:bg-white/5 rounded-lg py-2">
+              rounded-lg px-2 py-2
+              hover:bg-white/5 transition-all">
 
-        <img src="https://i.pravatar.cc/40"
-             class="w-8 h-8 rounded-full ring-2 ring-white/10" />
+        <!-- Avatar premium -->
+        <div
+          class="w-9 h-9 rounded-full
+                flex items-center justify-center
+                bg-gradient-to-br from-indigo-500 to-cyan-400
+                text-white font-semibold
+                ring-2 ring-white/10">
+          {{ user.nameUser[0] | uppercase }}
+        </div>
 
-        <div *ngIf="!isCollapsed">
+        <!-- Info -->
+        <div *ngIf="!isCollapsed" class="leading-tight">
           <div class="text-xs font-medium text-white">
-            Hacker
+            {{ user.nameUser }}
           </div>
-          <div class="text-[11px] text-white/40">
-            Plan Pro
+          <div class="text-[11px] uppercase tracking-wide text-white/40">
+            {{ user.userType }}
           </div>
         </div>
 
+        <!-- Tooltip collapsed -->
         <span *ngIf="isCollapsed" class="sidebar-tooltip">
-          Hacker · Plan Pro
+          {{ user.nameUser }} · {{ user.userType }}
         </span>
+
       </button>
     </div>
+
 
   </div>
 </aside>
