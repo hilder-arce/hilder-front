@@ -164,41 +164,45 @@
       </button>
     </nav>
 
-    <!-- FOOTER -->
-    <div
-      *ngIf="auth.currentUser as user"
-      class="mt-auto border-t border-white/5
-            bg-gradient-to-t from-black/30 to-transparent
-            px-3 py-3">
+     <!-- FOOTER -->
+<div
+  *ngIf="auth.currentUser as user"
+  class="mt-auto border-t border-white/5
+        bg-gradient-to-t from-black/30 to-transparent
+        px-3 py-3">
 
-      <button
-      (click)="close()"
-        class="group relative w-full flex items-center gap-3
-              rounded-lg px-2 py-2
-              hover:bg-white/5 transition-all">
+  <div class="flex items-center gap-2">
 
-        <!-- Avatar premium -->
-        <div
-          class="w-9 h-9 rounded-full
-                flex items-center justify-center
-                bg-gradient-to-br from-indigo-500 to-cyan-400
-                text-white font-semibold
-                ring-2 ring-white/10">
-          {{ user.nameUser[0] | uppercase }}
+    <!-- USER -->
+    <button
+    (click)="close()"
+      class="group relative flex-1 flex items-center gap-3
+            rounded-lg px-2 py-2
+            hover:bg-white/5 transition-all">
+
+      <!-- Avatar -->
+      <div
+        class="w-9 h-9 rounded-full
+              flex items-center justify-center
+              bg-gradient-to-br from-indigo-500 to-cyan-400
+              text-white font-semibold
+              ring-2 ring-white/10">
+        {{ user.nameUser[0] | uppercase }}
+      </div>
+
+      <!-- Info -->
+      <div class="leading-tight min-w-0">
+        <div class="text-xs uppercase font-medium text-white truncate">
+          {{ user.nameUser }}
         </div>
-
-        <!-- Info -->
-        <div class="leading-tight">
-          <div class="text-xs uppercase font-medium text-white">
-            {{ user.nameUser }}
-          </div>
-          <div class="text-[11px]  tracking-wide text-white/40">
-            {{ user.email }}
-          </div>
+        <div class="text-[11px] tracking-wide text-white/40 truncate">
+          {{ user.email }}
         </div>
+      </div>
 
-      </button>
-          <!-- LOGOUT (solo expandido) -->
+    </button>
+
+    <!-- LOGOUT (solo expandido) -->
     <button
       (click)="logout()"
       class="group relative w-9 h-9
@@ -223,9 +227,11 @@
         <polyline points="16 17 21 12 16 7" />
         <line x1="21" y1="12" x2="9" y2="12" />
       </svg>
+
     </button>
 
-    </div>
+  </div>
+</div>
 
   </div>
 </aside>

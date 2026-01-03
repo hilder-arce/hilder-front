@@ -40,7 +40,7 @@ export class DashboardSidebarMobileComponent {
   }
 
   logout() {
-        
+        this.close()
     }
 
   
