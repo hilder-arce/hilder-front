@@ -169,13 +169,13 @@
             {{ user.nameUser }}
           </div>
           <div class="text-[11px] uppercase tracking-wide text-white/40">
-            {{ user.userType }}
+            {{ user.email }}
           </div>
         </div>
 
         <!-- Tooltip collapsed -->
         <span *ngIf="isCollapsed" class="sidebar-tooltip">
-          {{ user.nameUser }} · {{ user.userType }}
+          {{ user.userType }} . {{ user.nameUser }}
         </span>
 
       </button>

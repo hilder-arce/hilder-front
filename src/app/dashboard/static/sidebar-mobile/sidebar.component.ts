@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { AuthService } from '../../../shared/services/auth.service';
 
 @Component({
     selector: 'app-dashboard-sidebar-mobile',
@@ -16,6 +17,8 @@ export class DashboardSidebarMobileComponent {
 
     open = false
 
+    constructor(public auth: AuthService, private el: ElementRef){}
+
     close () {
         this.open = false
     }
@@ -23,6 +26,18 @@ export class DashboardSidebarMobileComponent {
     openSidebar() {
         this.open = true
     }
+
+    // Detecta clics globales
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+
+    const clickedInside = this.el.nativeElement.contains(event.target);
+
+    // Si está abierto y el click fue fuera → cerrar
+    if (this.open && !clickedInside) {
+      this.close()
+    }
+  }
 
   
 }
