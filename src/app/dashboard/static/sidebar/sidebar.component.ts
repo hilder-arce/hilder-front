@@ -24,5 +24,9 @@ export class DashboardSidebarComponent {
     onToggle() {
         this.toggle.emit();
     }
+
+    logout() {
+        
+    }
   
 }

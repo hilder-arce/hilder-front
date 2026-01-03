@@ -39,5 +39,9 @@ export class DashboardSidebarMobileComponent {
     }
   }
 
+  logout() {
+        
+    }
+
   
 }
