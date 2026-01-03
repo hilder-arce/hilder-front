@@ -1,10 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { Router, RouterModule } from "@angular/router";
-import { UserService } from "../../shared/services/user.service";
-import { AuthService } from "../../shared/services/auth.service";
+import { AuthService } from "../../dashboard/components/users/services/auth.service";
 import { AlertService } from "../../shared/services/alert.service";
 import { CommonModule } from "@angular/common";
+import { UserService } from "../../dashboard/components/users/services/user.service";
 
 @Component({
     selector: 'app-login',

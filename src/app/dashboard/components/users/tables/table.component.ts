@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { UserService } from '../../../../shared/services/user.service';
-import { User } from '../../../../shared/interfaces/user.interface';
+import { User } from '../interfaces/user.interface';
 import { AlertService } from '../../../../shared/services/alert.service';
+import { UserService } from '../services/user.service';
 
 @Component({
     selector: 'app-users-table',

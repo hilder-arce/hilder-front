@@ -2,9 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { ActivatedRoute, Router, RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
-import { User, UserType } from "../../shared/interfaces/user.interface";
-import { UserService } from "../../shared/services/user.service";
+import { User, UserType } from "../../dashboard/components/users/interfaces/user.interface";
 import { AlertService } from "../../shared/services/alert.service";
+import { UserService } from "../../dashboard/components/users/services/user.service";
 
 @Component({
   selector: 'app-register',

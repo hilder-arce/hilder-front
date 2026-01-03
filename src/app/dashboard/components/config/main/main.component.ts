@@ -3,13 +3,13 @@ import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
-    selector: 'app-config-table',
-    templateUrl: './table.component.html',
-    styleUrl: './table.component.css',
+    selector: 'app-config-main',
+    templateUrl: './main.component.html',
+    styleUrl: './main.component.css',
     imports: [
         RouterModule,
         CommonModule,
     ]
 })
 
-export class ConfigTableComponent { }
+export class ConfigMainComponent { }

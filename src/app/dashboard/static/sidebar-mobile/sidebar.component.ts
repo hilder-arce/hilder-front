@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { AuthService } from '../../../shared/services/auth.service';
+import { AuthService } from '../../components/users/services/auth.service';
 import { AlertService } from '../../../shared/services/alert.service';
 
 @Component({

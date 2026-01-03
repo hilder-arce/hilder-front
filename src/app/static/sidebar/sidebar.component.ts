@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { ButtonLoginComponent } from '../../shared/componets/button-login/button-login.component';
 import { LayoutStateService } from '../../shared/services/layout-state.service';
 import { ButtonDashboardComponent } from '../../shared/componets/button-dashboard/button-dashboard.component';
-import { AuthService } from '../../shared/services/auth.service';
+import { AuthService } from '../../dashboard/components/users/services/auth.service';
 
 @Component({
   selector: 'app-sidebar',

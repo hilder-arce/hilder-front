@@ -4,7 +4,7 @@ import { ButtonDashboardComponent } from '../../shared/componets/button-dashboar
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { CommonModule } from '@angular/common';
 import { LayoutStateService } from '../../shared/services/layout-state.service';
-import { AuthService } from '../../shared/services/auth.service';
+import { AuthService } from '../../dashboard/components/users/services/auth.service';
 
 @Component({
   selector: 'app-header',
