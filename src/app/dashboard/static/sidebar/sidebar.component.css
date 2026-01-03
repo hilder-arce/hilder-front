@@ -1,44 +1,4 @@
-button {
-  cursor: pointer;
-}
-
-/* =========================================
-   SIDEBAR ITEM
-   ========================================= */
-
-.sidebar-item {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 12px;
-  margin-bottom: 6px;
-
-  border-radius: 10px;
-  color: rgba(255,255,255,0.7);
-  background: transparent;
-
-  transition:
-    background 0.25s ease,
-    color 0.25s ease,
-    transform 0.15s ease;
-}
-
-.sidebar-item:hover {
-  background: rgba(255,255,255,0.06);
-  color: #fff;
-}
-
-/* Texto */
-.sidebar-label {
-  font-size: 14px;
-  white-space: nowrap;
-}
-
-/* =========================================
-   TOOLTIP ENTERPRISE
-   ========================================= */
-
+/* TOOLTIP ENTERPRISE */
 .sidebar-tooltip {
   pointer-events: none;
   position: absolute;
@@ -53,12 +13,11 @@ button {
   white-space: nowrap;
 
   color: #fff;
-  background:
-    linear-gradient(
-      180deg,
-      rgba(15, 23, 42, 0.95),
-      rgba(2, 6, 23, 0.95)
-    );
+  background: linear-gradient(
+    180deg,
+    rgba(15, 23, 42, 0.95),
+    rgba(2, 6, 23, 0.95)
+  );
 
   backdrop-filter: blur(14px);
   border: 1px solid rgba(255,255,255,0.08);
