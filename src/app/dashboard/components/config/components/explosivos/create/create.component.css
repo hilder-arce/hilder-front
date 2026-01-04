@@ -1,0 +1,34 @@
+/* =========================================
+   INPUT GLOW PREMIUM (focus enterprise)
+========================================= */
+.input-elite:focus {
+  outline: none;
+  box-shadow:
+    0 0 0 4px rgba(59, 130, 246, 0.25),
+    0 0 25px rgba(234, 179, 8, 0.15);
+}
+
+/* =========================================
+   CARD ENTERPRISE BACKGROUND
+========================================= */
+.card-elite {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0.97),
+      rgba(248,250,252,0.95)
+    );
+}
+
+/* =========================================
+   SOFT FLOAT ANIMATION (no Tailwind)
+========================================= */
+@keyframes soft-float {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-4px); }
+  100% { transform: translateY(0); }
+}
+
+.animate-soft-float {
+  animation: soft-float 6s ease-in-out infinite;
+}

@@ -1,26 +1,30 @@
 <!-- ===============================
-     HEADER MOBILE
+     HEADER MOBILE (DARK ENTERPRISE)
 ================================ -->
 <header
   *ngIf="!open"
-  class="sticky top-0 z-[1999] lg:hidden
+  class="sticky top-0 z-[1999] md:hidden
          h-14 px-4
          flex items-center justify-between
-         bg-white/85 backdrop-blur-xl
-         border-b border-black/5">
+         bg-gradient-to-b from-[#0b0f19]/95 to-[#05070d]/95
+         backdrop-blur-xl
+         border-b border-white/5
+         shadow-[0_10px_30px_-10px_rgba(99,102,241,0.35)]
+         animate-header-in">
 
   <!-- MENU -->
   <button
     (click)="openSidebar()"
     class="group w-10 h-10 flex items-center justify-center
            rounded-xl
-           bg-black/[0.03]
-           hover:bg-black/[0.06]
+           bg-white/[0.04]
+           border border-white/10
+           hover:bg-indigo-500/10
            active:scale-95
            transition-all duration-200">
 
-    <i class="bi bi-list text-xl text-black/80
-              group-hover:text-black"></i>
+    <i class="bi bi-list text-xl text-white/80
+              group-hover:text-indigo-400 transition-colors"></i>
   </button>
 
   <!-- BRAND -->
@@ -28,17 +32,16 @@
     <div
       class="w-9 h-9 rounded-lg overflow-hidden
              bg-white
-             shadow-[0_0_20px_rgba(0,0,0,0.35)]">
+             shadow-[0_0_25px_rgba(99,102,241,0.45)]">
 
       <img
         src="https://i.ibb.co/Hp72r8P8/logo-cajace.jpg"
         alt="CAJACE EIRL"
         class="w-full h-full object-cover"
-        loading="lazy"
-        referrerpolicy="no-referrer" />
+        loading="lazy" />
     </div>
 
-    <span class="text-sm font-semibold tracking-wide truncate">
+    <span class="text-sm font-semibold tracking-wide truncate text-white/90">
       CAJACE EIRL
     </span>
   </div>
@@ -57,13 +60,13 @@
          bg-gradient-to-b from-[#0b0f19]/95 to-[#05070d]/95
          backdrop-blur-xl
          border-r border-white/5
-         shadow-[0_0_80px_-20px_rgba(99,102,241,0.35)]"
+         shadow-[0_0_100px_-30px_rgba(99,102,241,0.45)]"
   [class.translate-x-0]="open"
   [class.-translate-x-full]="!open">
 
   <div class="h-full flex flex-col">
 
-    <!-- HEADER -->
+    <!-- HEADER SIDEBAR -->
     <div
       class="h-14 px-4 flex items-center justify-between
              border-b border-white/5">
@@ -72,8 +75,7 @@
         <div
           class="w-9 h-9 rounded-lg overflow-hidden
                  bg-white
-                 shadow-[0_0_20px_rgba(0,0,0,0.35)]">
-
+                 shadow-[0_0_25px_rgba(99,102,241,0.45)]">
           <img
             src="https://i.ibb.co/Hp72r8P8/logo-cajace.jpg"
             class="w-full h-full object-cover" />
@@ -86,13 +88,13 @@
 
       <button
         (click)="close()"
-        class="w-9 h-9 flex items-center justify-center
+        class="group w-9 h-9 flex items-center justify-center
                rounded-lg
                text-white/60
                hover:text-white
                hover:bg-white/5
                active:scale-95
-               transition">
+               transition-all">
 
         <i class="bi bi-x-lg text-sm"></i>
       </button>
@@ -105,22 +107,22 @@
         routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
         (click)="close()"
-        class="mobile-item">
+        class="mobile-item group">
 
-        <i class="bi bi-speedometer2 text-lg"></i>
-        <span class="text-sm font-medium">Dashboard</span>
+        <i class="bi bi-speedometer2"></i>
+        Dashboard
       </button>
     </div>
 
     <!-- NAV -->
-    <nav
-      class="mt-5 flex-1 overflow-y-auto px-3 space-y-1 mobile-scroll">
+    <nav class="mt-5 flex-1 overflow-y-auto px-3 space-y-1 mobile-scroll">
 
       <button
         routerLink="users"
         routerLinkActive="active"
         (click)="close()"
-        class="mobile-item">
+        class="mobile-item group">
+
         <i class="bi bi-people"></i>
         Usuarios
       </button>
@@ -129,7 +131,8 @@
         routerLink="reports"
         routerLinkActive="active"
         (click)="close()"
-        class="mobile-item">
+        class="mobile-item group">
+
         <i class="bi bi-bar-chart"></i>
         Reportes
       </button>
@@ -138,7 +141,8 @@
         routerLink="config"
         routerLinkActive="active"
         (click)="close()"
-        class="mobile-item">
+        class="mobile-item group">
+
         <i class="bi bi-gear"></i>
         Configuración
       </button>
@@ -148,12 +152,11 @@
     <div
       *ngIf="auth.currentUser as user"
       class="mt-auto border-t border-white/5
-             bg-gradient-to-t from-black/30 to-transparent
+             bg-gradient-to-t from-black/40 to-transparent
              px-3 py-3">
 
       <div class="flex items-center gap-2">
 
-        <!-- USER -->
         <button
           (click)="close()"
           class="flex-1 flex items-center gap-3
@@ -163,9 +166,10 @@
           <div
             class="w-9 h-9 rounded-full
                    flex items-center justify-center
-                   bg-gradient-to-br from-indigo-500 to-cyan-400
+                   bg-gradient-to-br from-indigo-500 to-yellow-400
                    text-white font-semibold
-                   ring-2 ring-white/10">
+                   ring-2 ring-white/10
+                   animate-pulse-soft">
             {{ user.nameUser[0] | uppercase }}
           </div>
 
@@ -179,7 +183,6 @@
           </div>
         </button>
 
-        <!-- LOGOUT -->
         <button
           (click)="logout()"
           class="w-9 h-9 flex items-center justify-center

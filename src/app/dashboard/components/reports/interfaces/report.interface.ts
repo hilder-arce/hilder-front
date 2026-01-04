@@ -1,6 +1,6 @@
-import { Equipo } from "./equipo.interface"
-import { Explosivo } from "./explosivo.interface"
-import { Material } from "./material.interface"
+import { Equipo } from "../../config/components/equipos/interfaces/equipo.interface"
+import { Explosivo } from "../../config/components/explosivos/interfaces/explosivo.interface"
+import { Material } from "../../config/components/materials/interfaces/material.interface"
 
 export interface Report {
     id: string

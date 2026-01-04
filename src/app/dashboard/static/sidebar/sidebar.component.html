@@ -1,7 +1,7 @@
 <!-- DESKTOP SIDEBAR -->
 <aside
   class="fixed inset-y-0 left-0 z-[2000]
-         hidden lg:flex
+         hidden md:flex
          transition-all duration-500 ease-[cubic-bezier(.4,0,.2,1)]"
   [class.w-[280px]]="!isCollapsed"
   [class.w-[72px]]="isCollapsed">
@@ -53,12 +53,18 @@
                hover:text-yellow-400
                hover:bg-yellow-400/10
                active:scale-95
-               transition-all duration-300">
+               transition-all duration-300"
+               [class.cursor-e-resize]="isCollapsed"
+                [class.cursor-w-resize]="!isCollapsed">
 
-        <i class="bi bi-layout-sidebar-inset text-[16px]"></i>
+        <i class="bi bi-layout-sidebar-inset text-[16px] transition-transform duration-300" [class.rotate-180]="!isCollapsed"></i>
 
-        <span *ngIf="isCollapsed" class="sidebar-tooltip">
-          Barra lateral
+        <span *ngIf="isCollapsed" class="ml-3 sidebar-tooltip">
+          Expandir barra lateral
+        </span>
+
+        <span *ngIf="!isCollapsed" class="ml-3 sidebar-tooltip">
+          Contraer barra lateral
         </span>
       </button>
     </div>

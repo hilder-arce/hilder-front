@@ -30,35 +30,38 @@ button {
 
 .mobile-item i {
   font-size: 18px;
+  color: rgba(99,102,241,.7);
+  transition: color 0.25s ease;
 }
 
-/* Hover */
 .mobile-item:hover {
   background: linear-gradient(
     90deg,
-    rgba(99, 102, 241, 0.22),
-    rgba(99, 102, 241, 0.06)
+    rgba(99,102,241,0.22),
+    rgba(99,102,241,0.06)
   );
   color: #ffffff;
 }
 
-/* Active (tap feedback) */
+.mobile-item:hover i {
+  color: #6366f1;
+}
+
 .mobile-item:active {
   transform: scale(0.96);
 }
 
-/* Active route */
 .mobile-item.active {
   background: linear-gradient(
     90deg,
-    rgba(99, 102, 241, 0.35),
-    rgba(99, 102, 241, 0.12)
+    rgba(99,102,241,0.35),
+    rgba(99,102,241,0.12)
   );
   color: #ffffff;
 }
 
 /* ===============================
-   SCROLLBAR MOBILE SIDEBAR
+   SCROLLBAR MOBILE
 ================================ */
 .mobile-scroll {
   scrollbar-width: thin;
@@ -76,4 +79,35 @@ button {
     rgba(99,102,241,.5),
     rgba(34,211,238,.5)
   );
+}
+
+/* ===============================
+   ANIMACIONES PREMIUM
+================================ */
+@keyframes header-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-header-in {
+  animation: header-in 0.35s ease-out;
+}
+
+@keyframes pulse-soft {
+  0%, 100% {
+    box-shadow: 0 0 18px rgba(99,102,241,.45);
+  }
+  50% {
+    box-shadow: 0 0 28px rgba(99,102,241,.65);
+  }
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 3s ease-in-out infinite;
 }

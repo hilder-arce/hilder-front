@@ -1,0 +1,258 @@
+<!-- ======================================================
+     CREATE EXPLOSIVO – ENTERPRISE ELITE
+====================================================== -->
+<section class="max-w-5xl mx-auto px-4 py-10">
+
+  <!-- HEADER -->
+  <div class="mb-10 flex items-start gap-4">
+
+    <!-- ICON -->
+    <div
+      class="w-14 h-14 rounded-2xl
+             flex items-center justify-center
+             bg-gradient-to-br from-blue-600 to-indigo-600
+             text-yellow-300
+             shadow-[0_20px_40px_-15px_rgba(59,130,246,.9)]
+             animate-soft-float">
+
+      <i class="bi bi-lightning-charge-fill text-2xl"></i>
+    </div>
+
+    <!-- TITLE -->
+    <div>
+      <h1 class="text-2xl font-semibold tracking-tight text-black">
+        Registro de Explosivo
+      </h1>
+      <p class="mt-1 text-sm text-black/60 max-w-xl">
+        Gestión técnica y control de explosivos conforme a estándares operativos.
+      </p>
+    </div>
+
+  </div>
+
+  <!-- CARD -->
+  <form
+    class="card-elite
+           rounded-3xl
+           border border-black/5
+           shadow-[0_40px_100px_-40px_rgba(0,0,0,.5)]
+           p-8 space-y-10">
+
+    <!-- ===============================
+         SECTION: INFO GENERAL
+    ================================= -->
+    <div>
+
+      <div class="flex items-center gap-3 mb-6">
+        <i class="bi bi-info-circle-fill text-blue-600"></i>
+        <h2 class="text-sm font-semibold uppercase tracking-wide text-black/70">
+          Información general
+        </h2>
+      </div>
+
+      <!-- NOMBRE -->
+      <div>
+        <label class="block text-xs font-medium uppercase tracking-wide text-black/60">
+          Nombre del explosivo
+        </label>
+
+        <div
+          class="mt-2 flex items-center gap-3
+                 h-12 px-4
+                 rounded-xl
+                 bg-white
+                 border border-black/10
+                 focus-within:border-blue-500
+                 transition">
+
+          <i class="bi bi-tag-fill text-blue-600"></i>
+
+          <input
+            type="text"
+            [(ngModel)]="explosivo.nombre"
+            placeholder="Ej. Emulsión E-300"
+            name="nombre"
+            required
+            class="input-elite
+                   flex-1 bg-transparent
+                   text-sm
+                   placeholder:text-black/40" />
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ===============================
+         SECTION: CLASIFICACIÓN
+    ================================= -->
+    <div>
+
+      <div class="flex items-center gap-3 mb-6">
+        <i class="bi bi-diagram-3-fill text-blue-600"></i>
+        <h2 class="text-sm font-semibold uppercase tracking-wide text-black/70">
+          Clasificación técnica
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- TIPO -->
+        <div>
+          <label class="block text-xs uppercase tracking-wide text-black/60">
+            Tipo
+          </label>
+
+          <div class="mt-2 relative">
+            <i class="bi bi-lightning-fill
+                      absolute left-4 top-1/2 -translate-y-1/2
+                      text-yellow-500"></i>
+
+            <select
+              [(ngModel)]="explosivo.tipo"
+              required
+              name="tipo"
+              class="input-elite
+                     w-full h-12 pl-10 pr-3
+                     rounded-xl
+                     bg-white
+                     border border-black/10
+                     text-sm transition">
+
+              <option value="" disabled selected>Seleccionar</option>
+              <option value="EMULSION">Emulsión</option>
+              <option value="DINAMITA">Dinamita</option>
+              <option value="CORDON_DETONANTE">Cordón detonante</option>
+              <option value="DETONADOR">Detonador</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- PRESENTACIÓN -->
+        <div>
+          <label class="block text-xs uppercase tracking-wide text-black/60">
+            Presentación
+          </label>
+
+          <div class="mt-2 relative">
+            <i class="bi bi-box-seam
+                      absolute left-4 top-1/2 -translate-y-1/2
+                      text-blue-500"></i>
+
+            <select
+              [(ngModel)]="explosivo.presentacion"
+              required
+              name="presentacion"
+              class="input-elite
+                     w-full h-12 pl-10 pr-3
+                     rounded-xl
+                     bg-white
+                     border border-black/10
+                     text-sm transition">
+
+              <option value="" disabled selected>Seleccionar</option>
+              <option value="CARTUCHO">Cartucho</option>
+              <option value="GRANEL">Granel</option>
+              <option value="ROLLO">Rollo</option>
+              <option value="UNIDAD">Unidad</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- UNIDAD -->
+        <div>
+          <label class="block text-xs uppercase tracking-wide text-black/60">
+            Unidad de medida
+          </label>
+
+          <div class="mt-2 relative">
+            <i class="bi bi-rulers
+                      absolute left-4 top-1/2 -translate-y-1/2
+                      text-blue-500"></i>
+
+            <select
+              [(ngModel)]="explosivo.unidadMedida"
+              required
+              name="unidadMedida"
+              class="input-elite
+                     w-full h-12 pl-10 pr-3
+                     rounded-xl
+                     bg-white
+                     border border-black/10
+                     text-sm transition">
+
+              <option value="" disabled selected>Seleccionar</option>
+              <option value="CARTUCHOS">Cartuchos</option>
+              <option value="KILOGRAMOS">Kilogramos</option>
+              <option value="METROS">Metros</option>
+              <option value="UNIDADES">Unidades</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ===============================
+         DESCRIPCIÓN
+    ================================= -->
+    <div>
+      <div class="flex items-center gap-3 mb-4">
+        <i class="bi bi-journal-text text-blue-600"></i>
+        <h2 class="text-sm font-semibold uppercase tracking-wide text-black/70">
+          Descripción
+        </h2>
+      </div>
+
+      <textarea
+        rows="4"
+        [(ngModel)]="explosivo.descripcion"
+        name="descripcion"
+        placeholder="Información adicional relevante para control y seguridad…"
+        class="input-elite
+               w-full px-4 py-3
+               rounded-xl
+               bg-white
+               border border-black/10
+               text-sm resize-none
+               placeholder:text-black/40
+               transition">
+      </textarea>
+    </div>
+
+    <!-- ===============================
+         ACTIONS
+    ================================= -->
+    <div
+      class="pt-6 flex justify-end gap-4
+             border-t border-black/5">
+
+      <button
+        type="button"
+        routerLink="../"
+        class="h-11 px-6 rounded-xl
+               text-sm font-medium
+               text-black/70
+               hover:bg-black/5
+               transition">
+        Cancelar
+      </button>
+
+      <button
+        type="submit"
+        (click)="guardar()"
+        class="h-11 px-7 rounded-xl
+               text-sm font-semibold text-black
+               bg-gradient-to-r from-yellow-400 to-yellow-300
+               shadow-[0_15px_35px_-10px_rgba(234,179,8,.9)]
+               hover:from-yellow-300
+               active:scale-95
+               disabled:opacity-50
+               cursor-pointer
+               transition-all">
+        GUARDAR
+      </button>
+
+    </div>
+
+  </form>
+</section>
