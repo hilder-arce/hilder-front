@@ -1,0 +1,120 @@
+<section class="max-w-5xl mx-auto px-4 py-10">
+
+  <div class="mb-10 flex items-start gap-4">
+    <div
+      class="w-14 h-14 rounded-2xl
+             flex items-center justify-center
+             bg-transparent
+             text-blue-400
+             shadow-[0_20px_40px_-15px_rgba(30,41,59,.6)]
+             animate-soft-float">
+      <i class="bi bi-box-seam-fill text-2xl"></i>
+    </div>
+
+    <div>
+      <h1 class="text-2xl font-semibold tracking-tight text-black">
+        Registro de Material
+      </h1>
+      <p class="mt-1 text-sm text-black/60 max-w-xl">
+        Alta de materiales generales para el control de inventario y suministros.
+      </p>
+    </div>
+  </div>
+
+  <form
+    class="card-elite rounded-3xl border border-black/5
+           shadow-[0_40px_100px_-40px_rgba(0,0,0,.5)]
+           p-8 space-y-10">
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      
+      <div class="md:col-span-1">
+        <label class="block text-xs font-medium uppercase tracking-wide text-black/60">
+          Nombre del Material
+        </label>
+        <div class="mt-2 input-container-elite flex items-center gap-3 h-12 px-4 rounded-xl bg-white border border-black/10 transition">
+          <i class="bi bi-pencil-square text-slate-500"></i>
+          <input
+            type="text"
+            [(ngModel)]="material.nombre"
+            placeholder="Ej. Clavos de 2 pulgadas"
+            name="nombre"
+            required
+            class="input-clean flex-1 bg-transparent text-sm placeholder:text-black/40" />
+        </div>
+      </div>
+
+      <div class="md:col-span-1">
+        <label class="block text-xs font-medium uppercase tracking-wide text-black/60">
+          Unidad de Medida
+        </label>
+        <div class="mt-2 relative">
+          <i class="bi bi-rulers absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"></i>
+          <select
+            [(ngModel)]="material.unidad"
+            required
+            name="unidad"
+            class="input-elite w-full h-12 pl-10 pr-3 rounded-xl bg-white border border-black/10 text-sm transition">
+            <option value="" disabled selected>Seleccionar unidad</option>
+            <option value="unidad">Unidad</option>
+            <option value="metros">Metros</option>
+            <option value="sacos">Sacos</option>
+            <option value="kg">Kilogramos (kg)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="flex items-center gap-3 mb-4">
+        <i class="bi bi-justify-left text-slate-500"></i>
+        <h2 class="text-sm font-semibold uppercase tracking-wide text-black/70">
+          Especificaciones Técnicas
+        </h2>
+      </div>
+      <textarea
+        rows="4"
+        [(ngModel)]="material.descripcion"
+        name="descripcion"
+        placeholder="Detalles del material, marca, dimensiones o ubicación en almacén..."
+        class="input-elite w-full px-4 py-3 rounded-xl bg-white border border-black/10 text-sm resize-none placeholder:text-black/40 transition">
+      </textarea>
+    </div>
+
+    <!-- ===============================
+         ACTIONS
+    ================================= -->
+    <div
+      class="pt-6 flex justify-end gap-4
+             border-t border-black/5">
+
+      <button
+        type="button"
+        routerLink="../"
+        class="h-11 px-6 rounded-xl
+               text-sm font-medium
+               text-black/70
+               hover:bg-black/5
+               transition">
+        Cancelar
+      </button>
+
+      <button
+        type="submit"
+        (click)="guardar()"
+        class="h-11 px-7 rounded-xl
+               text-sm font-semibold text-black
+               bg-gradient-to-r from-yellow-400 to-yellow-300
+               shadow-[0_15px_35px_-10px_rgba(234,179,8,.9)]
+               hover:from-yellow-300
+               active:scale-95
+               disabled:opacity-50
+               cursor-pointer
+               transition-all">
+        GUARDAR
+      </button>
+
+    </div>
+
+  </form>
+</section>

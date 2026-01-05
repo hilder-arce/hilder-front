@@ -46,6 +46,6 @@ export class ExplosivosHeaderComponent {
 
     // Volver a la lista
     goExplosivosList(): void {
-        this.router.navigate(['/dashboard/config/explosivos/list']);
+        this.router.navigate(['/dashboard/config/explosivos']);
     }
 }

@@ -39,6 +39,6 @@ export class EquiposHeaderComponent {
   }
 
   goEquiposList(): void {
-    this.router.navigate(['/dashboard/config/equipos/list']);
+    this.router.navigate(['/dashboard/config/equipos']);
   }
 }

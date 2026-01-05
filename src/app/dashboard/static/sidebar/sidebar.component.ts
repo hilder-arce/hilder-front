@@ -16,7 +16,7 @@ import { AlertService } from '../../../shared/services/alert.service';
 
 export class DashboardSidebarComponent {
 
-    @Input() isCollapsed = false;
+    @Input() isCollapsed = true;
 
     @Output() toggle = new EventEmitter<void>();
 

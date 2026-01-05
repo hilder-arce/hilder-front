@@ -18,7 +18,7 @@ import { DashboardSidebarMobileComponent } from './static/sidebar-mobile/sidebar
 
 export class DashboardComponent {
 
-    isSidebarCollapsed = false;
+    isSidebarCollapsed = true;
 
     toggleSidebar() {
         this.isSidebarCollapsed = !this.isSidebarCollapsed;

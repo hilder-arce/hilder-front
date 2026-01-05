@@ -39,6 +39,6 @@ export class MaterialesHeaderComponent {
   }
 
   goMaterialesList(): void {
-    this.router.navigate(['/dashboard/config/materiales/list']);
+    this.router.navigate(['/dashboard/config/materiales']);
   }
 }
