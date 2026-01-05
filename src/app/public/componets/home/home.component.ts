@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +8,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.css'],
   imports: [
     CommonModule,
+    RouterModule
   ]
 })
 export class HomeComponent {
