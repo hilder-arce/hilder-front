@@ -9,9 +9,7 @@ import { Explosivo } from "../interfaces/explosivo.interface";
 
 export class ExplosivoService {
 
-    private readonly apiBackend = environment.apiUrl;
-    //private readonly apiBackend = 'http://localhost:3000/v1';
-    
+    private readonly apiBackend = environment.apiUrl;    
     
     //INJECTANDO A HttpClient PARA MANEJAR PETICIONES HTTP
     constructor(private http : HttpClient){}

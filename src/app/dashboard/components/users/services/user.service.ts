@@ -10,8 +10,6 @@ import { User } from "../interfaces/user.interface";
 export class UserService {
 
     private readonly apiBackend = environment.apiUrl;
-    //private readonly apiBackend = 'http://localhost:3000/v1';
-
 
   //INJECTANDO A HttpClient PARA MANEJAR PETICIONES HTTP
   constructor(private http : HttpClient){}

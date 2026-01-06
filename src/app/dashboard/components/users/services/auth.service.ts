@@ -10,7 +10,6 @@ import { SesionUser } from "../interfaces/user-sesion.interface";
 export class AuthService {
 
     private readonly apiBackend = environment.apiUrl;
-    //private readonly apiBackend = 'http://localhost:3000/v1';
 
     user?: SesionUser | null = null
 
