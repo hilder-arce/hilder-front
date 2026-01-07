@@ -53,7 +53,7 @@ export class CreateEquipoComponent {
             const res = await this.equipoService.createEquipo(this.equipo);
             if (!res) return;
 
-            this.alertService.show('Equipo registrado exitosamente', 'success');
+            this.alertService.show('Equipo registrado con éxito.', 'success');
             this.router.navigate(['/dashboard/config/equipos/list']); 
         } catch (error) {
             this.alertService.show('Error al registrar el equipo', 'error');
