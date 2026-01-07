@@ -26,7 +26,6 @@ export class CreateEquipoComponent {
     ) {}
 
     equipo: Equipo = {
-        id: '',
         nombre: '',
         marca: '',
         descripcion: ''
