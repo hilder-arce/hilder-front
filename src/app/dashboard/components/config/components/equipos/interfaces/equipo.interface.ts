@@ -3,4 +3,5 @@ export interface Equipo {
     nombre: string
     marca: string
     descripcion: string
+    estado?: boolean
 }

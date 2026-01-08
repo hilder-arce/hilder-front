@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { Component } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { Router, RouterModule } from "@angular/router";
+import { ActivatedRoute, Router, RouterModule } from "@angular/router";
 import { Equipo } from "../interfaces/equipo.interface";
 import { AlertService } from "../../../../../../shared/services/alert.service";
 import { EquipoService } from "../services/equipo.service";
@@ -19,18 +19,50 @@ import { EquipoService } from "../services/equipo.service";
 
 export class CreateEquipoComponent {
     
+    // INYECTAR SERVICIOS
     constructor(
         private alertService: AlertService,
         private router: Router,
-        private equipoService: EquipoService
+        private equipoService: EquipoService,
+        private route: ActivatedRoute
     ) {}
 
+    // PROPIEDADES
     equipo: Equipo = {
         nombre: '',
         marca: '',
         descripcion: ''
     };
+    private originalEquipo!: Equipo;
+    isEquipoExist: boolean = false;
 
+    // INICIALIZAR COMPONENTE
+    ngOnInit(): void {
+        // Cargar datos si es edición
+        this.loadEquipoForEdit();
+    }
+
+    // METODO PARA CARGAR DATOS EN EDICIÓN
+    async loadEquipoForEdit() {
+        // Lógica para cargar los datos del equipo para edición
+        const equipoId = this.route.snapshot.queryParamMap.get('_id');
+        if (equipoId) {
+            const equipoData = await this.equipoService.getEquipoById(equipoId)
+                if (equipoData) {
+                    this.equipo = { ...equipoData };
+                    this.originalEquipo = { ...equipoData };
+                    this.isEquipoExist = true;
+                }
+            
+        }
+    }
+
+    // ACTUALIZAR EQUIPO
+    async update() {
+        // VALIDACIÓN: NOMBRE
+    }
+
+    // GUARDAR EQUIPO
     async guardar() {
         // VALIDACIÓN: NOMBRE
         if (!this.equipo.nombre || !this.equipo.nombre.trim()) {
