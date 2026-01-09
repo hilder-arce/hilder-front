@@ -54,4 +54,13 @@ export class EquipoService {
             { withCredentials: true }
         ).toPromise();
     }
+
+    // ACTIVAR EQUIPO
+    async activateEquipo(id: string) {
+        return await this.http.patch<{ message: string }>(
+            `${this.apiBackend}/equipo/${id}/activate`,
+            {},
+            { withCredentials: true }
+        ).toPromise();
+    }
 }

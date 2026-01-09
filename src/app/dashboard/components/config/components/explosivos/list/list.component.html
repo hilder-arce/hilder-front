@@ -1,16 +1,18 @@
 <div class="m-4">
 
-  <!-- GRID DE EQUIPOS -->
+  <!-- GRID DE EXPLOSIVOS -->
   <div
-    *ngIf="filteredEquipos().length > 0"
+    *ngIf="explosivos.length > 0"
     class="grid gap-5
-           grid-cols-1
-           sm:grid-cols-2
-           lg:grid-cols-3
-           xl:grid-cols-4">
+         grid-cols-1
+         sm:grid-cols-2
+         lg:grid-cols-3
+         xl:grid-cols-4
+         overflow-x-hidden
+         max-w-full">
 
     <article
-      *ngFor="let equipo of filteredEquipos()"
+      *ngFor="let explosivo of explosivos"
       class="bg-white
              rounded-2xl
              border border-slate-200
@@ -22,28 +24,32 @@
 
       <!-- HEADER CARD -->
       <div class="flex items-start justify-between gap-3">
+
         <div>
+          <!-- NOMBRE -->
           <h2 class="text-base font-semibold text-slate-900">
-            {{ equipo.nombre }}
+            {{ explosivo.nombre }}
           </h2>
+
+          <!-- SUBTÍTULO -->
           <p class="text-sm text-slate-500">
-            {{ equipo.marca }}
+            {{ explosivo.tipo }} · {{ explosivo.presentacion }} · {{ explosivo.unidadMedida }}
           </p>
         </div>
 
         <!-- ESTADO -->
         <span
           class="px-2 py-0.5 rounded-md text-xs font-medium"
-          [ngClass]="equipo.estado
+          [ngClass]="explosivo.estado
             ? 'bg-emerald-100 text-emerald-700'
             : 'bg-red-100 text-red-700'">
-          {{ equipo.estado ? 'Activo' : 'Inactivo' }}
+          {{ explosivo.estado ? 'Activo' : 'Inactivo' }}
         </span>
       </div>
 
       <!-- DESCRIPCIÓN -->
       <p class="mt-3 text-sm text-slate-600 line-clamp-3">
-        {{ equipo.descripcion }}
+        {{ explosivo.descripcion || 'Sin descripción' }}
       </p>
 
       <!-- FOOTER -->
@@ -52,17 +58,17 @@
                flex items-center justify-end gap-2">
 
         <!-- EDITAR -->
-        <button *ngIf="equipo.estado"
-          (click)="editEquipo(equipo)"
+        <button
+          *ngIf="explosivo.estado"
+          (click)="editExplosivo(explosivo)"
           class="group relative
-                 w-9 h-9
+                 w-9 h-9 cursor-pointer
                  flex items-center justify-center
                  rounded-lg
                  text-slate-600
                  hover:text-slate-900
                  hover:bg-slate-100
-                 transition-all duration-200
-                 cursor-pointer">
+                 transition-all duration-200">
 
           <i class="bi bi-pencil-square text-[16px]"></i>
 
@@ -78,21 +84,21 @@
                    group-hover:translate-y-0
                    transition-all duration-200
                    pointer-events-none">
-            Editar equipo
+            Editar explosivo
           </span>
         </button>
 
-        <!-- ELIMINAR -->
-        <button *ngIf="equipo.estado"
-          (click)="eliminarEquipo(equipo)"
+        <!-- DESACTIVAR -->
+        <button
+            (click)="eliminarExplosivo(explosivo)"
+          *ngIf="explosivo.estado"
           class="group relative
-                 w-9 h-9
+                 w-9 h-9 cursor-pointer
                  flex items-center justify-center
                  rounded-lg
                  text-red-600
                  hover:bg-red-50
-                 transition-all duration-200
-                 cursor-pointer">
+                 transition-all duration-200">
 
           <i class="bi bi-trash text-[16px]"></i>
 
@@ -108,23 +114,23 @@
                    group-hover:translate-y-0
                    transition-all duration-200
                    pointer-events-none">
-            Eliminar equipo
+            Eliminar explosivo
           </span>
         </button>
 
         <!-- ACTIVAR -->
-        <button *ngIf="!equipo.estado"
-          (click)="activarEquipo(equipo)"
+        <button
+          *ngIf="!explosivo.estado"
+          (click)="activarExplosivo(explosivo)"
           class="group relative
                  w-9 h-9
                  flex items-center justify-center
-                 rounded-lg
+                 rounded-lg cursor-pointer
                  text-emerald-600
                  hover:bg-emerald-50
-                 transition-all duration-200
-                 cursor-pointer">
+                 transition-all duration-200">
 
-          <i class="bi bi-arrow-repeat text-[18px]"></i>
+          <i class="bi bi-arrow-clockwise text-[16px]"></i>
 
           <span
             class="absolute bottom-full mb-2
@@ -138,7 +144,7 @@
                    group-hover:translate-y-0
                    transition-all duration-200
                    pointer-events-none">
-            Activar equipo
+            Activar explosivo
           </span>
         </button>
 
@@ -149,13 +155,13 @@
 
   <!-- EMPTY STATE -->
   <div
-    *ngIf="filteredEquipos().length === 0"
+    *ngIf="explosivos.length === 0"
     class="py-16
            border border-dashed rounded-2xl
            text-center">
 
     <p class="text-sm text-slate-500">
-      No hay equipos registrados
+      No hay explosivos registrados
     </p>
   </div>
 

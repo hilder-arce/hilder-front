@@ -96,7 +96,7 @@
         routerLink="../"
         class="h-11 px-6 rounded-xl
                text-sm font-medium
-               text-black/70
+               text-black/70 cursor-pointer
                hover:bg-black/5
                transition">
         Cancelar
@@ -104,35 +104,28 @@
 
       <button
         type="submit"
-        *ngIf="!isEquipoExist"
-        (click)="guardar()"
-        class="h-11 px-7 rounded-xl
-               text-sm font-semibold text-black
-               bg-gradient-to-r from-yellow-400 to-yellow-300
-               shadow-[0_15px_35px_-10px_rgba(234,179,8,.9)]
-               hover:from-yellow-300
-               active:scale-95
-               disabled:opacity-50
-               cursor-pointer
-               transition-all">
-        GUARDAR
+        [disabled]="isSubmitting"
+        (click)="isEquipoExist ? update() : guardar()"
+        class="h-11 px-7 rounded-xl cursor-pointer
+              text-sm font-semibold text-black
+              bg-gradient-to-r from-yellow-400 to-yellow-300
+              shadow-[0_15px_35px_-10px_rgba(234,179,8,.9)]
+              hover:from-yellow-300
+              disabled:opacity-60
+              disabled:cursor-not-allowed
+              transition-all">
+
+        <span *ngIf="!isSubmitting">
+          {{ submitLabel }}
+        </span>
+
+        <span *ngIf="isSubmitting" class="flex items-center gap-2">
+          <i class="bi bi-arrow-repeat animate-spin"></i>
+          {{ submitLabel }}
+        </span>
+
       </button>
 
-      <button
-        type="submit"
-        *ngIf="isEquipoExist"
-        (click)="update()"
-        class="h-11 px-7 rounded-xl
-               text-sm font-semibold text-black
-               bg-gradient-to-r from-yellow-400 to-yellow-300
-               shadow-[0_15px_35px_-10px_rgba(234,179,8,.9)]
-               hover:from-yellow-300
-               active:scale-95
-               disabled:opacity-50
-               cursor-pointer
-               transition-all">
-        ACTUALIZAR
-      </button>
 
     </div>
 

@@ -5,47 +5,66 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { filter } from 'rxjs/operators';
 
 @Component({
-    selector: 'app-explosivos-header',
-    standalone: true,
-    imports: [CommonModule, RouterModule],
-    templateUrl: './header.component.html',
-    styleUrl: './header.component.css',
+  selector: 'app-explosivos-header',
+  standalone: true,
+  imports: [CommonModule, RouterModule],
+  templateUrl: './header.component.html',
 })
 export class ExplosivosHeaderComponent {
 
-    // URL actual (inicializada correctamente)
-    private currentUrl = signal<string>('');
+  // URL actual
+  private currentUrl = signal<string>('');
 
-    // true solo cuando está en /explosivos/create
-    readonly isCreate = computed(() =>
-        this.currentUrl().endsWith('/explosivos/create')
-    );
+  // URL limpia (sin query params)
+  readonly cleanUrl = computed(() =>
+    this.currentUrl().split('?')[0]
+  );
 
-    // Título dinámico
-    readonly title = computed(() =>
-        this.isCreate() ? 'NUEVO EXPLOSIVO' : 'EXPLOSIVOS'
-    );
+  // ¿Tiene _id? → edición
+  readonly hasIdParam = computed(() =>
+    this.currentUrl().includes('_id=')
+  );
 
-    constructor(
-        private router: Router,
-        private destroyRef: DestroyRef
-    ) {
-        // 🔑 CLAVE: inicializar con la URL actual (recarga directa)
-        this.currentUrl.set(this.router.url);
+  // Estados
+  readonly isCreate = computed(() =>
+    this.cleanUrl().endsWith('/create') && !this.hasIdParam()
+  );
 
-        // Escuchar cambios de ruta
-        this.router.events
-            .pipe(
-                filter(event => event instanceof NavigationEnd),
-                takeUntilDestroyed(this.destroyRef)
-            )
-            .subscribe((event: NavigationEnd) => {
-                this.currentUrl.set(event.urlAfterRedirects);
-            });
-    }
+  readonly isEdit = computed(() =>
+    this.cleanUrl().endsWith('/create') && this.hasIdParam()
+  );
 
-    // Volver a la lista
-    goExplosivosList(): void {
-        this.router.navigate(['/dashboard/config/explosivos']);
-    }
+  readonly isList = computed(() =>
+    this.cleanUrl().endsWith('/explosivos/list')
+  );
+
+  // Título dinámico
+  readonly title = computed(() => {
+    if (this.isEdit()) return 'EDITAR EXPLOSIVO';
+    if (this.isCreate()) return 'NUEVO EXPLOSIVO';
+    if (this.isList()) return 'EXPLOSIVOS';
+    return 'GESTIÓN';
+  });
+
+  constructor(
+    private router: Router,
+    private destroyRef: DestroyRef
+  ) {
+    // Inicial
+    this.currentUrl.set(this.router.url);
+
+    // Escuchar navegación
+    this.router.events
+      .pipe(
+        filter(e => e instanceof NavigationEnd),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe((e: NavigationEnd) => {
+        this.currentUrl.set(e.urlAfterRedirects);
+      });
+  }
+
+  goExplosivosList(): void {
+    this.router.navigate(['/dashboard/config/explosivos']);
+  }
 }

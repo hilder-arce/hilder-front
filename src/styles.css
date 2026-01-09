@@ -146,3 +146,83 @@
   from { opacity: 0; }
   to { opacity: 1; }
 }
+
+/* =========================================
+   CONFIRM ALERT
+   ========================================= */
+
+.enterprise-alert-confirm .enterprise-alert-icon {
+  background: rgba(234, 179, 8, 0.18);
+  color: #facc15;
+}
+
+.enterprise-alert-confirm {
+  border-left: 4px solid #facc15;
+}
+
+/* =========================================
+   ACTIONS
+   ========================================= */
+
+.enterprise-alert-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+
+  padding: 16px 20px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.enterprise-alert-actions button {
+  height: 36px;
+  padding: 0 16px;
+
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* CANCELAR */
+.enterprise-btn-cancel {
+  background: transparent;
+  color: #cbd5f5;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.enterprise-btn-cancel:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* CONFIRMAR */
+.enterprise-btn-confirm {
+  background: linear-gradient(180deg, #facc15, #eab308);
+  color: #020617;
+  border: none;
+  box-shadow: 0 10px 25px rgba(234, 179, 8, 0.35);
+}
+
+.enterprise-btn-confirm:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 30px rgba(234, 179, 8, 0.45);
+}
+
+/* =========================================
+   DANGER MODE
+   ========================================= */
+
+.enterprise-alert-danger {
+  border-left-color: #ef4444;
+}
+
+.enterprise-alert-danger .enterprise-alert-icon {
+  background: rgba(239, 68, 68, 0.18);
+  color: #ef4444;
+}
+
+.enterprise-alert-danger .enterprise-btn-confirm {
+  background: linear-gradient(180deg, #ef4444, #dc2626);
+  color: #fff;
+}

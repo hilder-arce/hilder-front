@@ -33,7 +33,7 @@ export class ExplosivoService {
     //OBTENER EXPLOSIVO BY ID
     async getExplosivoById (id: string) {
         return await this.http.get<Explosivo>(
-            `${this.apiBackend}/${id}/explosivo`,
+            `${this.apiBackend}/explosivo/${id}`,
             { withCredentials: true }
         ).toPromise();
     }
@@ -49,11 +49,19 @@ export class ExplosivoService {
 
     // DESACTIVAR EXPLOSIVO (SOFT DELETE)
     async deactivateExplosivo(id: string) {
-    return await this.http.patch<{ message: string }>(
-        `${this.apiBackend}/explosivo/${id}/deactivate`,
-        {},
-        { withCredentials: true }
-    ).toPromise();
+        return await this.http.patch<{ message: string }>(
+            `${this.apiBackend}/explosivo/${id}/deactivate`,
+            {},
+            { withCredentials: true }
+        ).toPromise();
+    }
+
+    async activateExplosivo(id: string) {
+        return await this.http.patch<{ message: string }>(
+            `${this.apiBackend}/explosivo/${id}/activate`,
+            {},
+            { withCredentials: true }
+        ).toPromise();
     }
 
 }
