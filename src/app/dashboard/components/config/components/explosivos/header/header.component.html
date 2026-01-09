@@ -33,6 +33,7 @@
       <input
         type="text"
         placeholder="Buscar explosivo..."
+        (input)="onSearch($any($event.target).value)"
         class="w-full h-10 pl-11 pr-4
                bg-black/5 border border-transparent
                rounded-xl text-sm

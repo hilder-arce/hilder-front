@@ -2,7 +2,7 @@
 
   <!-- GRID DE EXPLOSIVOS -->
   <div
-    *ngIf="explosivos.length > 0"
+    *ngIf="filteredExplosivos().length > 0"
     class="grid gap-5
          grid-cols-1
          sm:grid-cols-2
@@ -12,7 +12,7 @@
          max-w-full">
 
     <article
-      *ngFor="let explosivo of explosivos"
+      *ngFor="let explosivo of filteredExplosivos()"
       class="bg-white
              rounded-2xl
              border border-slate-200

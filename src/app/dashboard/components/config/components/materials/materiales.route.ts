@@ -1,7 +1,7 @@
 import { Routes } from "@angular/router";
 import { ConfigMaterialesComponent } from "./materiales.component";
 import { CreateMaterialComponent } from "./create/create.component";
-import { MainMaterialComponent } from "./main/main.component";
+import { ListMaterialComponent } from "./list/list.component";
 
 export const MATERIALES_ROUTES: Routes = [
     {
@@ -18,7 +18,7 @@ export const MATERIALES_ROUTES: Routes = [
             },
             //LIST 
             {
-                path: 'list', component: MainMaterialComponent
+                path: 'list', component: ListMaterialComponent
             },
         ]
     }

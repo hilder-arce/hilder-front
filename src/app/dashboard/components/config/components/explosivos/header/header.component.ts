@@ -3,6 +3,7 @@ import { Component, computed, DestroyRef, signal } from '@angular/core';
 import { Router, RouterModule, NavigationEnd } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { filter } from 'rxjs/operators';
+import { ExplosivosSearchService } from '../services/explosivos-search.service';
 
 @Component({
   selector: 'app-explosivos-header',
@@ -12,33 +13,35 @@ import { filter } from 'rxjs/operators';
 })
 export class ExplosivosHeaderComponent {
 
-  // URL actual
+  // PROPIEDAD QUE CONTIENE LA URL ACTUAL
   private currentUrl = signal<string>('');
 
-  // URL limpia (sin query params)
+  //PROPIEDAD QUE CONTIENE LA URL LIMPIA (SIN PARÁMETROS)
   readonly cleanUrl = computed(() =>
     this.currentUrl().split('?')[0]
   );
 
-  // ¿Tiene _id? → edición
+  // VER SI LA URL TIENE PARÁMETRO _id
   readonly hasIdParam = computed(() =>
     this.currentUrl().includes('_id=')
   );
 
-  // Estados
+  // PROPIEDAD QUE DETERMINA SI ESTAMOS EN LA RUTA DE CREACIÓN
   readonly isCreate = computed(() =>
     this.cleanUrl().endsWith('/create') && !this.hasIdParam()
   );
 
+  //PROPIEDAD QUE DETERMINA SI ESTAMOS EN LA RUTA DE EDICIÓN
   readonly isEdit = computed(() =>
     this.cleanUrl().endsWith('/create') && this.hasIdParam()
   );
 
+  //PROPIEDAD QUE DETERMINA SI ESTAMOS EN LA RUTA DE LISTA
   readonly isList = computed(() =>
     this.cleanUrl().endsWith('/explosivos/list')
   );
 
-  // Título dinámico
+  // TITULO DINÁMICO
   readonly title = computed(() => {
     if (this.isEdit()) return 'EDITAR EXPLOSIVO';
     if (this.isCreate()) return 'NUEVO EXPLOSIVO';
@@ -46,9 +49,11 @@ export class ExplosivosHeaderComponent {
     return 'GESTIÓN';
   });
 
+  // INYECTAR SERVICIOS
   constructor(
     private router: Router,
-    private destroyRef: DestroyRef
+    private destroyRef: DestroyRef,
+    private explosivosSearchService: ExplosivosSearchService
   ) {
     // Inicial
     this.currentUrl.set(this.router.url);
@@ -64,7 +69,13 @@ export class ExplosivosHeaderComponent {
       });
   }
 
+  // NAVEGAR A LISTA DE EXPLOSIVOS
   goExplosivosList(): void {
     this.router.navigate(['/dashboard/config/explosivos']);
+  }
+
+  //MANEJAR EVENTO DE BÚSQUEDA
+  onSearch(term: string): void {
+    this.explosivosSearchService.setSearch(term);
   }
 }

@@ -24,7 +24,6 @@ export class CreateMaterialComponent {
     ) {}
 
     material: Material = {
-        id: '',
         nombre: '',
         descripcion: '',
         unidad: 'unidad' // Valor por defecto

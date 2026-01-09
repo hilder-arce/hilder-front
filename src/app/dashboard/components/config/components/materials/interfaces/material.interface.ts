@@ -1,5 +1,6 @@
 export interface Material {
-    id: string
+    
+    _id?: string
     nombre: string
     descripcion: string
     unidad: 'unidad' | 'metros' | 'sacos' | 'kg'

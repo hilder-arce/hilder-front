@@ -1,9 +1,10 @@
 import { CommonModule } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
+import { Component, computed, OnInit, signal } from "@angular/core";
 import { Router, RouterModule } from "@angular/router";
 import { Explosivo } from "../interfaces/explosivo.interface";
 import { ExplosivoService } from "../services/explosivo.service";
 import { AlertService } from "../../../../../../shared/services/alert.service";
+import { ExplosivosSearchService } from "../services/explosivos-search.service";
 
 @Component({
   selector: 'app-explosivos-list',
@@ -18,24 +19,29 @@ import { AlertService } from "../../../../../../shared/services/alert.service";
 
 export class ExplosivosListComponent implements OnInit {
 
+    //INJECTAR SERVICIOS
     constructor(
         private explosivoService: ExplosivoService,
         private router: Router,
-        private alertService: AlertService
+        private alertService: AlertService,
+        private searchService: ExplosivosSearchService
     ) {}
 
+    //INICIALIZAR COMPONENTE
     ngOnInit(): void {
         // Lógica de inicialización si es necesario
         this.loadExplosivos();
     }
 
-    explosivos: Explosivo[] = []
+    //PROPIEDADES
+    explosivos = signal<Explosivo[]>([])
 
+    //CARGAR LISTA DE EXPLOSIVOS
     async loadExplosivos() {
         // Lógica para cargar la lista de explosivos
         const res = await this.explosivoService.getExplosivos();
         if (res) {
-            this.explosivos = res;
+            this.explosivos.set(res);
         }
     }
 
@@ -91,6 +97,20 @@ export class ExplosivosListComponent implements OnInit {
             }
         }
 
+        //FILTRAR EXPLOSIVOS SEGÚN TÉRMINO DE BÚSQUEDA
+        filteredExplosivos = computed(() => {
+            const search = this.searchService.search();
+            if (!search) return this.explosivos();
+
+            return this.explosivos().filter(e => 
+                e.nombre.toLowerCase().includes(search) ||
+                e.tipo.toLowerCase().includes(search) ||
+                e.presentacion.toLowerCase().includes(search) ||
+                e.unidadMedida.toLowerCase().includes(search) ||
+                (e.descripcion ?? '').toLowerCase().includes(search)
+
+            )
+        })
 
 
 }
