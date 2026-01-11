@@ -1,0 +1,162 @@
+<div class="m-4">
+
+  <!-- GRID DE MATERIALES -->
+  <div
+    *ngIf="filterMaterials().length > 0"
+    class="grid gap-5
+           grid-cols-1
+           sm:grid-cols-2
+           lg:grid-cols-3
+           xl:grid-cols-4">
+
+    <article
+      *ngFor="let material of filterMaterials()"
+      class="bg-white
+             rounded-2xl
+             border border-slate-200
+             p-5
+             flex flex-col justify-between
+             transition
+             hover:border-slate-300
+             hover:shadow-md">
+
+      <!-- HEADER -->
+      <div class="flex items-start justify-between gap-3">
+
+        <div>
+          <h2 class="text-base font-semibold text-slate-900">
+            {{ material.nombre }}
+          </h2>
+
+          <p class="text-sm text-slate-500">
+            Unidad: {{ material.unidad }}
+          </p>
+        </div>
+
+        <!-- ESTADO -->
+        <span
+          class="px-2 py-0.5 rounded-md text-xs font-medium"
+          [ngClass]="material.estado
+            ? 'bg-emerald-100 text-emerald-700'
+            : 'bg-red-100 text-red-700'">
+          {{ material.estado ? 'Activo' : 'Inactivo' }}
+        </span>
+      </div>
+
+      <!-- DESCRIPCIÓN -->
+      <p class="mt-3 text-sm text-slate-600 line-clamp-3">
+        {{ material.descripcion || 'Sin descripción' }}
+      </p>
+
+      <!-- FOOTER -->
+      <div
+        class="mt-5 pt-4 border-t
+               flex items-center justify-end gap-2">
+
+        <!-- EDITAR -->
+        <button
+          *ngIf="material.estado"
+          (click)="editMaterial(material)"
+          class="group relative w-9 h-9
+                 flex items-center justify-center
+                 rounded-lg
+                 text-slate-600
+                 hover:text-slate-900
+                 hover:bg-slate-100
+                 cursor-pointer
+                 transition all duration-200">
+
+          <i class="bi bi-pencil-square text-[16px]"></i>
+
+          <span
+            class="absolute bottom-full mb-2
+                   px-2.5 py-1.5
+                   rounded-md
+                   bg-slate-900
+                   text-white text-xs font-medium
+                   whitespace-nowrap
+                   opacity-0 translate-y-1
+                   group-hover:opacity-100
+                   group-hover:translate-y-0
+                   transition-all duration-200
+                   pointer-events-none">
+            Editar material
+          </span>
+        </button>
+
+        <!-- ELIMINAR -->
+        <button
+          *ngIf="material.estado"
+          (click)="eliminarMaterial(material)"
+          class="group relative w-9 h-9
+                 flex items-center justify-center
+                 rounded-lg
+                 text-red-600
+                 hover:bg-red-50
+                 transition all duration-200
+                 cursor-pointer">
+
+          <i class="bi bi-trash text-[16px]"></i>
+
+          <span
+            class="absolute bottom-full mb-2
+                   px-2.5 py-1.5
+                   rounded-md
+                   bg-slate-900
+                   text-white text-xs font-medium
+                   whitespace-nowrap
+                   opacity-0 translate-y-1
+                   group-hover:opacity-100
+                   group-hover:translate-y-0
+                   transition-all duration-200
+                   pointer-events-none">
+            Eliminar material
+          </span>
+        </button>
+
+        <!-- ACTIVAR -->
+        <button
+          *ngIf="!material.estado"
+          (click)="activarMaterial(material)"
+          class="group relative w-9 h-9
+                 flex items-center justify-center
+                 rounded-lg
+                 text-emerald-600
+                 hover:bg-emerald-50
+                 transition all duration-200
+                 cursor-pointer">
+
+          <i class="bi bi-arrow-clockwise text-[16px]"></i>
+
+          <span
+            class="absolute bottom-full mb-2
+                   px-2.5 py-1.5
+                   rounded-md
+                   bg-slate-900
+                   text-white text-xs font-medium
+                   whitespace-nowrap
+                   opacity-0 translate-y-1
+                   group-hover:opacity-100
+                   group-hover:translate-y-0
+                   transition-all duration-200
+                   pointer-events-none">
+            Activar material
+          </span>
+        </button>
+
+      </div>
+
+    </article>
+  </div>
+
+  <!-- EMPTY STATE -->
+  <div
+    *ngIf="filterMaterials().length < 0"
+    class="py-16 border border-dashed rounded-2xl text-center">
+
+    <p class="text-sm text-slate-500">
+      No hay materiales registrados
+    </p>
+  </div>
+
+</div>

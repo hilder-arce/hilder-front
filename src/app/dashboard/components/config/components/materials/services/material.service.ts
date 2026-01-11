@@ -54,4 +54,12 @@ export class MaterialService {
             { withCredentials: true }
         ).toPromise();
     }
+
+    async activateMaterial(id: string) {
+        return await this.http.patch<{ message: string }>(
+            `${this.apiBackend}/material/${id}/activate`,
+            {},
+            { withCredentials: true }
+        ).toPromise();
+    }
 }

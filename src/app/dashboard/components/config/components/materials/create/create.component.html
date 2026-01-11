@@ -12,8 +12,11 @@
     </div>
 
     <div>
-      <h1 class="text-2xl font-semibold tracking-tight text-black">
+      <h1 *ngIf="!isExistMaterial" class="text-2xl font-semibold tracking-tight text-black">
         Registro de Material
+      </h1>
+      <h1 *ngIf="isExistMaterial" class="text-2xl font-semibold tracking-tight text-black">
+        Edición de Material
       </h1>
       <p class="mt-1 text-sm text-black/60 max-w-xl">
         Alta de materiales generales para el control de inventario y suministros.
@@ -101,7 +104,8 @@
 
       <button
         type="submit"
-        (click)="guardar()"
+        [disabled]="isSubmitting"
+        (click)="isExistMaterial ? update() : guardar()"
         class="h-11 px-7 rounded-xl
                text-sm font-semibold text-black
                bg-gradient-to-r from-yellow-400 to-yellow-300
@@ -111,7 +115,14 @@
                disabled:opacity-50
                cursor-pointer
                transition-all">
-        GUARDAR
+        <span *ngIf="!isSubmitting">
+          {{ submitLabel }}
+        </span>
+
+        <span *ngIf="isSubmitting" class="flex items-center gap-2">
+          <i class="bi bi-arrow-repeat animate-spin"></i>
+          {{ submitLabel }}
+        </span>
       </button>
 
     </div>
