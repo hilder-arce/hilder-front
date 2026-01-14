@@ -1,0 +1,181 @@
+<app-header-home-reports></app-header-home-reports>
+<section class="px-6 py-6 space-y-8 max-w-[1400px] mx-auto">
+
+  <!-- =========================
+       RESUMEN GENERAL
+  ========================== -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+    <div class="bg-white rounded-xl border border-slate-200 px-6 py-5">
+      <p class="text-xs font-medium uppercase tracking-wide text-slate-500">
+        Reportes
+      </p>
+      <p class="mt-2 text-3xl font-semibold text-slate-900">
+        28
+      </p>
+    </div>
+
+    <div class="bg-white rounded-xl border border-slate-200 px-6 py-5">
+      <p class="text-xs font-medium uppercase tracking-wide text-slate-500">
+        Equipos
+      </p>
+      <p class="mt-2 text-3xl font-semibold text-slate-900">
+        124
+      </p>
+    </div>
+
+    <div class="bg-white rounded-xl border border-slate-200 px-6 py-5">
+      <p class="text-xs font-medium uppercase tracking-wide text-slate-500">
+        Explosivos
+      </p>
+      <p class="mt-2 text-3xl font-semibold text-slate-900">
+        3,420
+      </p>
+    </div>
+
+    <div class="bg-white rounded-xl border border-slate-200 px-6 py-5">
+      <p class="text-xs font-medium uppercase tracking-wide text-slate-500">
+        Materiales
+      </p>
+      <p class="mt-2 text-3xl font-semibold text-slate-900">
+        9,870
+      </p>
+    </div>
+
+  </div>
+
+  <!-- =========================
+       TABLA DE REPORTES
+  ========================== -->
+  <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+
+    <div class="max-h-[520px] overflow-auto">
+
+      <table class="w-full text-sm">
+
+        <!-- HEADER -->
+        <thead class="sticky top-0 z-10 bg-slate-50 border-b border-slate-200">
+          <tr class="text-xs font-semibold uppercase tracking-wide text-slate-600">
+            <th class="px-4 py-3 text-center w-12">#</th>
+            <th class="px-4 py-3">Fecha</th>
+            <th class="px-4 py-3">Turno</th>
+            <th class="px-4 py-3">Responsable</th>
+            <th class="px-4 py-3">Nivel</th>
+            <th class="px-4 py-3 text-center">Equipos</th>
+            <th class="px-4 py-3 text-center">Explosivos</th>
+            <th class="px-4 py-3 text-center">Materiales</th>
+            <th class="px-4 py-3 text-right">Estado</th>
+          </tr>
+        </thead>
+
+        <!-- BODY -->
+        <tbody class="divide-y divide-slate-200">
+
+          <!-- FILA -->
+          <tr class="hover:bg-slate-50 transition cursor-pointer">
+
+            <td class="px-4 py-4 text-center text-slate-400">
+              1
+            </td>
+
+            <td class="px-4 py-4 font-medium text-slate-900">
+              23/12/2025
+            </td>
+
+            <td class="px-4 py-4">
+              <span class="inline-flex px-2.5 py-1 rounded-md text-xs font-medium
+                           bg-blue-100 text-blue-700">
+                Día
+              </span>
+            </td>
+
+            <td class="px-4 py-4 font-medium text-slate-800">
+              Peña
+            </td>
+
+            <td class="px-4 py-4">
+              <span class="inline-flex px-2.5 py-1 rounded-md text-xs
+                           bg-amber-100 text-amber-700">
+                2750
+              </span>
+            </td>
+
+            <td class="px-4 py-4 text-center font-semibold text-slate-700">
+              6
+            </td>
+
+            <td class="px-4 py-4 text-center font-semibold text-slate-700">
+              420
+            </td>
+
+            <td class="px-4 py-4 text-center font-semibold text-slate-700">
+              1,230
+            </td>
+
+            <td class="px-4 py-4 text-right">
+              <span class="inline-flex px-3 py-1 rounded-md text-xs font-semibold
+                           bg-emerald-100 text-emerald-700">
+                COMPLETO
+              </span>
+            </td>
+
+          </tr>
+
+          <!-- FILA -->
+          <tr class="hover:bg-slate-50 transition cursor-pointer">
+
+            <td class="px-4 py-4 text-center text-slate-400">
+              2
+            </td>
+
+            <td class="px-4 py-4 font-medium text-slate-900">
+              22/12/2025
+            </td>
+
+            <td class="px-4 py-4">
+              <span class="inline-flex px-2.5 py-1 rounded-md text-xs font-medium
+                           bg-indigo-100 text-indigo-700">
+                Noche
+              </span>
+            </td>
+
+            <td class="px-4 py-4 font-medium text-slate-800">
+              Juárez
+            </td>
+
+            <td class="px-4 py-4">
+              <span class="inline-flex px-2.5 py-1 rounded-md text-xs
+                           bg-amber-100 text-amber-700">
+                2360
+              </span>
+            </td>
+
+            <td class="px-4 py-4 text-center font-semibold text-slate-700">
+              4
+            </td>
+
+            <td class="px-4 py-4 text-center font-semibold text-slate-700">
+              310
+            </td>
+
+            <td class="px-4 py-4 text-center font-semibold text-slate-700">
+              980
+            </td>
+
+            <td class="px-4 py-4 text-right">
+              <span class="inline-flex px-3 py-1 rounded-md text-xs font-semibold
+                           bg-yellow-100 text-yellow-700">
+                EN REVISIÓN
+              </span>
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+    </div>
+
+  </div>
+
+</section>

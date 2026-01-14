@@ -1,0 +1,63 @@
+/* =========================================
+   INPUT GLOW PREMIUM (focus enterprise)
+========================================= */
+.input-elite:focus {
+  outline: none;
+  box-shadow:
+    0 0 0 4px rgba(59, 130, 246, 0.25),
+    0 0 25px rgba(234, 179, 8, 0.15);
+}
+
+/* =========================================
+   CARD ENTERPRISE BACKGROUND
+========================================= */
+.card-elite {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0.97),
+      rgba(248,250,252,0.95)
+    );
+}
+
+/* =========================================
+   SOFT FLOAT ANIMATION (no Tailwind)
+========================================= */
+@keyframes soft-float {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-4px); }
+  100% { transform: translateY(0); }
+}
+
+.animate-soft-float {
+  animation: soft-float 6s ease-in-out infinite;
+}
+
+
+/* 1. Quitamos todo el estilo del input para que sea "transparente" */
+.input-clean {
+  background: transparent !important;
+  border: none !important;
+  outline: none !important; /* Quita el borde azul del navegador */
+  box-shadow: none !important;
+  padding: 0 !important;
+  width: 100%;
+}
+
+/* 2. El efecto de foco se lo damos al DIV que lo envuelve */
+/* Usamos :focus-within para que el div sepa cuando el input de adentro tiene el foco */
+.input-container-elite {
+  transition: all 0.3s ease;
+}
+
+.input-container-elite:focus-within {
+  box-shadow: 
+    0 0 0 4px rgba(59, 130, 246, 0.15), /* Resplandor suave externo */
+    0 4px 20px -5px rgba(59, 130, 246, 0.2); /* Sombra de elevación */
+  background-color: #ffffff;
+}
+
+/* 3. Opcional: Iluminar el icono también cuando se hace focus */
+.input-container-elite:focus-within i {
+  color: #3b82f6 !important;
+}
