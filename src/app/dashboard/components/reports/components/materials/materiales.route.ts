@@ -12,10 +12,7 @@ export const MATERIALES_ROUTES: Routes = [
             {
                 path: '', redirectTo: 'list', pathMatch: 'full'
             },
-            //CREATE 
-            {
-                path: 'create', component: CreateMaterialComponent
-            },
+
             //LIST 
             {
                 path: 'list', component: ListMaterialComponent

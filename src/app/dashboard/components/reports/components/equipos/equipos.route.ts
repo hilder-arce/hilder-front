@@ -8,13 +8,12 @@ export const   EQUIPOS_ROUTES: Routes = [
         path: '',
         component: ReportsEquiposComponent,
         children: [
-            //CREATE
-            {
-                path: 'create', component: CreateEquipoComponent
-            },
+            //LIST
             {
                 path: 'list', component: ListEquiposComponent
             },
+
+            //FOR DEFAULT
             {
                 path: '', redirectTo: 'list', pathMatch: 'full'
             },

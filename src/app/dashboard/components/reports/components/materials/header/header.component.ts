@@ -3,59 +3,66 @@ import { Component, computed, DestroyRef, signal } from '@angular/core';
 import { Router, RouterModule, NavigationEnd } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { filter } from 'rxjs/operators';
-import { MaterialsSearchService } from '../services/materials-search.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-materiales-header',
+  selector: 'app-header-materiales-reports',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './header.component.html',
 })
-export class MaterialesHeaderComponent {
+export class ReportsMaterialesHeaderComponent {
 
-  // URL ACTUAL
+  minDate: string = '2026-01-01';
+  maxDate: string = new Date().toISOString().split('T')[0];
+  startDate: string = '';
+  endDate: string = '';
+
+  // PROPIEDAD QUE CONTIENE LA URL ACTUAL
   private currentUrl = signal<string>('');
 
-  // URL LIMPIA (SIN QUERY PARAMS)
+  // PROPIEDAD QUE CONTIENE LA URL LIMPIA (SIN PARÁMETROS)
   readonly cleanUrl = computed(() =>
     this.currentUrl().split('?')[0]
   );
 
-  // DETECTAR _id
-  readonly hasIdParam = computed(() =>
-    this.currentUrl().includes('_id=')
-  );
-
-  // ESTADOS DE RUTA
+  //PROPIEDAD QUE DETERMINA SI ESTAMOS EN LA RUTA DE CREACIÓN
   readonly isCreate = computed(() =>
     this.cleanUrl().endsWith('/create') && !this.hasIdParam()
   );
 
+  //PROPIEDAD QUE DETERMINA SI ESTAMOS EN LA RUTA DE EDICIÓN
   readonly isEdit = computed(() =>
     this.cleanUrl().endsWith('/create') && this.hasIdParam()
   );
 
+  //PROPIEDAD QUE DETERMINA SI ESTAMOS EN LA RUTA DE LISTA
   readonly isList = computed(() =>
-    this.cleanUrl().endsWith('/materiales/list')
+    this.cleanUrl().endsWith('/reports/home')
   );
 
-  // TÍTULO DINÁMICO
+  // TITULO DINÁMICO
   readonly title = computed(() => {
-    if (this.isEdit()) return 'EDITAR MATERIAL';
-    if (this.isCreate()) return 'NUEVO MATERIAL';
-    if (this.isList()) return 'MATERIALES';
+    if (this.isEdit()) return 'EDITAR REPORTE';
+    if (this.isCreate()) return 'CREAR REPORTE';
+    if (this.isList()) return 'REPORTES';
     return 'GESTIÓN';
   });
 
+  // VER SI LA URL TIENE PARÁMETRO _id
+  readonly hasIdParam = computed(() =>
+    this.currentUrl().includes('_id=')
+  );
+
+
+  // INYECTAR SERVICIOS
   constructor(
     private router: Router,
     private destroyRef: DestroyRef,
-    private materialesSearchService: MaterialsSearchService
   ) {
-    // Estado inicial
+    // INICIALIZAR PROPIEDAD currentUrl
     this.currentUrl.set(this.router.url);
 
-    // Escuchar navegación
     this.router.events
       .pipe(
         filter(e => e instanceof NavigationEnd),
@@ -66,13 +73,13 @@ export class MaterialesHeaderComponent {
       });
   }
 
-  // IR A LISTA
-  goMaterialesList(): void {
-    this.router.navigate(['/dashboard/config/materiales']);
+  // NAVEGAR AL HOME DE REPORTES
+  goReportsHome(): void {
+    this.router.navigate(['/dashboard/reports/home']);
   }
 
-  // SEARCH (alineado con Explosivos)
-  onSearch(term: string): void {
-    this.materialesSearchService.setSearch(term);
+  // MANEJAR BÚSQUEDA
+  onSearch(value: string): void {
+    //this.equiposSearchService.setSearch(value);
   }
 }

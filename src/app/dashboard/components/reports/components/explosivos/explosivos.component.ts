@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
-import { ExplosivosHeaderComponent } from "./header/header.component";
+import { ReportsExplosivosHeaderComponent } from "./header/header.component";
 
 @Component({
     selector: 'app-reports-explosivos',
@@ -8,7 +8,7 @@ import { ExplosivosHeaderComponent } from "./header/header.component";
     styleUrl: './explosivos.component.css',
     imports: [
         RouterOutlet,
-        ExplosivosHeaderComponent
+        ReportsExplosivosHeaderComponent
     ]
 })
 

@@ -1,7 +1,14 @@
-export interface Equipo {
-    _id?: string
-    nombre: string
-    marca: string
-    descripcion: string
-    estado?: boolean
+export interface ReporteEquipo {
+  equipoId: string;
+  equipoNombre: string;
+
+  horometroInicial: number;
+  horometroFinal: number;
+
+  horasTrabajadas: number;   // calculado
+  combustibleGalones: number;
+
+  estado: 'OPERATIVO' | 'MANTENIMIENTO';
+
+  observacion?: string;
 }

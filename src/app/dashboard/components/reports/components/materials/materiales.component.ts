@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
-import { MaterialesHeaderComponent } from "./header/header.component";
+import { ReportsMaterialesHeaderComponent } from "./header/header.component";
 
 @Component({
     selector: 'app-config-materiales',
@@ -8,7 +8,7 @@ import { MaterialesHeaderComponent } from "./header/header.component";
     styleUrl: './materiales.component.css',
     imports: [
         RouterOutlet,
-        MaterialesHeaderComponent
+        ReportsMaterialesHeaderComponent
     ]
 })
 

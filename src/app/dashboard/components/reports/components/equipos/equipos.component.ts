@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
-import { EquiposHeaderComponent } from "./header/header.component";
+import { ReportsequiposHeaderComponent } from "./header/header.component";
 
 @Component({
     selector: 'app-reports-equipos',
@@ -8,7 +8,7 @@ import { EquiposHeaderComponent } from "./header/header.component";
     styleUrl: './equipos.component.css',
     imports: [
         RouterOutlet,
-        EquiposHeaderComponent
+        ReportsequiposHeaderComponent
     ]
 })
 

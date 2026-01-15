@@ -3,15 +3,20 @@ import { Component, computed, DestroyRef, signal } from '@angular/core';
 import { Router, RouterModule, NavigationEnd } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { filter } from 'rxjs/operators';
-import { EquiposSearchService } from '../services/equipos-search.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-equipos-header',
+  selector: 'app-header-equipos-reports',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './header.component.html',
 })
-export class EquiposHeaderComponent {
+export class ReportsequiposHeaderComponent {
+
+  minDate: string = '2026-01-01';
+  maxDate: string = new Date().toISOString().split('T')[0];
+  startDate: string = '';
+  endDate: string = '';
 
   // PROPIEDAD QUE CONTIENE LA URL ACTUAL
   private currentUrl = signal<string>('');
@@ -33,14 +38,14 @@ export class EquiposHeaderComponent {
 
   //PROPIEDAD QUE DETERMINA SI ESTAMOS EN LA RUTA DE LISTA
   readonly isList = computed(() =>
-    this.cleanUrl().endsWith('/equipos/list')
+    this.cleanUrl().endsWith('/reports/home')
   );
 
   // TITULO DINÁMICO
   readonly title = computed(() => {
-    if (this.isEdit()) return 'EDITAR EQUIPO';
-    if (this.isCreate()) return 'CREAR EQUIPO';
-    if (this.isList()) return 'EQUIPOS';
+    if (this.isEdit()) return 'EDITAR REPORTE';
+    if (this.isCreate()) return 'CREAR REPORTE';
+    if (this.isList()) return 'REPORTES';
     return 'GESTIÓN';
   });
 
@@ -54,7 +59,6 @@ export class EquiposHeaderComponent {
   constructor(
     private router: Router,
     private destroyRef: DestroyRef,
-    private equiposSearchService: EquiposSearchService
   ) {
     // INICIALIZAR PROPIEDAD currentUrl
     this.currentUrl.set(this.router.url);
@@ -69,13 +73,13 @@ export class EquiposHeaderComponent {
       });
   }
 
-  // NAVEGAR A LISTA DE EQUIPOS
-  goEquiposList(): void {
-    this.router.navigate(['/dashboard/config/equipos']);
+  // NAVEGAR AL HOME DE REPORTES
+  goReportsHome(): void {
+    this.router.navigate(['/dashboard/reports/home']);
   }
 
   // MANEJAR BÚSQUEDA
   onSearch(value: string): void {
-    this.equiposSearchService.setSearch(value);
+    //this.equiposSearchService.setSearch(value);
   }
 }

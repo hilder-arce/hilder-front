@@ -12,10 +12,7 @@ export const EXPLOSIVOS_ROUTES: Routes = [
             {
                 path: '', redirectTo: 'list', pathMatch: 'full'
             },
-            //CREATE
-            {
-                path: 'create', component: CreateExplosivoComponent
-            },
+            
             //LIST
             {
                 path: 'list', component: ExplosivosListComponent

@@ -1,16 +1,54 @@
-import { Equipo } from "../../config/components/equipos/interfaces/equipo.interface"
-import { Explosivo } from "../../config/components/explosivos/interfaces/explosivo.interface"
-import { Material } from "../../config/components/materials/interfaces/material.interface"
+import { ReporteEquipo } from "../components/equipos/interfaces/equipo.interface";
 
-export interface Report {
-    id: string
-    fecha: string
-    agente: string
-    turno: 'dia' | 'noche'
-    estado: 'borrador' | 'proceso' | 'completado'
-    createdAt?: number
-    updatedAt?: number
-    explosivos: Explosivo[]
-    equipos: Equipo[]
-    materiales: Material[]
+export interface ReporteTurno {
+  id?: string;
+
+  fecha: string;               // YYYY-MM-DD
+  turno: 'DIA' | 'NOCHE';
+
+  responsable: string;
+  equipos: ReporteEquipo[];
+  //explosivos: ReporteExplosivo[];
+  //materiales: ReporteMaterial[];
+
+  observacionesGenerales?: string;
+
+  estado: 'BORRADOR' | 'ENVIADO' | 'APROBADO';
+
+  createdAt?: string;
+  updatedAt?: string;
 }
+
+//dto backend
+export interface CreateReporteTurnoDto {
+  fecha: string;
+  turno: 'DIA' | 'NOCHE';
+
+  responsableId: string;
+
+  equipos: {
+    equipoId: string;
+    horometroInicial: number;
+    horometroFinal: number;
+    combustibleGalones: number;
+    estado: 'OPERATIVO' | 'MANTENIMIENTO';
+    observacion?: string;
+  }[];
+
+  materiales: {
+    materialId: string;
+    ingreso: number;
+    consumo: number;
+    observacion?: string;
+  }[];
+
+  explosivos: {
+    explosivoId: string;
+    ingreso: number;
+    consumo: number;
+    observacionesOperativas?: string;
+  }[];
+
+  observacionesGenerales?: string;
+}
+
