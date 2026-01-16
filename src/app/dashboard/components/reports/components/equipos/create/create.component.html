@@ -51,43 +51,53 @@
             <!-- EQUIPO -->
             <td class="px-4 py-3">
               <select
-                class="w-full h-10 px-3 rounded-lg border border-black/10"
                 [(ngModel)]="row.equipoId"
+                [disabled]="!isEditing(i)"
                 (ngModelChange)="onEquipoChange(row)"
-                name="equipo-{{i}}">
+                name="equipo-{{i}}"
+                class="w-full h-10 px-3 rounded-lg
+                      border border-black/10
+                      focus:outline-none focus:ring-4 focus:ring-blue-500/40">
 
-                <option value="">Seleccione</option>
+                <option value="" disabled>Seleccione</option>
                 <option *ngFor="let eq of equipos" [value]="eq._id">
                   {{ eq.nombre }}
                 </option>
               </select>
             </td>
 
-            <!-- HOROMETRO INICIAL -->
+            <!-- HORÓMETRO INICIAL -->
             <td class="px-4 py-3">
               <input
                 type="number"
                 [(ngModel)]="row.horometroInicial"
+                [disabled]="!isEditing(i)"
                 (ngModelChange)="calcularHoras(row)"
                 name="hini-{{i}}"
-                class="w-full h-10 text-center rounded-lg border border-black/10">
+                class="w-full h-10 text-center rounded-lg
+                      border border-black/10
+                      focus:outline-none focus:ring-4 focus:ring-blue-500/40">
             </td>
 
-            <!-- HOROMETRO FINAL -->
+            <!-- HORÓMETRO FINAL -->
             <td class="px-4 py-3">
               <input
                 type="number"
                 [(ngModel)]="row.horometroFinal"
+                [disabled]="!isEditing(i)"
                 (ngModelChange)="calcularHoras(row)"
                 name="hfin-{{i}}"
-                class="w-full h-10 text-center rounded-lg border border-black/10">
+                class="w-full h-10 text-center rounded-lg
+                      border border-black/10
+                      focus:outline-none focus:ring-4 focus:ring-blue-500/40">
             </td>
 
-            <!-- HORAS -->
+            <!-- HORAS TRABAJADAS -->
             <td
               class="px-4 py-3 text-center font-semibold"
               [class.text-blue-600]="row.horasTrabajadas > 0"
               [class.text-red-600]="row.horasTrabajadas === 0">
+
               {{ row.horasTrabajadas }} h
             </td>
 
@@ -96,37 +106,166 @@
               <input
                 type="number"
                 [(ngModel)]="row.combustibleGalones"
+                [disabled]="!isEditing(i)"
                 name="comb-{{i}}"
-                class="w-full h-10 text-center rounded-lg border border-yellow-300">
+                class="w-full h-10 text-center rounded-lg
+                      border border-yellow-300
+                      focus:outline-none focus:ring-4 focus:ring-yellow-500/60">
             </td>
 
             <!-- ESTADO -->
             <td class="px-4 py-3">
               <select
                 [(ngModel)]="row.estado"
+                [disabled]="!isEditing(i)"
                 name="estado-{{i}}"
-                class="w-full h-10 px-2 rounded-lg text-sm font-semibold border"
+                class="w-full h-10 px-2 rounded-lg text-sm font-semibold
+                      border focus:outline-none focus:ring-4 focus:ring-blue-500/40"
                 [ngClass]="{
                   'border-green-300 text-green-700 bg-green-50': row.estado === 'OPERATIVO',
                   'border-orange-300 text-orange-700 bg-orange-50': row.estado === 'MANTENIMIENTO'
                 }">
+
                 <option value="OPERATIVO">Operativo</option>
                 <option value="MANTENIMIENTO">Mantenimiento</option>
               </select>
             </td>
 
-            <!-- DELETE -->
-            <td class="px-4 py-3 text-center">
-              <button
-                (click)="removeEquipoRow(i)"
-                class="text-red-500 hover:text-red-700">
-                <i class="bi bi-x-lg"></i>
-              </button>
+            <!-- ACCIONES -->
+            <td class="px-4 py-3">
+              <div class="flex items-center justify-center gap-2">
+
+                <!-- GUARDAR -->
+                <button
+                  *ngIf="isEditing(i) && !isSaved(i)"
+                  (click)="saveRow(i)"
+                  class="group relative
+                        w-9 h-9
+                        flex items-center justify-center
+                        rounded-lg
+                        text-emerald-600
+                        hover:bg-emerald-50
+                        transition-all duration-200
+                        cursor-pointer">
+
+                  <i class="bi bi-check-lg text-[18px]"></i>
+
+                  <span
+                    class="absolute bottom-full mb-2
+                          px-2.5 py-1.5
+                          rounded-md
+                          bg-slate-900
+                          text-white text-xs font-medium
+                          whitespace-nowrap
+                          opacity-0 translate-y-1
+                          group-hover:opacity-100
+                          group-hover:translate-y-0
+                          transition-all duration-200
+                          pointer-events-none">
+                    Guardar equipo
+                  </span>
+                </button>
+
+                <!-- EDITAR -->
+                <button
+                  *ngIf="!isEditing(i) && isSaved(i)"
+                  (click)="editRow(i)"
+                  class="group relative
+                        w-9 h-9
+                        flex items-center justify-center
+                        rounded-lg
+                        text-blue-600
+                        hover:bg-blue-50
+                        transition-all duration-200
+                        cursor-pointer">
+
+                  <i class="bi bi-pencil text-[17px]"></i>
+
+                  <span
+                    class="absolute bottom-full mb-2
+                          px-2.5 py-1.5
+                          rounded-md
+                          bg-slate-900
+                          text-white text-xs font-medium
+                          whitespace-nowrap
+                          opacity-0 translate-y-1
+                          group-hover:opacity-100
+                          group-hover:translate-y-0
+                          transition-all duration-200
+                          pointer-events-none">
+                    Editar equipo
+                  </span>
+                </button>
+
+                <!-- ACTUALIZAR -->
+                <button
+                  *ngIf="isEditing(i) && isSaved(i)"
+                  (click)="saveRow(i)"
+                  class="group relative
+                        w-9 h-9
+                        flex items-center justify-center
+                        rounded-lg
+                        text-yellow-600
+                        hover:bg-yellow-50
+                        transition-all duration-200
+                        cursor-pointer">
+
+                  <i class="bi bi-arrow-repeat text-[18px]"></i>
+
+                  <span
+                    class="absolute bottom-full mb-2
+                          px-2.5 py-1.5
+                          rounded-md
+                          bg-slate-900
+                          text-white text-xs font-medium
+                          whitespace-nowrap
+                          opacity-0 translate-y-1
+                          group-hover:opacity-100
+                          group-hover:translate-y-0
+                          transition-all duration-200
+                          pointer-events-none">
+                    Actualizar datos
+                  </span>
+                </button>
+
+                <!-- ELIMINAR -->
+                <button
+                  (click)="removeEquipoRow(i)"
+                  class="group relative
+                        w-9 h-9
+                        flex items-center justify-center
+                        rounded-lg
+                        text-red-500
+                        hover:bg-red-50
+                        transition-all duration-200
+                        cursor-pointer">
+
+                  <i class="bi bi-x-lg text-[16px]"></i>
+
+                  <span
+                    class="absolute bottom-full mb-2
+                          px-2.5 py-1.5
+                          rounded-md
+                          bg-slate-900
+                          text-white text-xs font-medium
+                          whitespace-nowrap
+                          opacity-0 translate-y-1
+                          group-hover:opacity-100
+                          group-hover:translate-y-0
+                          transition-all duration-200
+                          pointer-events-none">
+                    Eliminar fila
+                  </span>
+                </button>
+
+              </div>
             </td>
+
 
           </tr>
 
         </tbody>
+
 
       </table>
 
@@ -138,44 +277,6 @@
         </button>
       </div>
 
-
-    </div>
-
-    <!-- ===============================
-         OBSERVACIONES
-    ================================= -->
-    <div>
-      <label class="block mb-2 text-xs font-semibold uppercase text-black/60">
-        Observaciones operativas
-      </label>
-      <textarea
-        rows="3"
-        placeholder="Paradas, fallas, mantenimiento correctivo, incidentes..."
-        class="w-full px-4 py-3 rounded-xl border border-black/10 text-sm resize-none">
-      </textarea>
-    </div>
-
-    <!-- ===============================
-         ACTIONS
-    ================================= -->
-    <div class="pt-6 flex justify-end gap-4 border-t border-black/5">
-
-      <button
-        class="h-11 px-6 rounded-xl
-               text-sm font-medium text-black/70
-               hover:bg-black/5 transition">
-        Cancelar
-      </button>
-
-      <button
-        class="h-11 px-7 rounded-xl
-               text-sm font-semibold text-black
-               bg-gradient-to-r from-yellow-400 to-yellow-300
-               shadow-[0_15px_35px_-10px_rgba(234,179,8,.9)]
-               hover:from-yellow-300
-               active:scale-95 transition-all">
-        Guardar
-      </button>
 
     </div>
 

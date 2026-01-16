@@ -2,7 +2,7 @@ export interface ReporteExplosivo {
   explosivoId: string;
   nombre: string;
 
-  tipo: 'EMULSION' | 'ANFO' | 'ACCESORIO';
+  tipo: TipoExplosivo;
 
   stockInicial: number;
 
@@ -11,8 +11,19 @@ export interface ReporteExplosivo {
 
   stockFinal: number;   // calculado
 
-  unidad: 'KG' | 'M';
+  unidad: UnidadMedidaExplosivo;
 
   observacionesOperativas?: string;
 }
 
+export type TipoExplosivo =
+  | 'EMULSION'
+  | 'DINAMITA'
+  | 'CORDON_DETONANTE'
+  | 'DETONADOR';
+
+export type UnidadMedidaExplosivo =
+  | 'CARTUCHOS'
+  | 'KILOGRAMOS'
+  | 'METROS'
+  | 'UNIDADES';

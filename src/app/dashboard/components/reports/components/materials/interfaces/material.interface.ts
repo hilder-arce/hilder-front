@@ -9,7 +9,7 @@ export interface ReporteMaterial {
 
   stockFinal: number;   // calculado
 
-  unidad: 'KG' | 'UND' | 'M3';
+  unidad: 'unidad' | 'metros' | 'sacos' | 'kg';
 
   observacion?: string;
 }

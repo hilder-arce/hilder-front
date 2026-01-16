@@ -57,10 +57,8 @@ export class CreateEquipoComponent implements  OnInit {
         estado: 'OPERATIVO',
         observacion: ''
         });
-    }
-
-    removeEquipoRow(index: number) {
-        this.reporteEquipos.splice(index, 1);
+        const index = this.reporteEquipos.length - 1;
+        this.editingRows.add(index);
     }
 
     calcularHoras(row: ReporteEquipo) {
@@ -77,6 +75,33 @@ export class CreateEquipoComponent implements  OnInit {
     onEquipoChange(row: ReporteEquipo) {
         const eq = this.equipos.find(e => e._id === row.equipoId);
         row.equipoNombre = eq ? eq.nombre : '';
+    }
+
+    editingRows = new Set<number>();
+    savedRows = new Set<number>();
+
+    isEditing(i: number): boolean {
+        return this.editingRows.has(i);
+    }
+
+        isSaved(i: number): boolean {
+        return this.savedRows.has(i);
+    }
+
+    saveRow(i: number) {
+        const row = this.reporteEquipos[i];
+
+        console.log('Guardando fila:', row);
+    }
+
+    editRow(i: number) {
+        this.editingRows.add(i);
+    }
+
+    removeEquipoRow(i: number) {
+        this.reporteEquipos.splice(i, 1);
+        this.editingRows.delete(i);
+        this.savedRows.delete(i);
     }
 
 
