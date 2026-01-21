@@ -11,108 +11,100 @@
     <!-- FORM -->
     <form class="space-y-7">
       <!-- NOMBRE -->
-      <div class="group relative w-full">
-        <label class="text-sm mb-1 block font-medium ml-4">Nombre de Usuario</label>
+      <div>
+        <label class="text-xs font-medium text-slate-600 block mb-1">
+          Nombre de Usuario
+        </label>
 
+        <div class="relative">
+          <span class="input-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+              <path d="M4.5 20.25a8.25 8.25 0 1115 0v.75H4.5v-.75z" />
+            </svg>
+          </span>
 
-        <input
-          type="text"
-          [(ngModel)]="user.nameUser"
-          name="nameUser"
-          class="w-full pl-11 pr-4 py-3 rounded-xl border placeholder-gray-500 text-sm shadow-sm
-                 focus:outline-none focus:ring-2 focus:ring-blue-500/70
-                 text-black border-gray-300 bg-white"
-        />
-
-        <div class="pointer-events-none h-full top-0
- absolute left-3 inset-y-0 flex items-center text-gray-400">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
-            stroke="currentColor" stroke-width="1.8"
-            viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
-            <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M4.5 20.25a8.25 8.25 0 1115 0v.75H4.5v-.75z" />
-          </svg>
+          <input
+            type="text"
+            name="nameUser"
+            [(ngModel)]="user.nameUser"
+            class="input-enterprise"
+          />
         </div>
       </div>
 
       <!-- EMAIL -->
-      <div class="group relative w-full">
-        <label class="text-sm mb-1 block font-medium ml-4">Correo</label>
+      <div>
+        <label class="text-xs font-medium text-slate-600 block mb-1">
+          Correo
+        </label>
 
+        <div class="relative">
+          <span class="input-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M4 6l8 6 8-6M4 6h16v12H4z"/>
+            </svg>
+          </span>
 
-        <input
-          type="email"
-          [(ngModel)]="user.email"
-          name="email"
-          class="w-full pl-11 pr-4 py-3 rounded-xl border placeholder-gray-500 text-sm shadow-sm
-                 focus:outline-none focus:ring-2 focus:ring-blue-500/70
-                 text-black border-gray-300 bg-white"
-        />
-
-        <div class="absolute left-3 inset-y-0 flex items-center text-gray-400">
-          <svg xmlns="http://www.w3.org/2000/svg"
-            class="w-5 h-5" fill="none" stroke="currentColor"
-            stroke-width="1.8" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round"
-                d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25H4.5A2.25 2.25 0 012.25 17.25V6.75m0 0L12 12.75m0 0l9.75-6m-9.75 6L2.25 6.75"/>
-          </svg>
+          <input
+            type="email"
+            name="email"
+            [(ngModel)]="user.email"
+            class="input-enterprise"
+          />
         </div>
       </div>
 
       <!-- PASSWORD -->
-      <div class="group relative w-full" *ngIf="!isUserExist">
-        <label class="text-sm mb-1 block font-medium ml-4">Contraseña</label>
+      <div *ngIf="!isUserExist">
+        <label class="text-xs font-medium text-slate-600 block mb-1">
+          Contraseña
+        </label>
 
+        <div class="relative">
+          <span class="input-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 11c1.1 0 2-.9 2-2V7a2 2 0 10-4 0v2a2 2 0 002 2z"/>
+              <path d="M5 11h14v8H5z"/>
+            </svg>
+          </span>
 
-        <input
-          type="password"
-          [(ngModel)]="user.password"
-          name="password"
-          class="w-full pl-11 pr-4 py-3 rounded-xl border placeholder-gray-500 text-sm shadow-sm
-                 focus:outline-none focus:ring-2 focus:ring-blue-500/70
-                 text-black border-gray-300 bg-white"
-        />
-
-        <div class="absolute left-3 inset-y-0 flex items-center text-gray-400">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5"
-            fill="none" stroke="currentColor" stroke-width="1.8"
-            viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round"
-                d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m12 0H3.75a.75.75 0 00-.75.75v9a.75.75 0 00.75.75h15a.75.75 0 00.75-.75v-9a.75.75 0 00-.75-.75z"/>
-          </svg>
+          <input
+            type="password"
+            name="password"
+            [(ngModel)]="user.password"
+            class="input-enterprise"
+          />
         </div>
       </div>
 
       <!-- SELECT -->
-      <div class="group relative w-full">
-        <label class="text-sm mb-1 block font-medium ml-4">Cargo</label>
+      <div>
+        <label class="text-xs font-medium text-slate-600 block mb-1">
+          Cargo
+        </label>
 
-        <select
-          [(ngModel)]="user.userType"
-          name="userType"
-          class="w-full pl-11 pr-4 py-3 rounded-xl border text-sm shadow-sm
-                 focus:outline-none focus:ring-2 focus:ring-blue-500/70
-                 bg-white border-gray-300  text-black"
-        >
-          <option value="" disabled selected>SELECCIONAR</option>
-          <option [ngValue]="UserType.Agente">Agente</option>
-          <option [ngValue]="UserType.Operador">Operador</option>
-          <option [ngValue]="UserType.Supervisor">Supervisor</option>
-          <option [ngValue]="UserType.Mecanico">Mecánico</option>
-          <option [ngValue]="UserType.Chofer">Chofer</option>
-          <option [ngValue]="UserType.Secretaria">Secretaria</option>
-          <option [ngValue]="UserType.Ingeniero">Ingeniero</option>
-        </select>
+        <div class="relative">
+          <span class="input-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M15.75 5.25a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 20.25a8.25 8.25 0 0115 0M19.5 7.5l2 2-2 2" />
+            </svg>
+          </span>
 
-        <div class="absolute left-3 inset-y-0 flex items-center text-gray-400">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5"
-            fill="none" stroke="currentColor" stroke-width="1.8"
-            viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round"
-              d="M15.75 5.25a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 20.25a8.25 8.25 0 0115 0M19.5 7.5l2 2-2 2" />
-          </svg>
+          <select
+            [(ngModel)]="user.userType"
+            name="userType"
+            class="input-enterprise"
+          >
+            <option [ngValue]="null" disabled>SELECCIONAR</option>
+            <option [ngValue]="UserType.Agente">Agente</option>
+            <option [ngValue]="UserType.Operador">Operador</option>
+            <option [ngValue]="UserType.Supervisor">Supervisor</option>
+            <option [ngValue]="UserType.Mecanico">Mecánico</option>
+            <option [ngValue]="UserType.Chofer">Chofer</option>
+            <option [ngValue]="UserType.Secretaria">Secretaria</option>
+            <option [ngValue]="UserType.Ingeniero">Ingeniero</option>
+          </select>
         </div>
       </div>
 

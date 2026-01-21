@@ -4,7 +4,6 @@ import { Router, RouterModule } from "@angular/router";
 import { AuthService } from "../../dashboard/components/users/services/auth.service";
 import { AlertService } from "../../shared/services/alert.service";
 import { CommonModule } from "@angular/common";
-import { UserService } from "../../dashboard/components/users/services/user.service";
 
 @Component({
     selector: 'app-login',
@@ -20,7 +19,6 @@ import { UserService } from "../../dashboard/components/users/services/user.serv
 export class LoginComponent implements OnInit {
 
   constructor(
-    private userService: UserService,
     private authService: AuthService,
     private alertService: AlertService,
     private router: Router
@@ -41,21 +39,27 @@ export class LoginComponent implements OnInit {
 
     this.isLoading = true;
 
-    if (!this.email || !this.password) {
-      this.alertService.show('Completa todos los campos','error');
+    if (!this.email) {
+      this.alertService.show('Falta introducir correo electrónico','warning', 'Correo requerido');
+      this.isLoading = false;
+      return;
+    }
+
+    if (!this.password) {
+      this.alertService.show('Falta introducir contraseña','warning', 'Contraseña requerida');
       this.isLoading = false;
       return;
     }
 
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(this.email)) {
-      this.alertService.show('Por favor, ingresa un correo electrónico válido.', 'error');
+      this.alertService.show('Por favor, ingresa un correo electrónico válido.', 'warning', 'Email inválido');
       this.isLoading = false;
       return;
     }
 
     if (this.password.length < 6) {
-      this.alertService.show('La contraseña debe tener al menos 6 caracteres.', 'error');
+      this.alertService.show('La contraseña debe tener al menos 6 caracteres.', 'warning', 'Contraseña débil');
       this.isLoading = false;
       return;
     }
@@ -68,11 +72,22 @@ export class LoginComponent implements OnInit {
           // navegar al login
           this.router.navigate(['/dashboard']);
         } else {
-          this.alertService.show('Error al crear la cuenta.', 'error');
+          this.alertService.show('Error al iniciar sesión. Por favor intenta nuevamente.', 'error');
         }
       
-    } catch (error) {
-      this.alertService.show("Credenciales incorrectas",'error');
+    } catch (error: any) {
+      const errorMessage = error?.error?.message || error?.message || 'Error al iniciar sesión';
+      
+      // Determinar el tipo de alerta según el error
+      let alertType: 'error' | 'warning' | 'info' | 'success' = 'error';
+      
+      if (errorMessage.includes('no encontrado')) {
+        alertType = 'warning';
+      } else if (errorMessage.includes('Contraseña')) {
+        alertType = 'error';
+      }
+      
+      this.alertService.show(errorMessage, alertType);
     }finally{
       this.isLoading = false;
     }

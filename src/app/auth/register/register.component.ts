@@ -45,7 +45,7 @@ export class RegisterComponent implements OnInit {
   //objeto de user
   user : User = {
     nameUser: '',
-    userType: UserType.Agente,
+    userType: null,
     email: '',
     password: ''
   }
@@ -72,7 +72,7 @@ export class RegisterComponent implements OnInit {
     const payload = this.buildUpdatePayload();
 
     if (Object.keys(payload).length === 0) {
-      this.alertService.show('No hay cambios para actualizar.', 'error');
+      this.alertService.show('No hay cambios para actualizar.', 'info', 'Sin cambios');
       this.isLoading = false;
       return;
     }
@@ -93,8 +93,9 @@ export class RegisterComponent implements OnInit {
         this.alertService.show('No se pudo actualizar el usuario.', 'error');
       }
 
-    } catch (error) {
-      this.alertService.show('Error al actualizar el usuario.', 'error');
+    } catch (error: any) {
+      const errorMessage = error?.error?.message || error?.message || 'Error al actualizar el usuario';
+      this.alertService.show(errorMessage, 'error');
     } finally {
       this.isLoading = false;
     }
@@ -108,12 +109,12 @@ export class RegisterComponent implements OnInit {
 
     // Validación de name
     if (!this.user.nameUser) {
-      this.alertService.show('El nombre de usario no debe estar vacío.', 'error');
+      this.alertService.show('Falta introducir el nombre de usuario.', 'warning', 'Nombre requerido');
       this.isLoading = false;
       return;
     }
     if (!/^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+$/.test(this.user.nameUser)) {
-      this.alertService.show('El nombre solo debe contener letras.', 'error');
+      this.alertService.show('El nombre solo debe contener letras.', 'warning', 'Nombre inválido');
       this.isLoading = false;
       return;
     }
@@ -121,24 +122,31 @@ export class RegisterComponent implements OnInit {
     // Validación de email
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!this.user.email) {
-      this.alertService.show('El correo electrónico no debe estar vacío.', 'error');
+      this.alertService.show('Falta introducir correo electrónico.', 'warning', 'Email requerido');
       this.isLoading = false;
       return;
     }
     if (!emailPattern.test(this.user.email)) {
-      this.alertService.show('Por favor, ingresa un correo electrónico válido.', 'error');
+      this.alertService.show('Por favor, ingresa un correo electrónico válido.', 'warning', 'Email inválido');
+      this.isLoading = false;
+      return;
+    }
+
+    // Validación de cargo
+    if (!this.user.userType) {
+      this.alertService.show('Debes seleccionar un cargo.', 'warning', 'Cargo requerido');
       this.isLoading = false;
       return;
     }
 
     // Validación de contraseña
     if (!this.user.password) {
-      this.alertService.show('La contraseña no debe estar vacía.', 'error');
+      this.alertService.show('Falta introducir contraseña.', 'warning', 'Contraseña requerida');
       this.isLoading = false;
       return;
     }
     if (this.user.password.length < 6) {
-      this.alertService.show('La contraseña debe tener al menos 6 caracteres.', 'error');
+      this.alertService.show('La contraseña debe tener al menos 6 caracteres.', 'warning', 'Contraseña débil');
       this.isLoading = false;
       return;
     }
@@ -155,8 +163,9 @@ export class RegisterComponent implements OnInit {
           this.alertService.show('Error al crear la cuenta.', 'error');
         }
 
-    } catch (error) {
-      this.alertService.show('Error al crear la cuenta.', 'error');
+    } catch (error: any) {
+      const errorMessage = error?.error?.message || error?.message || 'Error al crear la cuenta';
+      this.alertService.show(errorMessage, 'error');
     }finally{
       this.isLoading = false;
     }

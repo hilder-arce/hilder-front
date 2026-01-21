@@ -29,6 +29,7 @@ export class ListMaterialComponent implements OnInit {
 
   // STATE
   materials = signal<Material[]>([]);
+  isLoading = signal(true);
 
   ngOnInit(): void {
     this.loadMaterials();
@@ -37,10 +38,13 @@ export class ListMaterialComponent implements OnInit {
   // CARGAR MATERIALES
   async loadMaterials() {
     try {
+      this.isLoading.set(true);
       const res = await this.materialService.getMateriales();
       if (res) this.materials.set(res);
     } catch {
       this.alertService.show('Error al cargar materiales', 'error');
+    } finally {
+      this.isLoading.set(false);
     }
   }
 
@@ -57,10 +61,10 @@ export class ListMaterialComponent implements OnInit {
     if (!material._id) return;
 
     const confirmed = await this.alertService.confirm(
-      `¿Está seguro de eliminar el material <b>${material.nombre}</b>?`,
+      `¿Está seguro de desactivar el material <b>${material.nombre}</b>?`,
       {
-        title: 'Eliminar material',
-        confirmText: 'Sí, eliminar',
+        title: 'Desactivar material',
+        confirmText: 'Sí, desactivar',
         cancelText: 'Cancelar',
         danger: true
       }
@@ -71,11 +75,12 @@ export class ListMaterialComponent implements OnInit {
     try {
       const res = await this.materialService.deactivateMaterial(material._id);
       if (res?.message) {
-        this.alertService.show('Material eliminado con éxito', 'success');
+        this.alertService.show(`Material \"${material.nombre}\" desactivado con éxito`, 'success', 'Desactivación exitosa');
         this.loadMaterials();
       }
-    } catch {
-      this.alertService.show('Error al eliminar material', 'error');
+    } catch (error: any) {
+      const errorMessage = error?.error?.message || 'Error al desactivar material';
+      this.alertService.show(errorMessage, 'error', 'Error en la desactivación');
     }
   }
 
@@ -86,11 +91,12 @@ export class ListMaterialComponent implements OnInit {
     try {
       const res = await this.materialService.activateMaterial(material._id);
       if (res?.message) {
-        this.alertService.show('Material activado con éxito', 'success');
+        this.alertService.show(`Material \"${material.nombre}\" activado con éxito`, 'success', 'Activación exitosa');
         this.loadMaterials();
       }
-    } catch {
-      this.alertService.show('Error al activar material', 'error');
+    } catch (error: any) {
+      const errorMessage = error?.error?.message || 'Error al activar material';
+      this.alertService.show(errorMessage, 'error', 'Error en la activación');
     }
   }
 

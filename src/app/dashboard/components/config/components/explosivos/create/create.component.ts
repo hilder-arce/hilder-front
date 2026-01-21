@@ -177,7 +177,7 @@ export class CreateExplosivoComponent implements OnInit {
 
         // VALIDACIÓN: SIN CAMBIOS
         if (Object.keys(payload).length === 0) {
-            this.alertService.show('No se detectaron cambios para actualizar', 'error');
+            this.alertService.show('No se detectaron cambios para actualizar', 'info', 'Sin cambios');
             this.isSubmitting = false;
             return;
         }
@@ -189,11 +189,12 @@ export class CreateExplosivoComponent implements OnInit {
             const res = await this.explosivoservice.updateExplosivo(explosivoId, payload);
             if (!res) return;
 
-            this.alertService.show('Explosivo actualizado correctamente', 'success');
+            this.alertService.show(`Explosivo \"${this.explosivo.nombre}\" actualizado correctamente`, 'success', 'Actualización exitosa');
             this.router.navigate(['/dashboard/config/explosivos/list']);
 
-        } catch (error) {
-            this.alertService.show('Error al actualizar el explosivo', 'error');
+        } catch (error: any) {
+            const errorMessage = error?.error?.message || 'Error al actualizar el explosivo';
+            this.alertService.show(errorMessage, 'error', 'Error en la actualización');
         } finally {
             this.isSubmitting = false;
         }
@@ -279,11 +280,12 @@ export class CreateExplosivoComponent implements OnInit {
             const res = await this.explosivoservice.createExplosivo(this.explosivo);
             if (!res) return;
 
-            this.alertService.show(res.message, 'success');
+            this.alertService.show(`Explosivo \"${this.explosivo.nombre}\" registrado con éxito`, 'success', 'Creación exitosa');
             this.isSubmitting = false;
             this.router.navigate(['/dashboard/config/explosivos/list']);
-        } catch (error) {
-            this.alertService.show('Error al registrar explosivo', 'error');
+        } catch (error: any) {
+            const errorMessage = error?.error?.message || 'Error al registrar explosivo';
+            this.alertService.show(errorMessage, 'error', 'Error en la creación');
             this.isSubmitting = false;
         }
     }

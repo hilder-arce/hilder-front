@@ -35,14 +35,17 @@ export class ExplosivosListComponent implements OnInit {
 
     //PROPIEDADES
     explosivos = signal<Explosivo[]>([])
+    isLoading = signal(true);
 
     //CARGAR LISTA DE EXPLOSIVOS
     async loadExplosivos() {
         // Lógica para cargar la lista de explosivos
+        this.isLoading.set(true);
         const res = await this.explosivoService.getExplosivos();
         if (res) {
             this.explosivos.set(res);
         }
+        this.isLoading.set(false);
     }
 
        //EDITAR EXPLOSIVO
@@ -56,11 +59,11 @@ export class ExplosivosListComponent implements OnInit {
                 if (!explosive._id) return;
         
                 const confirm = await this.alertService.confirm(
-                    `¿Está seguro de eliminar el explosivo <b>${explosive.nombre}</b>? 
+                    `¿Está seguro de desactivar el explosivo <b>${explosive.nombre}</b>? 
                     Esta acción no se puede deshacer.`,
                     {
-                    title: 'Eliminar explosivo',
-                    confirmText: 'Sí, eliminar',
+                    title: 'Desactivar explosivo',
+                    confirmText: 'Sí, desactivar',
                     cancelText: 'Cancelar',
                     danger: true
                     }
@@ -68,16 +71,17 @@ export class ExplosivosListComponent implements OnInit {
         
                 if (!confirm) return;
         
-                // continuar eliminación
+                // continuar desactivación
                 try {
                     const response = await this.explosivoService.deactivateExplosivo(explosive._id);
         
                     if (response?.message === 'Explosivo eliminado con éxito.') {
-                        // Eliminación lógica inmediata (UX premium)
-                        this.alertService.show('Explosivo eliminado con éxito.', 'success');
+                        // Desactivación lógica inmediata (UX premium)
+                        this.alertService.show(`Explosivo \"${explosive.nombre}\" desactivado con éxito`, 'success', 'Desactivación exitosa');
                         this.loadExplosivos()}
-                } catch (error) {
-                    this.alertService.show('Error al eliminar explosivo', 'error');
+                } catch (error: any) {
+                    const errorMessage = error?.error?.message || 'Error al desactivar explosivo';
+                    this.alertService.show(errorMessage, 'error', 'Error en la desactivación');
                 }
             }
         
@@ -89,11 +93,12 @@ export class ExplosivosListComponent implements OnInit {
             try {
                 const response = await this.explosivoService.activateExplosivo(explosive._id);
                 if (response?.message === 'Explosivo activado con éxito.') {
-                    this.alertService.show('Explosivo activado con éxito.', 'success');
+                    this.alertService.show(`Explosivo \"${explosive.nombre}\" activado con éxito`, 'success', 'Activación exitosa');
                     this.loadExplosivos();
                 }
-            } catch (error) {
-                this.alertService.show('Error al activar explosivo', 'error');
+            } catch (error: any) {
+                const errorMessage = error?.error?.message || 'Error al activar explosivo';
+                this.alertService.show(errorMessage, 'error', 'Error en la activación');
             }
         }
 

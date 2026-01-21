@@ -27,7 +27,8 @@ export class ListEquiposComponent implements  OnInit {
     ) { }
 
     //PROPIEDADES
-equipos = signal<Equipo[]>([]);
+    equipos = signal<Equipo[]>([]);
+    isLoading = signal(true);
 
     //INICIALIZAR COMPONENTE
     ngOnInit(): void {
@@ -36,10 +37,12 @@ equipos = signal<Equipo[]>([]);
 
     //OBTENER LISTA DE EQUIPOS
     async getEquipos() {
+        this.isLoading.set(true);
         const equipos = await this.equipoService.getEquipos();
         if (equipos) {
             this.equipos.set(equipos);
         }
+        this.isLoading.set(false);
     }
 
     async eliminarEquipo(equipo: Equipo) {
@@ -47,11 +50,11 @@ equipos = signal<Equipo[]>([]);
         if (!equipo._id) return;
 
         const confirm = await this.alertService.confirm(
-            `¿Está seguro de eliminar el equipo <b>${equipo.nombre}</b>? 
+            `¿Está seguro de desactivar el equipo <b>${equipo.nombre}</b>? 
             Esta acción no se puede deshacer.`,
             {
-            title: 'Eliminar equipo',
-            confirmText: 'Sí, eliminar',
+            title: 'Desactivar equipo',
+            confirmText: 'Sí, desactivar',
             cancelText: 'Cancelar',
             danger: true
             }
@@ -59,16 +62,17 @@ equipos = signal<Equipo[]>([]);
 
         if (!confirm) return;
 
-        // continuar eliminación
+        // continuar desactivación
         try {
             const response = await this.equipoService.deactivateEquipo(equipo._id);
 
             if (response?.message === 'Equipo eliminado con éxito.') {
-                // Eliminación lógica inmediata (UX premium)
-                this.alertService.show('Equipo eliminado con éxito.', 'success');
+                // Desactivación lógica inmediata (UX premium)
+                this.alertService.show(`Equipo \"${equipo.nombre}\" desactivado con éxito`, 'success', 'Desactivación exitosa');
                 this.getEquipos()}
-        } catch (error) {
-            this.alertService.show('Error al eliminar equipo', 'error');
+        } catch (error: any) {
+            const errorMessage = error?.error?.message || 'Error al desactivar equipo';
+            this.alertService.show(errorMessage, 'error', 'Error en la desactivación');
         }
     }
 
@@ -85,12 +89,13 @@ equipos = signal<Equipo[]>([]);
         try {
             const response = await this.equipoService.activateEquipo(equipo._id);
             if (response?.message === 'Equipo activado con éxito.') {
-                this.alertService.show('Equipo activado con éxito.', 'success');
+                this.alertService.show(`Equipo \"${equipo.nombre}\" activado con éxito`, 'success', 'Activación exitosa');
                 this.getEquipos();
             }
 
-        } catch (error) {
-            this.alertService.show('Error al activar equipo', 'error');
+        } catch (error: any) {
+            const errorMessage = error?.error?.message || 'Error al activar equipo';
+            this.alertService.show(errorMessage, 'error', 'Error en la activación');
         }
     }
 

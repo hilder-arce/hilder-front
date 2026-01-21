@@ -68,20 +68,20 @@ export class CreateMaterialComponent implements OnInit {
 
         const materialId = this.route.snapshot.queryParamMap.get('_id');
         if (!materialId) {
-        this.alertService.show('No se pudo identificar el material a actualizar', 'error');
+        this.alertService.show('No se pudo identificar el material a actualizar', 'error', 'Error de identificación');
         this.isSubmitting = false;
         return;
         }
 
         // VALIDACIÓN: NOMBRE
         if (!this.material.nombre || !this.material.nombre.trim()) {
-        this.alertService.show('El nombre del material es obligatorio', 'error');
+        this.alertService.show('El nombre del material es obligatorio', 'warning', 'Nombre requerido');
         this.isSubmitting = false;
         return;
         }
 
         if (this.material.nombre.trim().length < 3) {
-        this.alertService.show('El nombre debe tener al menos 3 caracteres', 'error');
+        this.alertService.show('El nombre debe tener al menos 3 caracteres', 'warning', 'Nombre muy corto');
         this.isSubmitting = false;
         return;
         }
@@ -95,7 +95,7 @@ export class CreateMaterialComponent implements OnInit {
         ];
 
         if (!unidadesPermitidas.includes(this.material.unidad)) {
-        this.alertService.show('Unidad de medida no válida', 'error');
+        this.alertService.show('Unidad de medida no válida', 'warning', 'Unidad inválida');
         this.isSubmitting = false;
         return;
         }
@@ -118,7 +118,7 @@ export class CreateMaterialComponent implements OnInit {
         }
 
         if (Object.keys(payload).length === 0) {
-        this.alertService.show('No se detectaron cambios para actualizar', 'error');
+        this.alertService.show('No se detectaron cambios para actualizar', 'info', 'Sin cambios');
         this.isSubmitting = false;
         return;
         }
@@ -130,10 +130,11 @@ export class CreateMaterialComponent implements OnInit {
         const res = await this.materialService.updateMaterial(materialId, payload);
         if (!res) return;
 
-        this.alertService.show('Material actualizado correctamente', 'success');
+        this.alertService.show(`Material \"${this.material.nombre}\" actualizado correctamente`, 'success', 'Actualización exitosa');
         this.router.navigate(['/dashboard/config/materiales/list']);
-        } catch {
-        this.alertService.show('Error al actualizar el material', 'error');
+        } catch (error: any) {
+        const errorMessage = error?.error?.message || 'Error al actualizar el material';
+        this.alertService.show(errorMessage, 'error', 'Error en la actualización');
         } finally {
         this.isSubmitting = false;
         }
@@ -146,7 +147,7 @@ export class CreateMaterialComponent implements OnInit {
 
         // VALIDACIÓN: NOMBRE
         if (!this.material.nombre || !this.material.nombre.trim()) {
-            this.alertService.show('El nombre del material es requerido', 'error');
+            this.alertService.show('El nombre del material es requerido', 'warning', 'Nombre requerido');
             this.isSubmitting = false;
             return;
         }
@@ -155,7 +156,7 @@ export class CreateMaterialComponent implements OnInit {
         const unidadesPermitidas: Material['unidad'][] = ['unidad', 'metros', 'sacos', 'kg'];
         
         if (!unidadesPermitidas.includes(this.material.unidad)) {
-            this.alertService.show('Seleccione una unidad de medida válida', 'error');
+            this.alertService.show('Seleccione una unidad de medida válida', 'warning', 'Unidad inválida');
             this.isSubmitting = false;
             return;
         }
@@ -164,10 +165,11 @@ export class CreateMaterialComponent implements OnInit {
             const res = await this.materialService.createMaterial(this.material);
             if (!res) return;
 
-            this.alertService.show('Material guardado correctamente', 'success');
+            this.alertService.show(`Material \"${this.material.nombre}\" registrado con éxito`, 'success', 'Creación exitosa');
             this.router.navigate(['/dashboard/config/materiales/list']);
-        } catch (error) {
-            this.alertService.show('Hubo un problema al guardar el material', 'error');
+        } catch (error: any) {
+            const errorMessage = error?.error?.message || 'Hubo un problema al guardar el material';
+            this.alertService.show(errorMessage, 'error', 'Error en la creación');
         } finally {
             this.isSubmitting = false;
         }

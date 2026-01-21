@@ -1,4 +1,16 @@
-<div class="m-4">
+<div class="min-h-screen bg-gradient-to-br from-white via-blue-50 to-gray-100">
+  <!-- LOADER -->
+  <div *ngIf="isLoading()" class="flex items-center justify-center min-h-screen">
+    <div class="text-center">
+      <div class="inline-block">
+        <div class="w-16 h-16 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin"></div>
+      </div>
+      <p class="text-gray-600 mt-4 font-medium">Cargando datos...</p>
+    </div>
+  </div>
+
+  <!-- CONTENIDO -->
+  <div *ngIf="!isLoading()" class="m-4">
 
   <!-- GRID DE MATERIALES -->
   <div
@@ -84,19 +96,19 @@
           </span>
         </button>
 
-        <!-- ELIMINAR -->
+        <!-- DESACTIVAR -->
         <button
           *ngIf="material.estado"
           (click)="eliminarMaterial(material)"
           class="group relative w-9 h-9
                  flex items-center justify-center
                  rounded-lg
-                 text-red-600
-                 hover:bg-red-50
+                 text-orange-600
+                 hover:bg-orange-50
                  transition all duration-200
                  cursor-pointer">
 
-          <i class="bi bi-trash text-[16px]"></i>
+          <i class="bi bi-eye-slash text-[16px]"></i>
 
           <span
             class="absolute bottom-full mb-2
@@ -110,7 +122,7 @@
                    group-hover:translate-y-0
                    transition-all duration-200
                    pointer-events-none">
-            Eliminar material
+            Desactivar material
           </span>
         </button>
 
@@ -159,4 +171,5 @@
     </p>
   </div>
 
+  </div>
 </div>

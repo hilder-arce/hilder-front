@@ -78,27 +78,27 @@ export class CreateEquipoComponent {
         // VALIDACIÓN: ID EXISTENTE
         const equipoId = this.route.snapshot.queryParamMap.get('_id');
         if (!equipoId) {
-            this.alertService.show('No se pudo identificar el equipo a actualizar', 'error');
+            this.alertService.show('No se pudo identificar el equipo a actualizar', 'error', 'Error de identificación');
             this.isSubmitting = false;
             return;
         }
 
         // VALIDACIÓN: NOMBRE
         if (!this.equipo.nombre || !this.equipo.nombre.trim()) {
-            this.alertService.show('El nombre del equipo es obligatorio', 'error');
+            this.alertService.show('El nombre del equipo es obligatorio', 'warning', 'Nombre requerido');
             this.isSubmitting = false;
             return;
         }
 
         // VALIDACIÓN: MARCA
         if (!this.equipo.marca || !this.equipo.marca.trim()) {
-            this.alertService.show('La marca del fabricante es obligatoria', 'error');
+            this.alertService.show('La marca del fabricante es obligatoria', 'warning', 'Marca requerida');
             this.isSubmitting = false;
             return;
         }
 
         if (this.equipo.nombre.length > 100) {
-            this.alertService.show('El nombre es demasiado largo', 'error');
+            this.alertService.show('El nombre del equipo no debe exceder los 100 caracteres', 'warning', 'Nombre demasiado largo');
             this.isSubmitting = false;
             return;
         }
@@ -120,7 +120,7 @@ export class CreateEquipoComponent {
 
         // VALIDACIÓN: SIN CAMBIOS
         if (Object.keys(payload).length === 0) {
-            this.alertService.show('No se detectaron cambios para actualizar', 'error');
+            this.alertService.show('No se detectaron cambios para actualizar', 'info', 'Sin cambios');
             this.isSubmitting = false;
             return;
         }
@@ -129,12 +129,13 @@ export class CreateEquipoComponent {
             const res = await this.equipoService.updateEquipo(equipoId, payload);
             if (!res) return;
 
-            this.alertService.show('Equipo actualizado correctamente', 'success');
+            this.alertService.show(`Equipo \"${this.equipo.nombre}\" actualizado correctamente`, 'success', 'Actualización exitosa');
             this.isSubmitting = false;
             this.router.navigate(['/dashboard/config/equipos/list']);
 
-        } catch (error) {
-            this.alertService.show('Error al actualizar el equipo', 'error');
+        } catch (error: any) {
+            const errorMessage = error?.error?.message || 'Error al actualizar el equipo';
+            this.alertService.show(errorMessage, 'error', 'Error en la actualización');
             this.isSubmitting = false;
         }finally {
             this.isSubmitting = false;
@@ -151,20 +152,20 @@ export class CreateEquipoComponent {
 
         // VALIDACIÓN: NOMBRE
         if (!this.equipo.nombre || !this.equipo.nombre.trim()) {
-            this.alertService.show('El nombre del equipo es obligatorio', 'error');
+            this.alertService.show('El nombre del equipo es obligatorio', 'warning', 'Nombre requerido');
             this.isSubmitting = false;
             return;
         }
 
         // VALIDACIÓN: MARCA
         if (!this.equipo.marca || !this.equipo.marca.trim()) {
-            this.alertService.show('La marca del fabricante es obligatoria', 'error');
+            this.alertService.show('La marca del fabricante es obligatoria', 'warning', 'Marca requerida');
             this.isSubmitting = false;
             return;
         }
 
         if (this.equipo.nombre.length > 100) {
-            this.alertService.show('El nombre es demasiado largo', 'error');
+            this.alertService.show('El nombre del equipo no debe exceder los 100 caracteres', 'warning', 'Nombre demasiado largo');
             this.isSubmitting = false;
             return;
         }
@@ -173,11 +174,12 @@ export class CreateEquipoComponent {
             const res = await this.equipoService.createEquipo(this.equipo);
             if (!res) return;
 
-            this.alertService.show('Equipo registrado con éxito.', 'success');
+            this.alertService.show(`Equipo \"${this.equipo.nombre}\" registrado con éxito`, 'success', 'Creación exitosa');
             this.isSubmitting = false;
             this.router.navigate(['/dashboard/config/equipos']); 
-        } catch (error) {
-            this.alertService.show('Error al registrar el equipo', 'error');
+        } catch (error: any) {
+            const errorMessage = error?.error?.message || 'Error al registrar el equipo';
+            this.alertService.show(errorMessage, 'error', 'Error en la creación');
             this.isSubmitting = false;
         }finally {
             this.isSubmitting = false;

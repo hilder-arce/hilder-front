@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 export class AlertService {
 
   // MOSTRAR ALERTA
-  show(message: string, type: 'success' | 'error') {
+  show(message: string, type: 'success' | 'error' | 'info' | 'warning', heading?: string) {
 
     const old = document.querySelector('.enterprise-alert-overlay');
     if (old) old.remove();
@@ -17,13 +17,16 @@ export class AlertService {
     const box = document.createElement('div');
     box.className = `enterprise-alert enterprise-alert-${type}`;
 
+    const alertHeading = heading || this.getHeading(type);
+    const icon = this.getIcon(type);
+
     box.innerHTML = `
       <div class="enterprise-alert-header">
         <div class="enterprise-alert-icon">
-          ${type === 'success' ? this.successIcon() : this.errorIcon()}
+          ${icon}
         </div>
         <div class="enterprise-alert-heading">
-          ${type === 'success' ? 'Operación completada' : 'Error del sistema'}
+          ${alertHeading}
         </div>
       </div>
 
@@ -46,6 +49,29 @@ export class AlertService {
     }, 2000);
   }
 
+  private getHeading(type: 'success' | 'error' | 'info' | 'warning'): string {
+    const headings = {
+      success: 'Éxito',
+      error: 'Error',
+      info: 'Información',
+      warning: 'Advertencia'
+    };
+    return headings[type];
+  }
+
+  private getIcon(type: 'success' | 'error' | 'info' | 'warning'): string {
+    switch (type) {
+      case 'success':
+        return this.successIcon();
+      case 'error':
+        return this.errorIcon();
+      case 'info':
+        return this.infoIcon();
+      case 'warning':
+        return this.warningIcon();
+    }
+  }
+
   private successIcon() {
     return `
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
@@ -60,6 +86,16 @@ export class AlertService {
         <circle cx="12" cy="12" r="9"/>
         <line x1="15" y1="9" x2="9" y2="15"/>
         <line x1="9" y1="9" x2="15" y2="15"/>
+      </svg>
+    `;
+  }
+
+  private infoIcon() {
+    return `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+        <circle cx="12" cy="12" r="9"/>
+        <line x1="12" y1="8" x2="12" y2="12"/>
+        <line x1="12" y1="16" x2="12.01" y2="16"/>
       </svg>
     `;
   }
