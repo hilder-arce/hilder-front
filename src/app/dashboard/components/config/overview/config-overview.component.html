@@ -1,16 +1,13 @@
-<div class="min-h-screen bg-gradient-to-br from-white via-blue-50 to-gray-100">
+<div *ngIf="isLoading" class="h-[calc(70vh)]">
   <!-- LOADER -->
-  <div *ngIf="isLoading" class="flex items-center justify-center min-h-screen">
-    <div class="text-center">
-      <div class="inline-block">
-        <div class="w-16 h-16 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin"></div>
-      </div>
-      <p class="text-gray-600 mt-4 font-medium">Cargando datos...</p>
-    </div>
-  </div>
+  <app-loader  message="Cargando datos..."></app-loader>
+</div>
+
+<div *ngIf="!isLoading" class="flex flex-col min-h-screen bg-gradient-to-br from-white via-blue-50 to-gray-100">
 
   <!-- CONTENIDO -->
-  <div *ngIf="!isLoading" class="max-w-[1600px] mx-auto">
+  <div  class="m-4">
+    <div>
     <!-- HEADER SECTION -->
     <div class="px-6 py-8 border-b border-blue-200/40">
       <div class="flex items-start justify-between">
@@ -244,3 +241,7 @@
           </div>
         </div>
       </div>
+    </div>
+    </div>
+  </div>
+</div>

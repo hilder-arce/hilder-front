@@ -44,9 +44,8 @@
 
         <tbody>
 
-          <tr
-            *ngFor="let row of reporteEquipos; let i = index"
-            class="border-t border-black/5">
+          <ng-container *ngFor="let row of reporteEquipos; let i = index">
+            <tr class="border-t border-black/5">
 
             <!-- EQUIPO -->
             <td class="px-4 py-3">
@@ -135,7 +134,7 @@
             <td class="px-4 py-3">
               <div class="flex items-center justify-center gap-2">
 
-                <!-- GUARDAR -->
+                <!-- GUARDAR (para filas nuevas) -->
                 <button
                   *ngIf="isEditing(i) && !isSaved(i)"
                   (click)="saveRow(i)"
@@ -166,7 +165,7 @@
                   </span>
                 </button>
 
-                <!-- EDITAR -->
+                <!-- EDITAR (para filas guardadas no editadas) -->
                 <button
                   *ngIf="!isEditing(i) && isSaved(i)"
                   (click)="editRow(i)"
@@ -197,7 +196,7 @@
                   </span>
                 </button>
 
-                <!-- ACTUALIZAR -->
+                <!-- ACTUALIZAR (cuando estás editando una fila guardada) -->
                 <button
                   *ngIf="isEditing(i) && isSaved(i)"
                   (click)="saveRow(i)"
@@ -205,8 +204,8 @@
                         w-9 h-9
                         flex items-center justify-center
                         rounded-lg
-                        text-yellow-600
-                        hover:bg-yellow-50
+                        text-blue-600
+                        hover:bg-blue-50
                         transition-all duration-200
                         cursor-pointer">
 
@@ -228,7 +227,7 @@
                   </span>
                 </button>
 
-                <!-- ELIMINAR -->
+                <!-- ELIMINAR (siempre visible) -->
                 <button
                   (click)="removeEquipoRow(i)"
                   class="group relative
@@ -261,8 +260,31 @@
               </div>
             </td>
 
-
           </tr>
+
+          <!-- FILA DE OBSERVACIÓN (expandible) -->
+          <tr class="border-t border-black/5 bg-slate-50/50">
+            <td [attr.colspan]="7" class="px-4 py-4">
+              <div class="flex items-start gap-3">
+                <label class="block text-xs font-semibold text-black/70 pt-2 min-w-fit">
+                  Observación (opcional):
+                </label>
+                <textarea
+                  [(ngModel)]="row.observacion"
+                  [disabled]="!isEditing(i)"
+                  name="obs-{{i}}"
+                  rows="2"
+                  placeholder="Añade cualquier nota o comentario sobre este equipo..."
+                  class="w-full px-3 py-2 text-sm rounded-lg
+                        border border-black/10
+                        resize-none
+                        focus:outline-none focus:ring-4 focus:ring-blue-500/40
+                        disabled:bg-black/5 disabled:cursor-not-allowed">
+                </textarea>
+              </div>
+            </td>
+          </tr>
+          </ng-container>
 
         </tbody>
 

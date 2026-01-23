@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { LoaderComponent } from '../../../../shared/componets/loader/loader.component';
 import { EquipoService } from '../components/equipos/services/equipo.service';
 import { ExplosivoService } from '../components/explosivos/services/explosivo.service';
 import { MaterialService } from '../components/materials/services/material.service';
@@ -10,7 +11,7 @@ import { Material } from '../components/materials/interfaces/material.interface'
 @Component({
   selector: 'app-config-overview',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, LoaderComponent],
   templateUrl: './config-overview.component.html',
   styleUrl: './config-overview.component.css'
 })

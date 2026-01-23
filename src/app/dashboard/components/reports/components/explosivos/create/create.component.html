@@ -14,20 +14,17 @@
         Explosivos
       </h1>
       <p class="mt-1 text-sm text-black/60 max-w-xl">
-        Control de stock, ingresos y consumo de explosivos por turno y responsable.
+        Control de stock, ingresos y consumo de explosivos por turno.
       </p>
     </div>
   </div>
 
   <!-- CARD -->
   <div
-    class="space-y-10 rounded-3xl border border-black/5
-           bg-white p-8
-           shadow-[0_40px_100px_-40px_rgba(0,0,0,.5)]">
+    class="space-y-10 rounded-3xl border border-black/5 bg-white p-8
+           shadow-[0_40px_100px_-40px_rgba(0,0,0,.4)]">
 
-    <!-- ===============================
-         TABLA DE CONTROL
-    ================================= -->
+    <!-- TABLA DE EXPLOSIVOS -->
     <div class="overflow-hidden rounded-2xl border border-black/5">
 
       <table class="w-full text-sm">
@@ -44,92 +41,249 @@
         </thead>
 
         <tbody>
-  <tr
-    *ngFor="let row of reporteExplosivos; let i = index; trackBy: trackByIndex"
-    class="border-t border-black/5"
-  >
 
-    <!-- EXPLOSIVO -->
-    <td class="px-4 py-3">
-      <select
-        [(ngModel)]="row.explosivoId"
-        (ngModelChange)="onExplosivoChange(row)"
-        name="explosivo-{{i}}"
-        class="w-full h-10 px-3 rounded-lg border border-black/10 focus:outline-none focus:ring-4 focus:border-none focus:ring-blue-500/40"
-      >
-        <option value="">Seleccione</option>
-        <option *ngFor="let ex of explosivos" [value]="ex._id">
-          {{ ex.nombre }}
-        </option>
-      </select>
-    </td>
+          <ng-container *ngFor="let row of reporteExplosivos; let i = index; trackBy: trackByIndex">
+            <tr class="border-t border-black/5">
 
-    <!-- TIPO -->
-    <td class="px-4 py-3 text-center text-black/70">
-      {{ row.tipo }}
-    </td>
+              <!-- EXPLOSIVO -->
+              <td class="px-4 py-3">
+                <select
+                  [(ngModel)]="row.explosivoId"
+                  [disabled]="!isEditing(i)"
+                  (ngModelChange)="onExplosivoChange(row)"
+                  name="explosivo-{{i}}"
+                  class="w-full h-10 px-3 rounded-lg
+                        border border-black/10
+                        focus:outline-none focus:ring-4 focus:ring-blue-500/40">
 
-    <!-- STOCK INICIAL -->
-    <td class="px-4 py-3 text-center font-semibold text-black/60">
-      {{ row.stockInicial }} {{ row.unidad }}
-    </td>
+                  <option value="" disabled>Seleccione</option>
+                  <option *ngFor="let ex of explosivos" [value]="ex._id">
+                    {{ ex.nombre }}
+                  </option>
+                </select>
+              </td>
 
-    <!-- INGRESO -->
-    <td class="px-4 py-3">
-      <input
-        type="number"
-        [(ngModel)]="row.ingreso"
-        (ngModelChange)="calcularStock(row)"
-        name="ingreso-{{i}}"
-        class="w-full h-10 text-center rounded-lg
-               border border-green-300 text-green-700 focus:outline-none focus:ring-4 focus:border-none focus:ring-green-500/40"
-      />
-    </td>
+              <!-- TIPO -->
+              <td class="px-4 py-3 text-center text-black/70">
+                {{ row.tipo }}
+              </td>
 
-    <!-- CONSUMO -->
-    <td class="px-4 py-3">
-      <input
-        type="number"
-        [(ngModel)]="row.consumo"
-        (ngModelChange)="calcularStock(row)"
-        name="consumo-{{i}}"
-        class="w-full h-10 text-center rounded-lg
-               border border-red-300 text-red-700 focus:outline-none focus:ring-4 focus:border-none focus:ring-red-500/40"
-      />
-    </td>
+              <!-- STOCK INICIAL -->
+              <td class="px-4 py-3">
+                <input
+                  type="number"
+                  [(ngModel)]="row.stockInicial"
+                  [disabled]="!isEditing(i)"
+                  (ngModelChange)="calcularStock(row)"
+                  name="stock-ini-{{i}}"
+                  class="w-full h-10 text-center rounded-lg
+                        border border-black/10
+                        focus:outline-none focus:ring-4 focus:ring-blue-500/40">
+              </td>
 
-    <!-- STOCK FINAL -->
-    <td
-      class="px-4 py-3 text-center font-semibold"
-      [class.text-yellow-600]="row.stockFinal > 0"
-      [class.text-red-600]="row.stockFinal === 0"
-    >
-      {{ row.stockFinal }} {{ row.unidad }}
-    </td>
+              <!-- INGRESO -->
+              <td class="px-4 py-3">
+                <input
+                  type="number"
+                  [(ngModel)]="row.ingreso"
+                  [disabled]="!isEditing(i)"
+                  (ngModelChange)="calcularStock(row)"
+                  name="ingreso-{{i}}"
+                  class="w-full h-10 text-center rounded-lg
+                        border border-green-300
+                        focus:outline-none focus:ring-4 focus:ring-green-500/40">
+              </td>
 
-    <!-- DELETE -->
-    <td class="px-4 py-3 text-center">
-      <button
-        (click)="removeExplosivoRow(i)"
-        class="text-red-500 hover:text-red-700 cursor-pointer"
-      >
-        <i class="bi bi-x-lg"></i>
-      </button>
-    </td>
-  </tr>
-</tbody>
+              <!-- CONSUMO -->
+              <td class="px-4 py-3">
+                <input
+                  type="number"
+                  [(ngModel)]="row.consumo"
+                  [disabled]="!isEditing(i)"
+                  (ngModelChange)="calcularStock(row)"
+                  name="consumo-{{i}}"
+                  class="w-full h-10 text-center rounded-lg
+                        border border-red-300
+                        focus:outline-none focus:ring-4 focus:ring-red-500/40">
+              </td>
+
+              <!-- STOCK FINAL -->
+              <td
+                class="px-4 py-3 text-center font-semibold"
+                [class.text-yellow-600]="row.stockFinal > 0"
+                [class.text-red-600]="row.stockFinal <= 0">
+
+                {{ row.stockFinal }} {{ row.unidad }}
+              </td>
+
+              <!-- ACCIONES -->
+              <td class="px-4 py-3">
+                <div class="flex items-center justify-center gap-2">
+
+                  <!-- GUARDAR (para filas nuevas) -->
+                  <button
+                    *ngIf="isEditing(i) && !isSaved(i)"
+                    (click)="saveExplosivoRow(i)"
+                    class="group relative
+                          w-9 h-9
+                          flex items-center justify-center
+                          rounded-lg
+                          text-emerald-600
+                          hover:bg-emerald-50
+                          transition-all duration-200
+                          cursor-pointer">
+
+                    <i class="bi bi-check-lg text-[18px]"></i>
+
+                    <span
+                      class="absolute bottom-full mb-2
+                            px-2.5 py-1.5
+                            rounded-md
+                            bg-slate-900
+                            text-white text-xs font-medium
+                            whitespace-nowrap
+                            opacity-0 translate-y-1
+                            group-hover:opacity-100
+                            group-hover:translate-y-0
+                            transition-all duration-200
+                            pointer-events-none">
+                      Guardar explosivo
+                    </span>
+                  </button>
+
+                  <!-- EDITAR (para filas guardadas no editadas) -->
+                  <button
+                    *ngIf="!isEditing(i) && isSaved(i)"
+                    (click)="editExplosivoRow(i)"
+                    class="group relative
+                          w-9 h-9
+                          flex items-center justify-center
+                          rounded-lg
+                          text-blue-600
+                          hover:bg-blue-50
+                          transition-all duration-200
+                          cursor-pointer">
+
+                    <i class="bi bi-pencil text-[17px]"></i>
+
+                    <span
+                      class="absolute bottom-full mb-2
+                            px-2.5 py-1.5
+                            rounded-md
+                            bg-slate-900
+                            text-white text-xs font-medium
+                            whitespace-nowrap
+                            opacity-0 translate-y-1
+                            group-hover:opacity-100
+                            group-hover:translate-y-0
+                            transition-all duration-200
+                            pointer-events-none">
+                      Editar explosivo
+                    </span>
+                  </button>
+
+                  <!-- ACTUALIZAR (cuando estás editando una fila guardada) -->
+                  <button
+                    *ngIf="isEditing(i) && isSaved(i)"
+                    (click)="saveExplosivoRow(i)"
+                    class="group relative
+                          w-9 h-9
+                          flex items-center justify-center
+                          rounded-lg
+                          text-blue-600
+                          hover:bg-blue-50
+                          transition-all duration-200
+                          cursor-pointer">
+
+                    <i class="bi bi-arrow-repeat text-[18px]"></i>
+
+                    <span
+                      class="absolute bottom-full mb-2
+                            px-2.5 py-1.5
+                            rounded-md
+                            bg-slate-900
+                            text-white text-xs font-medium
+                            whitespace-nowrap
+                            opacity-0 translate-y-1
+                            group-hover:opacity-100
+                            group-hover:translate-y-0
+                            transition-all duration-200
+                            pointer-events-none">
+                      Actualizar datos
+                    </span>
+                  </button>
+
+                  <!-- ELIMINAR (siempre visible) -->
+                  <button
+                    (click)="removeExplosivoRow(i)"
+                    class="group relative
+                          w-9 h-9
+                          flex items-center justify-center
+                          rounded-lg
+                          text-red-500
+                          hover:bg-red-50
+                          transition-all duration-200
+                          cursor-pointer">
+
+                    <i class="bi bi-x-lg text-[16px]"></i>
+
+                    <span
+                      class="absolute bottom-full mb-2
+                            px-2.5 py-1.5
+                            rounded-md
+                            bg-slate-900
+                            text-white text-xs font-medium
+                            whitespace-nowrap
+                            opacity-0 translate-y-1
+                            group-hover:opacity-100
+                            group-hover:translate-y-0
+                            transition-all duration-200
+                            pointer-events-none">
+                      Eliminar fila
+                    </span>
+                  </button>
+
+                </div>
+              </td>
+
+            </tr>
+
+            <!-- FILA DE OBSERVACIÓN (expandible) -->
+            <tr class="border-t border-black/5 bg-slate-50/50">
+              <td [attr.colspan]="7" class="px-4 py-4">
+                <div class="flex items-start gap-3">
+                  <label class="block text-xs font-semibold text-black/70 pt-2 min-w-fit">
+                    Observación (opcional):
+                  </label>
+                  <textarea
+                    [(ngModel)]="row.observacionesOperativas"
+                    [disabled]="!isEditing(i)"
+                    name="obs-{{i}}"
+                    rows="2"
+                    placeholder="Añade cualquier nota o comentario sobre este explosivo..."
+                    class="w-full px-3 py-2 text-sm rounded-lg
+                          border border-black/10
+                          resize-none
+                          focus:outline-none focus:ring-4 focus:ring-blue-500/40
+                          disabled:bg-black/5 disabled:cursor-not-allowed">
+                  </textarea>
+                </div>
+              </td>
+            </tr>
+          </ng-container>
+
+        </tbody>
 
       </table>
 
       <div class="p-4">
         <button
-  (click)="addExplosivoRow()"
-  class="text-sm font-semibold text-yellow-600 hover:underline cursor-pointer"
->
-  + Agregar explosivo
-</button>
-
+          (click)="addExplosivoRow()"
+          class="text-sm font-semibold text-yellow-600 hover:underline cursor-pointer">
+          + Agregar explosivo
+        </button>
       </div>
+
     </div>
 
   </div>

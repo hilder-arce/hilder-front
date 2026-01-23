@@ -40,7 +40,6 @@ export class ExplosivoService {
 
     //UPDATED EXPLOSIVO BY ID
     async updateExplosivo(id: string, payload: Partial<Explosivo>) {
-        console.log(payload);
         return await this.http.patch<{ message: string }>(
             `${this.apiBackend}/explosivo/${id}`,
             payload

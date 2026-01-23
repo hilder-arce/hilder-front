@@ -1,6 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { Component, computed, OnInit, signal } from "@angular/core";
 import { Router, RouterModule } from "@angular/router";
+import { LoaderComponent } from "../../../../../../shared/componets/loader/loader.component";
 import { MaterialService } from "../services/material.service";
 import { Material } from "../interfaces/material.interface";
 import { AlertService } from "../../../../../../shared/services/alert.service";
@@ -16,6 +17,7 @@ import { MaterialsSearchService } from "../services/materials-search.service";
     CommonModule,
     FormsModule,
     RouterModule,
+    LoaderComponent
   ]
 })
 export class ListMaterialComponent implements OnInit {

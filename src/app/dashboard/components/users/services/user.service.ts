@@ -40,7 +40,6 @@ export class UserService {
 
     //UPDATED USER BY ID
     async updateUser(id: string, payload: Partial<User>) {
-        console.log(payload);
         return await this.http.patch<{ message: string }>(
             `${this.apiBackend}/users/${id}`,
             payload

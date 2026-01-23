@@ -1,6 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { Component, computed, OnInit, signal } from "@angular/core";
 import { Router, RouterModule } from "@angular/router";
+import { LoaderComponent } from "../../../../../../shared/componets/loader/loader.component";
 import { Explosivo } from "../interfaces/explosivo.interface";
 import { ExplosivoService } from "../services/explosivo.service";
 import { AlertService } from "../../../../../../shared/services/alert.service";
@@ -13,7 +14,8 @@ import { ExplosivosSearchService } from "../services/explosivos-search.service";
   imports: [
     // Módulos necesarios
     CommonModule,
-    RouterModule
+    RouterModule,
+    LoaderComponent
   ],
 })
 

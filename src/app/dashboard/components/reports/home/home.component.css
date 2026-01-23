@@ -1,0 +1,73 @@
+/* Modal animations */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Modal container animation */
+:host ::ng-deep .modal-content {
+  animation: slideIn 0.3s ease-out;
+}
+
+/* Smooth transitions */
+.transition {
+  transition: all 0.3s ease;
+}
+
+/* Table styling */
+table {
+  border-spacing: 0;
+}
+
+table td,
+table th {
+  white-space: nowrap;
+}
+
+/* Scrollable table container */
+.overflow-x-auto {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Button hover effects */
+button {
+  transition: all 0.2s ease;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+/* Modal background fade */
+@media (prefers-reduced-motion: no-preference) {
+  .modal-overlay {
+    animation: fadeIn 0.3s ease-out;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  table {
+    font-size: 0.75rem;
+  }
+
+  table td,
+  table th {
+    padding: 0.5rem !important;
+  }
+}

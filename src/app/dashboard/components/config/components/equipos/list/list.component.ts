@@ -1,6 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { Component, computed, OnInit, signal } from "@angular/core";
 import { Router, RouterModule } from "@angular/router";
+import { LoaderComponent } from "../../../../../../shared/componets/loader/loader.component";
 import { EquipoService } from "../services/equipo.service";
 import { Equipo } from "../interfaces/equipo.interface";
 import { AlertService } from "../../../../../../shared/services/alert.service";
@@ -12,7 +13,8 @@ import { EquiposSearchService } from "../services/equipos-search.service";
     styleUrls: ['./list.component.css'],
     imports: [
         CommonModule,
-        RouterModule
+        RouterModule,
+        LoaderComponent
     ]
 })
 
