@@ -355,7 +355,7 @@ export class ReportsHomeComponent implements OnInit, OnDestroy {
       drawSection(
         'EXPLOSIVOS',
         ['Explosivo', 'Tipo', 'Stock Ini.', 'Ingreso', 'Consumo', 'Stock Fin.', 'Unidad', 'Obs.'],
-        [20, 15, 18, 15, 15, 15, 16, 26],
+        [20, 27, 14, 13, 13, 13, 16, 25],
         reporte.explosivos.map(ex => [
           ex.nombre ?? '—',
           ex.tipo ?? '—',
