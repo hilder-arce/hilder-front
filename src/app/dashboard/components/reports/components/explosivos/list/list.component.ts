@@ -243,7 +243,7 @@ export class ExplosivosListComponent implements OnInit, OnDestroy {
             // Tabla de explosivos
             if (reporte.explosivos && reporte.explosivos.length > 0) {
                 const headers = ['Explosivo', 'Tipo', 'Stock Inicial', 'Ingreso', 'Consumo', 'Stock Final', 'Unidad', 'Observaciones'];
-                let colWidths = normalizeWidths([20, 15, 18, 15, 15, 15, 12, 30]);
+                let colWidths = normalizeWidths([20, 27, 14, 13, 13, 13, 16, 25]);
 
                 drawHeader(headers, colWidths, [249, 115, 22]);
 
