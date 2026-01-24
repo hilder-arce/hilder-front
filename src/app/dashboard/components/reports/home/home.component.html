@@ -1,3 +1,4 @@
+<app-header-home-reports></app-header-home-reports>
 <section class="px-6 py-6 space-y-8 max-w-[1400px] mx-auto">
 
   <!-- =========================
@@ -67,7 +68,10 @@
         <svg class="mx-auto w-12 h-12 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
         </svg>
-        <p class="mt-2 text-slate-500">No hay reportes disponibles</p>
+        <p class="mt-2 text-slate-500">
+          <span *ngIf="reportesOriginal.length === 0">No hay reportes disponibles</span>
+          <span *ngIf="reportesOriginal.length > 0">No se encontraron reportes que coincidan con la búsqueda</span>
+        </p>
       </div>
     </div>
 
@@ -162,6 +166,11 @@
                         class="inline-flex items-center justify-center w-8 h-8 text-sm rounded-md bg-slate-100 text-slate-600 hover:bg-slate-200 transition"
                         title="Ver detalles completos">
                   <i class="bi bi-eye"></i>
+                </button>
+                <button (click)="editarReporte(reporte)"
+                        class="inline-flex items-center justify-center w-8 h-8 text-sm rounded-md bg-amber-100 text-amber-600 hover:bg-amber-200 transition"
+                        title="Editar reporte">
+                  <i class="bi bi-pencil"></i>
                 </button>
                 <button (click)="generarPDFCompleto(reporte)"
                         class="inline-flex items-center justify-center w-8 h-8 text-sm rounded-md bg-red-100 text-red-600 hover:bg-red-200 transition"

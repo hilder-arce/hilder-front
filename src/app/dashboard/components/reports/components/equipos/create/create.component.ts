@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, inject } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { ActivatedRoute, Router, RouterModule } from "@angular/router";
 import { AlertService } from "../../../../../../shared/services/alert.service";
@@ -7,6 +7,7 @@ import { EquipoReportService } from "../services/equipo.service";
 import { Equipo } from "../../../../config/components/equipos/interfaces/equipo.interface";
 import { ReporteEquipo } from "../interfaces/equipo.interface";
 import { EquipoService } from "../../../../config/components/equipos/services/equipo.service";
+import { ReportsSearchService } from "../../../services/reports-search.service";
 
 @Component({
     selector: 'app-create-equipo',
@@ -22,6 +23,8 @@ import { EquipoService } from "../../../../config/components/equipos/services/eq
 export class CreateEquipoComponent implements  OnInit {
     
     // INYECTAR SERVICIOS
+    private searchService = inject(ReportsSearchService);
+
     constructor(
         private alertService: AlertService,
         private router: Router,
@@ -35,14 +38,33 @@ export class CreateEquipoComponent implements  OnInit {
         this.cargarEquiposDisponibles();
         // Cargar reportes guardados en localStorage
         this.cargarReportesAlmacenados();
+        // Escuchar cambios de búsqueda
+        this.searchService.search$.subscribe(searchTerm => {
+            this.filtrarEquipos(searchTerm);
+        });
     }
 
     // PROPIEDADES 
     equipos: Equipo[] = [];
     reporteEquipos: ReporteEquipo[] = [];
+    reporteEquiposOriginal: ReporteEquipo[] = []; // Para guardar los datos sin filtrar
+    equiposFiltrados: ReporteEquipo[] = [];
     editingRows = new Set<number>();
     savedRows = new Set<number>();
     originalRow: Map<number, ReporteEquipo> = new Map(); // Para restaurar si cancela edición
+
+    /**
+     * Filtrar equipos según la búsqueda
+     */
+    filtrarEquipos(searchTerm: string): void {
+        if (!searchTerm.trim()) {
+            this.reporteEquipos = [...this.reporteEquiposOriginal];
+        } else {
+            this.reporteEquipos = this.reporteEquiposOriginal.filter(equipo =>
+                equipo.equipoNombre?.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+        }
+    }
 
     /**
      * Cargar los equipos disponibles del servicio de config
@@ -64,6 +86,7 @@ export class CreateEquipoComponent implements  OnInit {
     cargarReportesAlmacenados() {
         const reportes = this.equipoReportService.obtenerEquipos();
         this.reporteEquipos = [...reportes];
+        this.reporteEquiposOriginal = [...reportes]; // Guardar original para filtrado
         // Marcar todos los reportes cargados como guardados
         reportes.forEach((_, index) => {
             this.savedRows.add(index);

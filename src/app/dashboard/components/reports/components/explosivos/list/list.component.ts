@@ -1,12 +1,15 @@
 import { CommonModule } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy, inject } from "@angular/core";
 import { Router, RouterModule } from "@angular/router";
 import { AlertService } from "../../../../../../shared/services/alert.service";
 import { Reporte } from "../../../interfaces/report.interface";
 import { ReporteExplosivo } from "../interfaces/explosivo.interface";
 import { ReportService } from "../../../services/report.service";
+import { ReportsSearchService } from "../../../services/reports-search.service";
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 
 @Component({
   selector: 'app-explosivos-list',
@@ -19,9 +22,12 @@ import html2canvas from 'html2canvas';
   ],
 })
 
-export class ExplosivosListComponent implements OnInit {
+export class ExplosivosListComponent implements OnInit, OnDestroy {
     reportes: Reporte[] = [];
+    reportesOriginal: Reporte[] = [];
     isLoading = false;
+    private destroy$ = new Subject<void>();
+    private searchService = inject(ReportsSearchService);
     
     // Modal
     modalAbierto = false;
@@ -37,6 +43,43 @@ export class ExplosivosListComponent implements OnInit {
     //INICIALIZAR COMPONENTE
     ngOnInit(): void {
         this.cargarReportes();
+        this.subscribeToSearch();
+    }
+
+    ngOnDestroy(): void {
+        this.destroy$.next();
+        this.destroy$.complete();
+    }
+
+    /**
+     * Suscribirse a los cambios del servicio de búsqueda
+     */
+    subscribeToSearch(): void {
+        this.searchService.search$
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(searchTerm => {
+                this.filtrarReportes(searchTerm);
+            });
+    }
+
+    /**
+     * Filtrar reportes por término de búsqueda
+     */
+    filtrarReportes(searchTerm: string): void {
+        if (!searchTerm.trim()) {
+            this.reportes = [...this.reportesOriginal];
+            return;
+        }
+
+        const termLower = searchTerm.toLowerCase();
+        this.reportes = this.reportesOriginal.filter(reporte => {
+            const fechaMatch = this.formatearFecha(reporte.fecha).includes(termLower);
+            const turnoMatch = reporte.turno.toLowerCase().includes(termLower);
+            const responsableMatch = (reporte.responsable || '').toLowerCase().includes(termLower);
+            const nivelMatch = (reporte.nivel || '').includes(searchTerm);
+
+            return fechaMatch || turnoMatch || responsableMatch || nivelMatch;
+        });
     }
 
     //CARGAR LISTA DE REPORTES DE EXPLOSIVOS
@@ -44,7 +87,8 @@ export class ExplosivosListComponent implements OnInit {
         try {
             this.isLoading = true;
             const res = await this.reportService.getReports();
-            this.reportes = res || [];
+            this.reportesOriginal = res || [];
+            this.reportes = [...this.reportesOriginal];
             console.log('Reportes cargados:', this.reportes);
         } catch (error) {
             console.error('Error al cargar reportes:', error);

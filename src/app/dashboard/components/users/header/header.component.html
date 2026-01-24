@@ -1,93 +1,46 @@
 <!-- ========================= -->
-<!-- HEADER -->
+<!-- CLEAN PROFESSIONAL HEADER -->
 <!-- ========================= -->
-<header class="mx-3 mt-4 mb-6
-         flex items-center gap-4
-         px-4 py-3
-         rounded-xl
-         bg-white/80 
-         backdrop-blur-xl
-         border border-gray-200/70 dark:border-white/10
-         shadow-[0_10px_30px_-10px_rgba(0,0,0,0.15)]">
+<header class="mt-4 mx-3 mb-6 px-6 py-4 rounded-2xl bg-white/80 backdrop-blur-xl border border-gray-200/70 shadow-[0_12px_40px_-18px_rgba(0,0,0,0.25)]">
+  
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+    
+    <!-- LEFT: Title -->
+    <div class="flex-1 min-w-0">
+      <h1 class="text-2xl font-bold text-gray-900 truncate">
+        {{ title() }}
+      </h1>
+      <p class="text-sm text-gray-600 mt-1">
+        <span *ngIf="isCreate()">Crear nuevo usuario en el sistema</span>
+        <span *ngIf="isEdit()">Editar información del usuario</span>
+        <span *ngIf="!isCreate() && !isEdit()">Gestión integral de usuarios</span>
+      </p>
+    </div>
 
-  <!-- COLUMNA TÍTULO (ocupa lo que queda) -->
-  <div class="flex-1 flex items-center justify-center min-w-0">
-    <h1 class="text-base font-semibold tracking-wide
-             text-black
-             truncate">
-      {{ title() }}
-    </h1>
-  </div>
+    <!-- RIGHT: Action Buttons -->
+    <div class="flex items-center gap-3">
+      
+      <!-- Create User Button -->
+      <button routerLink="create" *ngIf="!isCreate() && !isEdit()" 
+              class="px-4 py-2 rounded-lg bg-blue-600 text-white text-sm font-semibold
+                     hover:bg-blue-700 transition-colors flex items-center gap-2">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+        </svg>
+        <span>Nuevo</span>
+      </button>
 
-  <!-- COLUMNA BOTÓN (ancho natural) -->
-  <div class="shrink-0">
-    <!--cuando este en list-->
-    <button routerLink="create" *ngIf="!isCreate() && !isEdit()" class="group relative inline-flex items-center gap-2
-             px-4 py-2.5
-             rounded-lg
-             cursor-pointer
-             bg-gradient-to-br from-blue-500 to-blue-600
-             text-white text-sm font-medium
-             shadow-lg shadow-blue-600/30
-             transition-all duration-300
-             hover:shadow-blue-600/50
-             active:scale-[0.97]">
+      <!-- Back Button -->
+      <button (click)="goReportList()" *ngIf="isCreate() || isEdit()" 
+              aria-label="Volver"
+              class="w-10 h-10 flex items-center justify-center rounded-lg 
+                     text-slate-600 hover:bg-slate-100 transition">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
 
-      <span class="flex items-center justify-center
-               w-8 h-8 rounded-md
-               bg-white/15 backdrop-blur
-               transition-transform duration-300
-               group-hover:rotate-90">
-        <i class="bi bi-plus text-base"></i>
-      </span>
-      <span class="whitespace-nowrap sm:inline">
-        Nuevo
-      </span>
-
-      <!-- glow -->
-      <span class="absolute inset-0 rounded-lg
-               bg-white/20 opacity-0
-               group-hover:opacity-10
-               transition-opacity"></span>
-    </button>
-    <!--cuando este en create-->
-    <button (click)="goReportList()" *ngIf="isCreate() || isEdit()" aria-label="Volver a la lista de reportes" class="group relative inline-flex items-center justify-center
-            w-10 h-10
-            rounded-full
-            cursor-pointer
-            bg-gradient-to-br from-yellow-400 to-yellow-500
-            border border-gray-300/70 dark:border-white/20
-            bg-white/70 dark:bg-white/5
-            backdrop-blur-md
-            shadow-[0_6px_18px_-6px_rgba(0,0,0,0.25)]
-            transition-all duration-300
-            hover:bg-white hover:shadow-[0_8px_24px_-6px_rgba(0,0,0,0.35)]
-            active:scale-95">
-
-      <!-- icon -->
-      <span class="flex items-center justify-center
-                  w-6 h-6
-                  rounded-full
-                  transition-transform duration-300
-                  group-hover:rotate-90">
-        <i class="bi bi-x-lg text-sm "></i>
-      </span>
-
-      <!--tool tip-->
-      <span class="absolute -bottom-9 left-1/2 -translate-x-1/2
-              text-xs px-2 py-1 rounded-md
-              bg-black/80 text-white
-              opacity-0 group-hover:opacity-100
-              transition-opacity">
-        Volver
-      </span>
-
-      <!-- soft glow -->
-      <span class="pointer-events-none absolute inset-0 rounded-full
-                  bg-white/30 opacity-0
-                  group-hover:opacity-20
-                  transition-opacity"></span>
-    </button>
+    </div>
 
   </div>
 

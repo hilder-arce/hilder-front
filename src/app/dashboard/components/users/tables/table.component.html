@@ -1,148 +1,118 @@
 <!-- ========================= -->
-<!-- DASHBOARD USUARIOS ENTERPRISE 3.0 -->
+<!-- CLEAN PROFESSIONAL TABLE -->
 <!-- ========================= -->
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+<div class="m-4 space-y-6">
 
-  <div *ngFor="let user of users; let i = index"
-       class="flex flex-col justify-between p-5 bg-white border border-gray-200 rounded-xl
-              shadow-sm hover:shadow-md transition-shadow duration-300">
-
-    <!-- INFO PRINCIPAL -->
-    <div class="flex items-start gap-4">
-      <!-- Icono / número -->
-      <div class="flex items-center justify-center w-12 h-12 rounded-full
-                  bg-gray-100 text-gray-700 font-semibold">
-        {{ i + 1 }}
-      </div>
-
-      <!-- Datos de usuario -->
-      <div class="flex-1 min-w-0">
-        <h2 class="text-lg font-semibold text-gray-800 truncate uppercase">
-          {{ user.nameUser }}
-        </h2>
-
-        <p class="text-sm text-gray-500 truncate">
-          {{ user.email }}
-        </p>
-
-        <span class="inline-block mt-1 px-3 py-1 rounded-full text-xs font-medium
-                     bg-blue-50 text-blue-700">
-          {{ user.userType }}
-        </span>
-      </div>
+  <!-- SEARCH BAR -->
+  <div class="relative">
+    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+      <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+      </svg>
     </div>
-
-    <!-- ESTADO -->
-    <div class="mt-4 flex items-center justify-between">
-      <span [ngClass]="user.estado
-            ? 'bg-green-100 text-green-800'
-            : 'bg-red-100 text-red-800'"
-            class="flex items-center gap-2 px-3 py-1 rounded-full
-                   text-xs font-semibold">
-
-        <span [ngClass]="user.estado ? 'bg-green-500' : 'bg-red-500'"
-              class="w-2 h-2 rounded-full"></span>
-
-        {{ user.estado ? 'Activo' : 'Inactivo' }}
-      </span>
-    </div>
-
-    <!-- ACCIONES -->
-    <div class="flex justify-center mt-4">
-
-      <!-- ========================= -->
-      <!-- USUARIO DEL SISTEMA -->
-      <!-- ========================= -->
-      <ng-container *ngIf="user.userType === 'administrador'; else normalActions">
-        <div class="flex flex-col items-center gap-1">
-          <span class="px-4 py-1 rounded-full text-xs font-semibold
-                       bg-black text-white tracking-wide">
-            USUARIO DEL SISTEMA
-          </span>
-          <span class="text-xs text-gray-500 italic">
-            No modificable
-          </span>
-        </div>
-      </ng-container>
-
-      <!-- ========================= -->
-      <!-- ACCIONES NORMALES -->
-      <!-- ========================= -->
-      <ng-template #normalActions>
-        <div class="flex gap-4">
-
-          <!-- EDITAR -->
-          <div class="relative group">
-            <button
-              (click)="editUser(user)"
-              aria-label="Editar usuario"
-              class="w-10 h-10 flex items-center justify-center rounded-md
-                     text-gray-600 hover:text-white hover:bg-yellow-600
-                     transition-colors duration-300 shadow-md">
-
-              <svg xmlns="http://www.w3.org/2000/svg"
-                   class="h-5 w-5"
-                   viewBox="0 0 24 24"
-                   fill="none"
-                   stroke="currentColor"
-                   stroke-width="2"
-                   stroke-linecap="round"
-                   stroke-linejoin="round">
-                <path d="M12 20h9"/>
-                <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/>
-              </svg>
-            </button>
-
-            <span class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2
-                         bg-gray-800 text-white text-xs font-semibold
-                         px-3 py-1 rounded-md shadow-lg
-                         opacity-0 group-hover:opacity-100
-                         transition-opacity pointer-events-none">
-              Editar usuario
-            </span>
-          </div>
-
-          <!-- ELIMINAR -->
-          <div class="relative group">
-            <button
-              (click)="deleteUser(user)"
-              aria-label="Eliminar usuario"
-              class="w-10 h-10 flex items-center justify-center rounded-md
-                     text-gray-600 hover:text-white hover:bg-red-600
-                     transition-colors duration-300 shadow-md">
-
-              <svg xmlns="http://www.w3.org/2000/svg"
-                   class="h-5 w-5"
-                   fill="none"
-                   viewBox="0 0 24 24"
-                   stroke="currentColor">
-                <path stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M19 7L5 7M6 7L6 19a2 2 0 002 2h8a2 2 0 002-2V7M10 11v6M14 11v6M9 7V5a1 1 0 011-1h4a1 1 0 011 1v2"/>
-              </svg>
-            </button>
-
-            <span class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2
-                         bg-gray-800 text-white text-xs font-semibold
-                         px-3 py-1 rounded-md shadow-lg
-                         opacity-0 group-hover:opacity-100
-                         transition-opacity pointer-events-none">
-              Eliminar usuario
-            </span>
-          </div>
-
-        </div>
-      </ng-template>
-
-    </div>
+    <input type="text"
+           [(ngModel)]="searchQuery"
+           placeholder="Buscar por nombre, correo o cargo..."
+           class="w-full pl-12 pr-4 py-3 rounded-xl border-2 border-gray-200 bg-white
+                  text-gray-900 font-medium placeholder:text-gray-500
+                  focus:outline-none focus:ring-4 focus:ring-blue-100
+                  transition-all duration-200"/>
   </div>
 
   <!-- EMPTY STATE -->
-  <div *ngIf="users.length === 0"
-       class="col-span-full text-center text-gray-400
-              text-lg font-medium py-16">
-    No hay usuarios registrados
+  <div *ngIf="filteredUsers.length === 0" class="flex items-center justify-center py-12">
+    <div class="text-center">
+      <svg class="w-12 h-12 text-slate-300 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.856-1.487M15 10a3 3 0 11-6 0 3 3 0 016 0zM6 20a6 6 0 0112 0v2H0v-2a6 6 0 016-6z"/>
+      </svg>
+      <p class="text-slate-600 font-medium">
+        {{ searchQuery() ? 'No se encontraron resultados' : 'No hay usuarios registrados' }}
+      </p>
+      <p class="text-slate-500 text-sm mt-1">
+        {{ searchQuery() ? 'Intenta con otros términos' : 'Crea el primer usuario para comenzar' }}
+      </p>
+    </div>
+  </div>
+
+  <!-- USERS GRID -->
+  <div *ngIf="filteredUsers.length > 0" class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+    <!-- USER CARD -->
+    <article *ngFor="let user of filteredUsers; let i = index"
+             class="bg-white rounded-2xl border border-slate-200 p-6 space-y-4
+                    transition hover:shadow-lg hover:border-slate-300">
+
+      <!-- HEADER SECTION -->
+      <div class="flex items-start justify-between">
+        <div class="flex items-start gap-3 flex-1 min-w-0">
+          <!-- Avatar -->
+          <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-slate-100 flex items-center justify-center font-bold text-slate-700">
+            {{ user.nameUser.charAt(0).toUpperCase() }}
+          </div>
+          <!-- Info -->
+          <div class="flex-1 min-w-0">
+            <h3 class="text-base font-semibold text-slate-900 truncate">
+              {{ user.nameUser }}
+            </h3>
+            <p class="text-xs text-slate-600 truncate">
+              {{ user.email }}
+            </p>
+          </div>
+        </div>
+
+        <!-- Status Badge -->
+        <span [ngClass]="user.estado 
+              ? 'bg-emerald-50 text-emerald-700' 
+              : 'bg-slate-100 text-slate-600'"
+              class="flex-shrink-0 px-2 py-1 rounded-md text-xs font-semibold">
+          {{ user.estado ? 'Activo' : 'Inactivo' }}
+        </span>
+      </div>
+
+      <!-- ROLE BADGE -->
+      <div>
+        <span class="inline-block px-3 py-1.5 rounded-lg text-xs font-semibold uppercase tracking-wide bg-slate-100 text-slate-700">
+          {{ user.userType }}
+        </span>
+      </div>
+
+      <!-- FOOTER ACTIONS -->
+      <div class="pt-3 border-t border-slate-200">
+        <!-- System Admin -->
+        <ng-container *ngIf="user.userType === 'administrador'; else normalActions">
+          <div class="text-center py-2">
+            <span class="inline-block px-3 py-1 bg-slate-900 text-white text-xs font-bold rounded-md">
+              USUARIO DEL SISTEMA
+            </span>
+          </div>
+        </ng-container>
+
+        <!-- Normal User Actions -->
+        <ng-template #normalActions>
+          <div class="flex gap-2">
+            <!-- Edit Button -->
+            <button (click)="editUser(user)"
+                    class="flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-lg
+                           text-blue-600 hover:bg-blue-50 transition text-sm font-medium">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+              </svg>
+              Editar
+            </button>
+
+            <!-- Delete Button -->
+            <button (click)="deleteUser(user)"
+                    class="flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-lg
+                           text-red-600 hover:bg-red-50 transition text-sm font-medium">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+              </svg>
+              Eliminar
+            </button>
+          </div>
+        </ng-template>
+      </div>
+
+    </article>
   </div>
 
 </div>

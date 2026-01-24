@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, inject } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { ActivatedRoute, Router, RouterModule } from "@angular/router";
 import { AlertService } from "../../../../../../shared/services/alert.service";
@@ -7,6 +7,7 @@ import { Material } from "../../../../config/components/materials/interfaces/mat
 import { MaterialService } from "../../../../config/components/materials/services/material.service";
 import { ReporteMaterial } from "../interfaces/material.interface";
 import { MaterialReportService } from "../services/material-report.service";
+import { ReportsSearchService } from "../../../services/reports-search.service";
 
 @Component({
     selector: 'app-create-material',
@@ -18,6 +19,8 @@ import { MaterialReportService } from "../services/material-report.service";
 })
 
 export class CreateMaterialComponent implements OnInit {
+
+    private searchService = inject(ReportsSearchService);
 
     constructor(
         private alertService: AlertService,
@@ -33,13 +36,31 @@ export class CreateMaterialComponent implements OnInit {
         this.cargarMaterialesDisponibles();
         // Cargar reportes guardados en localStorage
         this.cargarReportesAlmacenados();
+        // Escuchar cambios de búsqueda
+        this.searchService.search$.subscribe(searchTerm => {
+            this.filtrarMateriales(searchTerm);
+        });
     }
 
     materiales: Material[] = [];
     reporteMateriales: ReporteMaterial[] = [];
+    reporteMateriaisOriginal: ReporteMaterial[] = []; // Para guardar los datos sin filtrar
     editingRows = new Set<number>();
     savedRows = new Set<number>();
     originalRow: Map<number, ReporteMaterial> = new Map(); // Para restaurar si cancela edición
+
+    /**
+     * Filtrar materiales según la búsqueda
+     */
+    filtrarMateriales(searchTerm: string): void {
+        if (!searchTerm.trim()) {
+            this.reporteMateriales = [...this.reporteMateriaisOriginal];
+        } else {
+            this.reporteMateriales = this.reporteMateriaisOriginal.filter(material =>
+                material.materialNombre?.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+        }
+    }
 
     /**
      * Cargar los materiales disponibles del servicio de config
@@ -60,6 +81,7 @@ export class CreateMaterialComponent implements OnInit {
     cargarReportesAlmacenados() {
         const reportes = this.materialReportService.obtenerMateriales();
         this.reporteMateriales = [...reportes];
+        this.reporteMateriaisOriginal = [...reportes]; // Guardar original para filtrado
         // Marcar todos los reportes cargados como guardados
         reportes.forEach((_, index) => {
             this.savedRows.add(index);

@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { User } from '../interfaces/user.interface';
 import { AlertService } from '../../../../shared/services/alert.service';
 import { UserService } from '../services/user.service';
@@ -12,6 +13,7 @@ import { UserService } from '../services/user.service';
     imports: [
         RouterModule,
         CommonModule,
+        FormsModule,
     ]
 })
 
@@ -23,7 +25,8 @@ export class UsersTableComponent implements OnInit {
         private alertService: AlertService,
     ) {}
 
-    users: User[] = []
+    users: User[] = [];
+    searchQuery = signal('');
 
     ngOnInit(): void {
         this.loadUsers()
@@ -34,6 +37,17 @@ export class UsersTableComponent implements OnInit {
         if(users){
             this.users = [...users]
         }
+    }
+
+    get filteredUsers(): User[] {
+        const query = this.searchQuery().toLowerCase();
+        if (!query) return this.users;
+        
+        return this.users.filter(user =>
+          user.nameUser.toLowerCase().includes(query) ||
+          user.email.toLowerCase().includes(query) ||
+          (user.userType && user.userType.toLowerCase().includes(query))
+        );
     }
 
     // Navega al formulario de registro con el ID

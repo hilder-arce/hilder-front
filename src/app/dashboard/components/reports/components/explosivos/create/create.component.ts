@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, inject } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { ActivatedRoute, Router, RouterModule } from "@angular/router";
@@ -7,6 +7,7 @@ import { Explosivo } from "../../../../config/components/explosivos/interfaces/e
 import { ExplosivoService } from "../../../../config/components/explosivos/services/explosivo.service";
 import { ReporteExplosivo, TipoExplosivo, UnidadMedidaExplosivo } from "../interfaces/explosivo.interface";
 import { ExplosivoReportService } from "../services/explosivo-report.service";
+import { ReportsSearchService } from "../../../services/reports-search.service";
 
 @Component({
     selector: 'app-create-explosivo',
@@ -21,6 +22,8 @@ import { ExplosivoReportService } from "../services/explosivo-report.service";
 
 export class CreateExplosivoComponent implements OnInit {
 
+    private searchService = inject(ReportsSearchService);
+
     constructor(
         private alertService: AlertService,
         private router: Router,
@@ -34,13 +37,31 @@ export class CreateExplosivoComponent implements OnInit {
         this.cargarExplosivosDisponibles();
         // Cargar reportes guardados en localStorage
         this.cargarReportesAlmacenados();
+        // Escuchar cambios de búsqueda
+        this.searchService.search$.subscribe(searchTerm => {
+            this.filtrarExplosivos(searchTerm);
+        });
     }
 
     explosivos: Explosivo[] = [];
     reporteExplosivos: ReporteExplosivo[] = [];
+    reporteExplosivosOriginal: ReporteExplosivo[] = []; // Para guardar los datos sin filtrar
     editingRows = new Set<number>();
     savedRows = new Set<number>();
     originalRow: Map<number, ReporteExplosivo> = new Map(); // Para restaurar si cancela edición
+
+    /**
+     * Filtrar explosivos según la búsqueda
+     */
+    filtrarExplosivos(searchTerm: string): void {
+        if (!searchTerm.trim()) {
+            this.reporteExplosivos = [...this.reporteExplosivosOriginal];
+        } else {
+            this.reporteExplosivos = this.reporteExplosivosOriginal.filter(explosivo =>
+                explosivo.nombre?.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+        }
+    }
 
     /**
      * Cargar los explosivos disponibles del servicio de config
@@ -61,6 +82,7 @@ export class CreateExplosivoComponent implements OnInit {
     cargarReportesAlmacenados() {
         const reportes = this.explosivoReportService.obtenerExplosivos();
         this.reporteExplosivos = [...reportes];
+        this.reporteExplosivosOriginal = [...reportes]; // Guardar original para filtrado
         // Marcar todos los reportes cargados como guardados
         reportes.forEach((_, index) => {
             this.savedRows.add(index);

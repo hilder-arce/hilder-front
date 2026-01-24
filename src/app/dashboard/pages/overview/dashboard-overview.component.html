@@ -1,0 +1,108 @@
+<div *ngIf="isLoading" class="h-screen">
+  <app-loader message="Cargando analytics..."></app-loader>
+</div>
+
+<div *ngIf="!isLoading" class="min-h-screen bg-gradient-to-br from-white via-blue-50 to-gray-50 overflow-x-hidden w-full">
+  
+  <!-- Background Elements -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none">
+    <div class="absolute top-0 right-0 w-96 h-96 bg-blue-400/5 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 left-0 w-96 h-96 bg-indigo-400/5 rounded-full blur-3xl"></div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="relative z-10 w-full">
+    
+    <!-- Hero Section -->
+    <app-dashboard-hero></app-dashboard-hero>
+
+    <!-- KPI Cards Section -->
+    <div class="px-4 md:px-6 py-6 md:py-8 w-full">
+      <div class="max-w-7xl mx-auto px-0">
+        <!-- Section Title -->
+        <div class="mb-6 md:mb-8">
+          <h2 class="text-xl md:text-2xl font-bold text-gray-900 mb-2">Indicadores Clave de Desempeño</h2>
+          <div class="h-1 w-20 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full"></div>
+        </div>
+
+        <!-- KPI Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8 md:mb-12">
+          <app-kpi-card 
+            *ngFor="let kpi of kpiData"
+            [label]="kpi.label"
+            [value]="kpi.value"
+            [change]="kpi.change"
+            [icon]="kpi.icon"
+            [colorGradient]="kpi.color">
+          </app-kpi-card>
+        </div>
+      </div>
+    </div>
+
+    <!-- Charts Section -->
+    <div class="px-4 md:px-6 py-6 md:py-8 w-full">
+      <div class="max-w-7xl mx-auto px-0">
+        <!-- Section Title -->
+        <div class="mb-6 md:mb-8">
+          <h2 class="text-xl md:text-2xl font-bold text-gray-900 mb-2">Análisis Detallado</h2>
+          <div class="h-1 w-20 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full"></div>
+        </div>
+
+        <!-- Charts Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 lg:gap-8 mb-8 md:mb-12">
+          <app-chart-widget
+            title="Tendencia de Inventario"
+            subtitle="Últimos 30 días"
+            [data]="chartData.inventoryTrend"
+            chartType="line"
+            [colorGradient]="['#2563eb', '#4f46e5']">
+          </app-chart-widget>
+
+          <app-chart-widget
+            title="Distribución de Equipos"
+            subtitle="Por marca"
+            [data]="chartData.equipmentDistribution"
+            chartType="doughnut"
+            [colorGradient]="['#10b981', '#059669']">
+          </app-chart-widget>
+
+          <app-chart-widget
+            title="Estado de Explosivos"
+            subtitle="Por tipo"
+            [data]="chartData.explosivesStatus"
+            chartType="bar"
+            [colorGradient]="['#ef4444', '#dc2626']">
+          </app-chart-widget>
+
+          <app-chart-widget
+            title="Materiales por Categoría"
+            subtitle="Stock disponible"
+            [data]="chartData.materialsByType"
+            chartType="area"
+            [colorGradient]="['#8b5cf6', '#7c3aed']">
+          </app-chart-widget>
+        </div>
+      </div>
+    </div>
+
+    <!-- System Health & Recent Activity -->
+    <div class="px-4 md:px-6 py-6 md:py-8 w-full">
+      <div class="max-w-7xl mx-auto px-0">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
+          <!-- System Health (spans 1 column) -->
+          <div class="lg:col-span-1">
+            <app-system-health [metrics]="systemMetrics"></app-system-health>
+          </div>
+
+          <!-- Recent Activity (spans 2 columns) -->
+          <div class="lg:col-span-2">
+            <app-recent-activity [activities]="recentActivities"></app-recent-activity>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Padding -->
+    <div class="h-6 md:h-12"></div>
+  </div>
+</div>

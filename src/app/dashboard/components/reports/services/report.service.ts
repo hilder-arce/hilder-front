@@ -72,37 +72,6 @@ export class ReportService {
 
     // ==================== MÉTODOS PARA BORRADORES (LOCALSTORAGE) ====================
 
-    // GUARDAR BORRADOR EN LOCALSTORAGE
-    async saveDraft(draft: Reporte): Promise<Reporte> {
-        try {
-            const drafts = this.getAllDrafts();
-            
-            // Si el borrador ya tiene ID, actualizar. Si no, crear uno nuevo
-            if (draft.id) {
-                const index = drafts.findIndex(d => d.id === draft.id);
-                if (index !== -1) {
-                    drafts[index] = { ...draft, updatedAt: new Date().toISOString() };
-                } else {
-                    drafts.push({ ...draft, id: this.generateId(), createdAt: new Date().toISOString() });
-                }
-            } else {
-                draft.id = this.generateId();
-                draft.createdAt = new Date().toISOString();
-                drafts.push(draft);
-            }
-
-            localStorage.setItem(this.draftStorageKey, JSON.stringify(drafts));
-            
-            // Limpiar los datos de equipos, explosivos y materiales
-            this.limpiarDatosTemporales();
-            
-            return draft;
-        } catch (error) {
-            console.error('Error al guardar borrador en localStorage:', error);
-            throw error;
-        }
-    }
-
     // OBTENER TODOS LOS BORRADORES DEL LOCALSTORAGE
     async getDrafts(): Promise<Reporte[]> {
         try {

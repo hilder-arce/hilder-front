@@ -1,16 +1,23 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { FooterPublicComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  standalone: true,
   imports: [
     CommonModule,
-    RouterModule
-  ]
+    RouterModule,
+    FooterPublicComponent
+  ],
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+  constructor(private router: Router) {}
 
+  navigateTo(path: string): void {
+    this.router.navigate([path]);
+  }
 }

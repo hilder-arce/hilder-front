@@ -1,0 +1,16 @@
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
+
+@Component({
+  selector: 'app-footer-public',
+  standalone: true,
+  imports: [CommonModule, RouterModule],
+  templateUrl: './footer.component.html',
+  styleUrls: ['./footer.component.css']
+})
+export class FooterPublicComponent {
+  currentYear = new Date().getFullYear();
+
+  constructor(private router: Router) {}
+}

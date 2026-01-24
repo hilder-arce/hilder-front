@@ -39,7 +39,7 @@
         Información general
       </h2>
 
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
 
         <!-- Fecha -->
         <div>
@@ -64,6 +64,21 @@
             <option value="">Seleccione un turno</option>
             <option value="dia">Día</option>
             <option value="noche">Noche</option>
+          </select>
+        </div>
+
+        <!-- Nivel -->
+        <div>
+          <label class="block text-xs font-medium text-slate-500 mb-1">
+            Nivel
+          </label>
+          <select [(ngModel)]="nivelSeleccionado" class="w-full rounded-lg border border-slate-300 bg-white
+                   px-3 py-2 text-sm
+                   focus:outline-none focus:ring-2
+                   focus:ring-blue-500/40">
+            <option value="">Seleccione un nivel</option>
+            <option value="2750">2750</option>
+            <option value="2360">2360</option>
           </select>
         </div>
 
@@ -114,23 +129,14 @@
       </button>
 
       <button 
-        (click)="saveDraft()"
-        [disabled]="isLoading"
-        class="px-5 py-2.5 rounded-lg border border-amber-300 bg-amber-50
-                 text-sm font-medium text-amber-700
-                 hover:bg-amber-100 transition disabled:opacity-50 disabled:cursor-not-allowed">
-        <span *ngIf="!isLoading">📋 Guardar en borrador</span>
-        <span *ngIf="isLoading">Guardando...</span>
-      </button>
-
-      <button 
         (click)="saveReport()"
         [disabled]="isLoading"
         class="px-5 py-2.5 rounded-lg bg-blue-600 text-white
                  text-sm font-medium
                  shadow-md shadow-blue-600/30
                  hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed">
-        <span *ngIf="!isLoading">✓ Enviar reporte</span>
+        <span *ngIf="!isLoading && !isEditing">✓ Enviar reporte</span>
+        <span *ngIf="!isLoading && isEditing">✓ Actualizar reporte</span>
         <span *ngIf="isLoading">Guardando...</span>
       </button>
 

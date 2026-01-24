@@ -32,7 +32,10 @@
       <div class="flex items-start justify-between">
         <div>
           <h2 class="text-lg font-semibold text-slate-900">
-            {{ reporte.turno }} · Nivel {{ reporte.responsable }}
+            {{ reporte.nivel }} - {{ reporte.turno }}
+          </h2>
+          <h2 class="text-lg font-semibold text-slate-900">
+            Agente: {{ reporte.responsable }}
           </h2>
           <p class="text-sm text-slate-500">
             {{ formatearFecha(reporte.fecha) }}

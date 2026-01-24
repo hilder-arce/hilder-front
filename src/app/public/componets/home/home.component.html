@@ -1,55 +1,180 @@
-<section class="min-h-screen flex items-center justify-center bg-gray-50 px-4 py-16">
 
-  <div class="card-elite rounded-3xl border border-black/5
-              shadow-[0_40px_100px_-40px_rgba(0,0,0,.3)]
-              p-10 md:p-14 space-y-8
-              max-w-xl text-center">
+<!-- HERO SECTION -->
+<section class="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 flex items-center pt-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      
+      <!-- LEFT CONTENT -->
+      <div class="space-y-8">
+        <div class="space-y-4">
+          <div class="inline-block px-4 py-2 bg-amber-50 border border-amber-200 rounded-full">
+            <span class="text-sm font-semibold text-amber-700">🏗️ Minería y Construcción</span>
+          </div>
+          <h1 class="text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
+            Excelencia en <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-orange-700">Operaciones</span>
+          </h1>
+          <p class="text-xl text-slate-600 leading-relaxed max-w-xl">
+            CAJACE desarrolla actividades mineras y construcción civil con excelencia operacional, innovación y prácticas sostenibles.
+          </p>
+        </div>
 
-    <div class="mb-6 flex flex-col items-center justify-center">
-      <div
-        class="w-16 h-16 rounded-3xl
-               flex items-center justify-center
-               bg-gradient-to-br from-blue-700 to-indigo-800
-               text-yellow-300
-               shadow-[0_20px_40px_-15px_rgba(59,130,246,.7)]
-               animate-soft-float mb-5">
-        <i class="bi bi-tools text-3xl"></i>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <button (click)="navigateTo('/login')" class="px-8 py-3 bg-gradient-to-r from-amber-600 to-orange-700 text-white rounded-lg font-semibold hover:shadow-lg transition">
+            Comenzar Ahora
+          </button>
+          <button routerLink="/nosotros" class="px-8 py-3 border border-slate-300 text-slate-700 rounded-lg font-semibold hover:bg-slate-50 transition">
+            Conocer Más
+          </button>
+        </div>
+
+        <div class="flex gap-8 pt-4">
+          <div class="flex items-center gap-2">
+            <div class="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center">
+              <svg class="w-6 h-6 text-amber-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+            <span class="text-slate-700 font-medium">Excelencia Operacional</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center">
+              <svg class="w-6 h-6 text-amber-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+            <span class="text-slate-700 font-medium">Sostenibilidad</span>
+          </div>
+        </div>
       </div>
-      <h1 class="text-3xl font-extrabold tracking-tight text-black">
-        Sistema en Implementación
-      </h1>
-      <p class="mt-3 text-base text-black/60 max-w-sm">
-        Estamos construyendo el futuro de tus operaciones mineras.
+
+      <!-- RIGHT IMAGE -->
+      <div class="hidden lg:block">
+        <div class="relative">
+          <div class="absolute inset-0 bg-gradient-to-r from-blue-400 to-indigo-400 rounded-2xl blur-3xl opacity-20"></div>
+          <div class="relative bg-white rounded-2xl border border-slate-200 p-8 shadow-xl">
+            <div class="space-y-4">
+              <div class="h-3 bg-blue-200 rounded w-3/4"></div>
+              <div class="h-3 bg-blue-100 rounded w-full"></div>
+              <div class="h-3 bg-blue-100 rounded w-5/6"></div>
+              <div class="pt-4 space-y-3">
+                <div class="flex gap-2">
+                  <div class="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-500 rounded-lg"></div>
+                  <div class="flex-1 space-y-2">
+                    <div class="h-2 bg-slate-300 rounded w-3/4"></div>
+                    <div class="h-2 bg-slate-200 rounded w-1/2"></div>
+                  </div>
+                </div>
+                <div class="flex gap-2">
+                  <div class="w-12 h-12 bg-gradient-to-br from-indigo-400 to-indigo-500 rounded-lg"></div>
+                  <div class="flex-1 space-y-2">
+                    <div class="h-2 bg-slate-300 rounded w-3/4"></div>
+                    <div class="h-2 bg-slate-200 rounded w-1/2"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES SECTION -->
+<section class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center space-y-4 mb-16">
+      <h2 class="text-4xl font-bold text-slate-900">Nuestros Servicios</h2>
+      <p class="text-xl text-slate-600 max-w-2xl mx-auto">
+        Soluciones completas para actividades mineras y construcción civil con estándares de excelencia
       </p>
     </div>
 
-    <div class="bg-blue-50/70 border border-blue-200 rounded-2xl p-6 space-y-4 text-left">
-      <h2 class="text-xl font-bold text-blue-800 flex items-center gap-3">
-        <i class="bi bi-code-slash text-blue-600 text-2xl"></i>
-        Desarrollo Activo
-      </h2>
-      <p class="text-sm text-blue-700 leading-relaxed">
-        Nuestro equipo trabaja diligentemente para entregar una plataforma robusta y optimizada.
-        Agradecemos tu paciencia mientras afinamos cada detalle para ofrecerte la mejor experiencia.
-      </p>
-    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      
+      <!-- FEATURE 1 -->
+      <div class="bg-slate-50 rounded-xl border border-slate-200 p-8 hover:shadow-lg transition">
+        <div class="w-14 h-14 bg-amber-100 rounded-lg flex items-center justify-center mb-6">
+          <svg class="w-8 h-8 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5.581m0 0H9m5.581 0a2 2 0 110-4m0 4a2 2 0 110 4m-5.581-4h.581m0 0a2.121 2.121 0 015.162 0"/>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-slate-900 mb-3">Actividades Mineras</h3>
+        <p class="text-slate-600 leading-relaxed">
+          Operaciones mineras de clase mundial con tecnología moderna y prácticas sostenibles.
+        </p>
+      </div>
 
-    <div class="pt-6 border-t border-black/5 space-y-5">
-      <p class="text-base text-black/70">
-        ¡Algunas secciones ya están operativas! Te invitamos a explorar las funcionalidades que ya puedes probar.
-      </p>
-      <button
-        type="button"
-        routerLink="/login" class="h-12 px-8 rounded-2xl text-sm font-bold text-white
-               bg-gradient-to-r from-yellow-500 to-orange-600 cursor-pointer
-               shadow-[0_15px_30px_-10px_rgba(234,179,8,0.7)]
-               hover:from-yellow-400 hover:to-orange-500
-               active:scale-95 transition-all duration-300">
-        EXPLORAR FUNCIONES DISPONIBLES
-        <i class="bi bi-arrow-right ml-2"></i>
+      <!-- FEATURE 2 -->
+      <div class="bg-slate-50 rounded-xl border border-slate-200 p-8 hover:shadow-lg transition">
+        <div class="w-14 h-14 bg-orange-100 rounded-lg flex items-center justify-center mb-6">
+          <svg class="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-slate-900 mb-3">Construcción Civil</h3>
+        <p class="text-slate-600 leading-relaxed">
+          Proyectos de construcción ejecutados con precisión, seguridad y calidad garantizada.
+        </p>
+      </div>
+
+      <!-- FEATURE 3 -->
+      <div class="bg-slate-50 rounded-xl border border-slate-200 p-8 hover:shadow-lg transition">
+        <div class="w-14 h-14 bg-yellow-100 rounded-lg flex items-center justify-center mb-6">
+          <svg class="w-8 h-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-slate-900 mb-3">Innovación Continua</h3>
+        <p class="text-slate-600 leading-relaxed">
+          Desarrollo constante de procesos para mejorar la forma de hacer las cosas.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- STATS SECTION -->
+<section class="py-20 bg-gradient-to-br from-amber-600 to-orange-700">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center text-white">
+      <div class="space-y-2">
+        <div class="text-4xl font-bold">20+</div>
+        <p class="text-amber-100">Clientes Satisfechos</p>
+      </div>
+      <div class="space-y-2">
+        <div class="text-4xl font-bold">∞</div>
+        <p class="text-amber-100">Proyectos Exitosos</p>
+      </div>
+      <div class="space-y-2">
+        <div class="text-4xl font-bold">100%</div>
+        <p class="text-amber-100">Compromiso</p>
+      </div>
+      <div class="space-y-2">
+        <div class="text-4xl font-bold">24/7</div>
+        <p class="text-amber-100">Disponibilidad</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA SECTION -->
+<section class="py-20 bg-white">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h2 class="text-4xl font-bold text-slate-900 mb-6">¿Listo para trabajar con CAJACE?</h2>
+    <p class="text-xl text-slate-600 mb-8 max-w-2xl mx-auto">
+      Únete a las empresas líderes que confían en nuestros servicios de excelencia operacional y sostenibilidad.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <button (click)="navigateTo('/login')" class="px-8 py-3 bg-gradient-to-r from-amber-600 to-orange-700 text-white rounded-lg font-semibold hover:shadow-lg transition">
+        Acceso al Sistema
+      </button>
+      <button routerLink="/contacto" class="px-8 py-3 border border-slate-300 text-slate-700 rounded-lg font-semibold hover:bg-slate-50 transition">
+        Contáctanos
       </button>
     </div>
-
   </div>
-
 </section>
+
+<app-footer-public></app-footer-public>
